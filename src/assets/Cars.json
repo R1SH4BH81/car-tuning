@@ -1,32 +1,6 @@
 {
   "cars": [
     {
-      "id": "bugatti-divo",
-      "name": "Bugatti Divo",
-      "modelPath": "https://rishabh81.sirv.com/models/bugati_divo.glb",
-      "brand": "Bugatti",
-      "year": 2019,
-      "class": "S2",
-      "pi": 998,
-      "transmission": {
-        "gears": 7,
-        "type": "DSG",
-        "adjustable": true
-      },
-      "baseStats": {
-        "hp": 1479,
-        "torque": 1180,
-        "weight": 1960,
-        "topSpeed": 236,
-        "acceleration060": 2.4,
-        "handling": 9.4,
-        "braking": 9.6,
-        "driveType": "AWD",
-        "brakingDistance600": 93
-      },
-      "compatibleSwaps": []
-    },
-    {
       "id": "koenigsegg-one-1",
       "name": "Koenigsegg One:1",
       "modelPath": "https://rishabh81.sirv.com/models/koenigsegg_one1_low_poly.glb",
@@ -188,32 +162,7 @@
       },
       "compatibleSwaps": ["flat6_tt", "racing_v10"]
     },
-    {
-      "id": "aston-martin-one-77",
-      "name": "Aston Martin One-77",
-      "modelPath": "https://rishabh81.sirv.com/models/2009_aston_martin_one-77.glb",
-      "brand": "Aston Martin",
-      "year": 2012,
-      "class": "S1",
-      "pi": 882,
-      "transmission": {
-        "gears": 6,
-        "type": "Automated Manual",
-        "adjustable": true
-      },
-      "baseStats": {
-        "hp": 750,
-        "torque": 553,
-        "weight": 1630,
-        "topSpeed": 220,
-        "acceleration060": 3.5,
-        "handling": 8.4,
-        "braking": 8.8,
-        "driveType": "RWD",
-        "brakingDistance600": 102
-      },
-      "compatibleSwaps": ["racing_v12"]
-    },
+
     {
       "id": "honda-nsx-lb-works",
       "name": "Honda NSX LB-Works",
@@ -293,28 +242,28 @@
       "compatibleSwaps": ["racing_v8", "racing_v12"]
     },
     {
-      "id": "lamborghini-aventador",
-      "name": "Lamborghini Aventador LP700-4",
+      "id": "lamborghini-aventador-svj",
+      "name": "Lamborghini Aventador SVJ",
       "modelPath": "https://rishabh81.sirv.com/models/lamborghini_aventador.glb",
       "brand": "Lamborghini",
-      "year": 2012,
-      "class": "S1",
-      "pi": 855,
+      "year": 2018,
+      "class": "S2",
+      "pi": 980,
       "transmission": {
         "gears": 7,
         "type": "ISR",
         "adjustable": true
       },
       "baseStats": {
-        "hp": 690,
-        "torque": 509,
-        "weight": 1575,
-        "topSpeed": 217,
-        "acceleration060": 2.9,
-        "handling": 8.0,
-        "braking": 8.5,
+        "hp": 759,
+        "torque": 531,
+        "weight": 1525,
+        "topSpeed": 219,
+        "acceleration060": 2.8,
+        "handling": 9.6,
+        "braking": 9.8,
         "driveType": "AWD",
-        "brakingDistance600": 104
+        "brakingDistance600": 98
       },
       "compatibleSwaps": ["racing_v12"]
     },
@@ -344,32 +293,7 @@
       },
       "compatibleSwaps": ["racing_v10", "racing_v12", "racing_v8"]
     },
-    {
-      "id": "ford-gt40-mkii",
-      "name": "Ford GT40 MKII",
-      "modelPath": "https://rishabh81.sirv.com/models/ford_gt40_mkii.glb",
-      "brand": "Ford",
-      "year": 1966,
-      "class": "S1",
-      "pi": 825,
-      "transmission": {
-        "gears": 6,
-        "type": "Manual",
-        "adjustable": true
-      },
-      "baseStats": {
-        "hp": 550,
-        "torque": 500,
-        "weight": 1581,
-        "topSpeed": 205,
-        "acceleration060": 3.3,
-        "handling": 8.0,
-        "braking": 8.1,
-        "driveType": "RWD",
-        "brakingDistance600": 108
-      },
-      "compatibleSwaps": ["v8_modern", "racing_v8", "racing_v12"]
-    },
+
     {
       "id": "ferrari-f40",
       "name": "Ferrari F40",
@@ -396,32 +320,7 @@
       },
       "compatibleSwaps": ["racing_v8", "racing_v12", "v10_n_a"]
     },
-    {
-      "id": "audi-rs3-sportback",
-      "name": "Audi RS3 Sportback",
-      "modelPath": "https://rishabh81.sirv.com/models/2018_audi_rs3_sportback.glb",
-      "brand": "Audi",
-      "year": 2022,
-      "class": "A",
-      "pi": 745,
-      "transmission": {
-        "gears": 7,
-        "type": "S-Tronic DCT",
-        "adjustable": true
-      },
-      "baseStats": {
-        "hp": 401,
-        "torque": 369,
-        "weight": 1570,
-        "topSpeed": 180,
-        "acceleration060": 3.6,
-        "handling": 7.2,
-        "braking": 7.8,
-        "driveType": "AWD",
-        "brakingDistance600": 112
-      },
-      "compatibleSwaps": ["racing_v6_tt", "v10_n_a"]
-    },
+
     {
       "id": "chevrolet-camaro-ss-2016",
       "name": "Chevrolet Camaro SS",
@@ -448,35 +347,10 @@
       },
       "compatibleSwaps": ["v8_modern", "racing_v8"]
     },
-    {
-      "id": "nissan-skyline-gtr-r34",
-      "name": "Nissan Skyline GT-R (R34)",
-      "modelPath": "https://rishabh81.sirv.com/models/nissan_skyline_r34_gtr_2002__www.vecarz.com.glb",
-      "brand": "Nissan",
-      "year": 2002,
-      "class": "B",
-      "pi": 685,
-      "transmission": {
-        "gears": 6,
-        "type": "Manual",
-        "adjustable": true
-      },
-      "baseStats": {
-        "hp": 327,
-        "torque": 289,
-        "weight": 1540,
-        "topSpeed": 165,
-        "acceleration060": 4.9,
-        "handling": 7.0,
-        "braking": 6.8,
-        "driveType": "AWD",
-        "brakingDistance600": 125
-      },
-      "compatibleSwaps": ["racing_v6_tt", "v10_n_a", "racing_v12"]
-    },
+
     {
       "id": "porsche-911-930-turbo",
-      "name": "1975 Porsche 911 (930) Turbo",
+      "name": "Porsche 911 (930) Turbo",
       "modelPath": "https://rishabh81.sirv.com/models/porsche_911_930_turbo_1975.glb",
       "brand": "Porsche",
       "year": 1975,
@@ -500,32 +374,7 @@
       },
       "compatibleSwaps": ["flat6_modern", "flat6_tt", "racing_v8"]
     },
-    {
-      "id": "mitsubishi-evo-x-2022",
-      "name": "Mitsubishi Lancer Evolution X",
-      "modelPath": "https://rishabh81.sirv.com/models/2022_mitsubishi_lancer_evolution_x_-_asphalt_8.glb",
-      "brand": "Mitsubishi",
-      "year": 2022,
-      "class": "B",
-      "pi": 650,
-      "transmission": {
-        "gears": 6,
-        "type": "SST",
-        "adjustable": true
-      },
-      "baseStats": {
-        "hp": 303,
-        "torque": 300,
-        "weight": 1590,
-        "topSpeed": 155,
-        "acceleration060": 4.8,
-        "handling": 6.8,
-        "braking": 6.5,
-        "driveType": "AWD",
-        "brakingDistance600": 128
-      },
-      "compatibleSwaps": ["turbo_rally_i4", "racing_v6_tt"]
-    },
+
     {
       "id": "bmw-m3-e30",
       "name": "BMW M3 (E30)",
