@@ -26,32 +26,7 @@
       },
       "compatibleSwaps": ["racing_v12"]
     },
-    {
-      "id": "mercedes-amg-one",
-      "name": "Mercedes-Benz AMG ONE",
-      "modelPath": "https://rishabh81.sirv.com/models/mercedes_amg_one.glb",
-      "brand": "Mercedes-Benz",
-      "year": 2023,
-      "class": "S2",
-      "pi": 998,
-      "transmission": {
-        "gears": 8,
-        "type": "Racing",
-        "adjustable": true
-      },
-      "baseStats": {
-        "hp": 1049,
-        "torque": 800,
-        "weight": 1695,
-        "topSpeed": 219,
-        "acceleration060": 2.9,
-        "handling": 10,
-        "braking": 10,
-        "driveType": "AWD",
-        "brakingDistance600": 92
-      },
-      "compatibleSwaps": ["racing_v12"]
-    },
+
     {
       "id": "mazda-787b",
       "name": "Mazda 787B",
@@ -104,32 +79,7 @@
       },
       "compatibleSwaps": ["racing_v12"]
     },
-    {
-      "id": "lamborghini-revuelto",
-      "name": "Lamborghini Revuelto",
-      "modelPath": "https://rishabh81.sirv.com/models/lamborghini_revuelto.glb",
-      "brand": "Lamborghini",
-      "year": 2024,
-      "class": "S2",
-      "pi": 940,
-      "transmission": {
-        "gears": 8,
-        "type": "DCT",
-        "adjustable": true
-      },
-      "baseStats": {
-        "hp": 1001,
-        "torque": 535,
-        "weight": 1772,
-        "topSpeed": 217,
-        "acceleration060": 2.5,
-        "handling": 9.2,
-        "braking": 9.5,
-        "driveType": "AWD",
-        "brakingDistance600": 95
-      },
-      "compatibleSwaps": []
-    },
+
     {
       "id": "porsche-911-gt3rs",
       "name": "Porsche 911 GT3 RS (992)",

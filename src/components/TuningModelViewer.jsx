@@ -82,7 +82,7 @@ export default function TuningModelViewer({ modelPath }) {
         <OrbitControls
           makeDefault
           autoRotate
-          autoRotateSpeed={0.5}
+          autoRotateSpeed={5}
           enableZoom={false}
           enablePan={false}
           enableRotate={false}
