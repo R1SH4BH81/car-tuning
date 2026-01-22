@@ -4,12 +4,13 @@ import Navigation from "./components/Navigation";
 import UpgradeShop from "./components/UpgradeShop";
 import TuningMenu from "./components/TuningMenu";
 import PerformanceStats from "./components/PerformanceStats";
+import ShowCar from "./components/ShowCar";
 import Telemetry from "./components/Telemetry";
 import CarSelect from "./components/CarSelect";
-import { FaArrowLeft, FaChartBar, FaDatabase, FaGlobe } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 
 function App() {
-  const [currentView, setView] = useState("upgrade");
+  const [currentView, setView] = useState("garage");
   const [cacheNotification, setCacheNotification] = useState(null);
 
   useEffect(() => {
@@ -66,22 +67,7 @@ function App() {
         )}
 
         {currentView === "showcase" ? (
-          <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-6">
-            {/* Top Controls */}
-            <div className="flex justify-between items-start pointer-events-auto">
-              <button
-                onClick={() => setView("upgrade")}
-                className="bg-black/50 hover:bg-white text-white hover:text-black p-3 rounded-full backdrop-blur-md border border-white/10 transition-all"
-              >
-                <FaArrowLeft size={20} />
-              </button>
-            </div>
-
-            {/* Performance Stats Overlay */}
-            <div className="pointer-events-auto relative z-50">
-              <PerformanceStats />
-            </div>
-          </div>
+          <ShowCar setView={setView} />
         ) : (
           <main className="flex-1 relative pointer-events-auto">
             {currentView === "garage" && <CarSelect />}

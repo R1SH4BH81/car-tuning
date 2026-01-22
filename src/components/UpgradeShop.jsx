@@ -525,7 +525,7 @@ const UpgradeShop = () => {
       </div>
 
       {/* Categories Bottom Bar */}
-      <div className="h-24 bg-black/90 backdrop-blur-md border-t border-white/10 pointer-events-auto overflow-x-auto flex items-center px-8 gap-4">
+      <div className="h-18 bg-black/90 backdrop-blur-md border-t border-white/10 pointer-events-auto overflow-x-auto flex items-center px-8 gap-4">
         {Object.keys(CATEGORY_GROUPS).map((group) => (
           <button
             key={group}

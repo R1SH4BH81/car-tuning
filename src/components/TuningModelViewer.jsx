@@ -40,9 +40,7 @@ function Loader() {
     <Html center>
       <div className="flex flex-col items-center whitespace-nowrap">
         <div className="w-8 h-8 border-2 border-yellow-500 border-t-transparent rounded-full animate-spin mb-2"></div>
-        <div className="text-[10px] font-black italic uppercase text-white tracking-widest">
-          Loading
-        </div>
+
         <div className="font-mono text-[8px] text-yellow-500 mt-1">
           {progress.toFixed(0)}%
         </div>
@@ -65,7 +63,7 @@ export default function TuningModelViewer({ modelPath }) {
       <Canvas
         shadows
         dpr={[1, 2]}
-        camera={{ fov: 45 }}
+        camera={{ fov: 15 }}
         style={{ background: "transparent" }}
       >
         <ErrorBoundary
@@ -84,7 +82,7 @@ export default function TuningModelViewer({ modelPath }) {
         <OrbitControls
           makeDefault
           autoRotate
-          autoRotateSpeed={2}
+          autoRotateSpeed={0.5}
           enableZoom={false}
           enablePan={false}
           enableRotate={false}

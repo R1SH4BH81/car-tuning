@@ -603,7 +603,7 @@ const TuningMenu = () => {
   };
 
   return (
-    <div className="absolute inset-0 top-24 bottom-24 flex z-10">
+    <div className="absolute inset-0 top-24 bottom-0 flex z-10">
       {/* Top Bar (simulated by Flex layout) */}
       <div className="absolute top-0 left-0 right-0 h-12 bg-black/90 flex items-center justify-between px-8 border-b border-white/10 z-20">
         <div className="text-xl font-bold italic tracking-tighter">
@@ -723,7 +723,7 @@ const TuningMenu = () => {
         </div>
 
         {/* Right: Helper Info/Image */}
-        <div className="w-1/3 bg-black/80 backdrop-blur-md border-l border-white/10 p-8 pt-12 flex flex-col">
+        <div className="w-1/4 bg-black/80 backdrop-blur-md border-l border-white/10 p-8 pt-12 flex flex-col">
           <div className="flex-1 bg-white/5 rounded-lg mb-4 flex items-center justify-center border border-white/10 overflow-hidden relative">
             {activeSection === "gearing" ? (
               <div className="w-full h-full p-2 relative">
