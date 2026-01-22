@@ -2,13 +2,15 @@ import React, { useState, useMemo } from "react";
 import useStore from "../store/useStore";
 import { PARTS_DB, INITIAL_TUNING } from "../data/parts";
 import { calculatePerformance } from "../utils/physicsEngine";
+import tuningData from "../data/tuningData.json";
+import TuningModelViewer from "./TuningModelViewer";
 import { FaLock } from "react-icons/fa";
 
 const TUNING_SECTIONS = [
   { id: "tires", label: "Tires" },
   { id: "gearing", label: "Gearing" },
   { id: "alignment", label: "Alignment" },
-  { id: "arbs", label: "Anti-roll bars" },
+  // { id: "arbs", label: "Anti-roll bars" },
   { id: "springs", label: "Springs" },
   { id: "damping", label: "Damping" },
   { id: "aero", label: "Aero" },
@@ -644,24 +646,14 @@ const TuningMenu = () => {
 
         {/* Right: Helper Info/Image */}
         <div className="w-1/3 bg-black/80 backdrop-blur-md border-l border-white/10 p-8 pt-12">
-          <div className="aspect-video bg-white/5 rounded-lg mb-4 flex items-center justify-center border border-white/10">
-            {/* Placeholder for dynamic image based on section */}
-            <div className="text-6xl opacity-20">
-              {activeSection === "tires" && "🛞"}
-              {activeSection === "gearing" && "⚙️"}
-              {activeSection === "alignment" && "📐"}
-              {activeSection === "springs" && "🌀"}
-              {activeSection === "brake" && "🛑"}
-            </div>
+          <div className="aspect-video bg-white/5 rounded-lg mb-4 flex items-center justify-center border border-white/10 overflow-hidden">
+            {/* 3D Model Viewer */}
+            <TuningModelViewer
+              modelPath={tuningData[activeSection]?.modelPath}
+            />
           </div>
           <p className="text-gray-300 leading-relaxed text-sm">
-            {activeSection === "tires" &&
-              "Tire pressure has an effect on peak grip, responsiveness and wear. Excessively high or low pressures can adversely affect the contact area."}
-            {activeSection === "gearing" &&
-              "Final Drive ratio adjusts the entire gear set simultaneously. Higher ratio = Acceleration, Lower ratio = Top Speed."}
-            {activeSection === "alignment" &&
-              "Adjust camber, toe and caster to optimize the tire contact patch during cornering and straight line stability."}
-            {/* Add more descriptions as needed */}
+            {tuningData[activeSection]?.description}
           </p>
         </div>
       </div>
