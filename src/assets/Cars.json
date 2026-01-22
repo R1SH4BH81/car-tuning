@@ -1,6 +1,31 @@
 {
   "cars": [
     {
+      "id": "ferrari-f40",
+      "name": "Ferrari F40",
+      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/lb-works_ferrari_f40_-__free.glb?alt=media&token=fe006a35-76b7-400a-8dca-6c9c6d9acb9d",
+      "brand": "Ferrari",
+      "year": 1987,
+      "class": "A",
+      "pi": 785,
+      "transmission": {
+        "gears": 5,
+        "type": "Manual",
+        "adjustable": false
+      },
+      "baseStats": {
+        "hp": 471,
+        "torque": 426,
+        "weight": 1100,
+        "topSpeed": 201,
+        "acceleration060": 3.8,
+        "handling": 7.8,
+        "braking": 7.5,
+        "driveType": "RWD",
+        "brakingDistance600": 118
+      }
+    },
+    {
       "id": "nissan-gtr-r35",
       "name": "Nissan GT-R (R35)",
       "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/nissan_gt-r.glb?alt=media&token=1196e8ac-116d-4900-b06f-a0c3c3578df4",
@@ -56,31 +81,7 @@
         }
       }
     },
-    {
-      "id": "ferrari-f40",
-      "name": "Ferrari F40",
-      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/lb-works_ferrari_f40_-__free.glb?alt=media&token=fe006a35-76b7-400a-8dca-6c9c6d9acb9d",
-      "brand": "Ferrari",
-      "year": 1987,
-      "class": "A",
-      "pi": 785,
-      "transmission": {
-        "gears": 5,
-        "type": "Manual",
-        "adjustable": false
-      },
-      "baseStats": {
-        "hp": 471,
-        "torque": 426,
-        "weight": 1100,
-        "topSpeed": 201,
-        "acceleration060": 3.8,
-        "handling": 7.8,
-        "braking": 7.5,
-        "driveType": "RWD",
-        "brakingDistance600": 118
-      }
-    },
+
     {
       "id": "koenigsegg-one-1",
       "name": "Koenigsegg One:1",
