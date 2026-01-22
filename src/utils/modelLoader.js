@@ -8,6 +8,11 @@ const modelStore = localforage.createInstance({
 
 const urlCache = new Map(); // Memory cache for active Blob URLs
 
+export const peekCachedModelUrl = (url) => {
+  if (!url) return null;
+  return urlCache.get(url) ?? null;
+};
+
 export const getCachedModelUrl = async (url) => {
   if (!url) return null;
 
@@ -60,25 +65,33 @@ export const getCachedModelUrl = async (url) => {
 
 // Custom hook to use in components
 import { useState, useEffect } from "react";
+import { useGLTF } from "@react-three/drei";
+
+export const preloadModel = async (url) => {
+  const cachedUrl = await getCachedModelUrl(url);
+  if (cachedUrl) useGLTF.preload(cachedUrl);
+  return cachedUrl;
+};
 
 export const useCachedModelUrl = (url) => {
-  const [cachedUrl, setCachedUrl] = useState(null);
+  const memoryCachedUrl = peekCachedModelUrl(url);
+  const [cacheState, setCacheState] = useState(() => ({
+    sourceUrl: url ?? null,
+    cachedUrl: memoryCachedUrl,
+  }));
 
   useEffect(() => {
     let active = true;
 
-    if (!url) {
-      setCachedUrl(null);
-      return;
-    }
+    if (!url) return;
 
     const load = async () => {
       try {
         const result = await getCachedModelUrl(url);
-        if (active) setCachedUrl(result);
+        if (active) setCacheState({ sourceUrl: url, cachedUrl: result });
       } catch (e) {
         console.error(e);
-        if (active) setCachedUrl(url);
+        if (active) setCacheState({ sourceUrl: url, cachedUrl: url });
       }
     };
 
@@ -89,5 +102,7 @@ export const useCachedModelUrl = (url) => {
     };
   }, [url]);
 
-  return cachedUrl;
+  if (!url) return null;
+  if (cacheState.sourceUrl !== url) return memoryCachedUrl;
+  return cacheState.cachedUrl ?? memoryCachedUrl;
 };

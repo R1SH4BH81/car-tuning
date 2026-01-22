@@ -29,12 +29,9 @@ export const generateGearingGraphData = (
   // RPM_N = rpmLimit
   // RPM_N+1 = RPM_N * (Ratio_N+1 / Ratio_N)
 
-  let currentSpeed = 0;
-
   gears.forEach((gearRatio, index) => {
     const gearNum = index + 1;
     const effectiveRatio = gearRatio * finalDrive;
-    const nextGearRatio = gears[index + 1];
 
     // Start of gear (or post-shift RPM)
     // For 1st gear, start at 0 (or idle)
@@ -56,7 +53,6 @@ export const generateGearingGraphData = (
       return speedMs * 2.23694; // to MPH
     };
 
-    const startSpeed = calcSpeed(startRpm);
     const endSpeed = calcSpeed(endRpm);
 
     // Add points for this gear line

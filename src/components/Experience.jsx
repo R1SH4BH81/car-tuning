@@ -1,35 +1,42 @@
 import React, { Suspense, useEffect, useRef } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
   Stage,
-  Environment,
+  useGLTF,
   ContactShadows,
 } from "@react-three/drei";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import useStore from "../store/useStore";
+
 import { useCachedModelUrl } from "../utils/modelLoader";
 
 const InnerCarModel = ({ url }) => {
   const { carConfig, baseCar } = useStore();
   const meshRef = useRef();
 
-  const gltf = useLoader(GLTFLoader, url);
-  
+  const gltf = useGLTF(url);
+
   // Clone the scene to avoid modifying the cached original if we switch back and forth
-  const scene = React.useMemo(() => gltf.scene.clone(), [gltf]);
+  const scene = React.useMemo(() => gltf.scene.clone(true), [gltf]);
 
   useEffect(() => {
+    const applyMaterialTweaks = (material) => {
+      if (material?.isMeshStandardMaterial) {
+        material.envMapIntensity = 0.6;
+      }
+    };
+
     // Traverse the model to apply materials or handle parts
     scene.traverse((child) => {
       if (child.isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
 
-        // Apply envMap intensity to materials if they are standard materials
-        if (child.material.isMeshStandardMaterial) {
-          child.material.envMapIntensity = 1.0;
+        if (Array.isArray(child.material)) {
+          child.material.forEach(applyMaterialTweaks);
+        } else {
+          applyMaterialTweaks(child.material);
         }
       }
     });
@@ -44,8 +51,8 @@ const InnerCarModel = ({ url }) => {
           child.name.toLowerCase().includes("wheel") &&
           carConfig.tires === "slick_comp"
         ) {
-           // Example modification for slick tires
-           // child.material.color.setHex(0x111111); 
+          // Example modification for slick tires
+          // child.material.color.setHex(0x111111);
         }
       }
     });
@@ -65,13 +72,21 @@ const CarModel = () => {
 
 const Experience = () => {
   return (
-    <Canvas shadows camera={{ position: [4, 2, 5], fov: 45 }}>
+    <Canvas
+      shadows
+      dpr={[1, 2]}
+      camera={{ position: [4, 2, 5], fov: 45 }}
+      onCreated={({ gl }) => {
+        gl.toneMapping = THREE.ACESFilmicToneMapping;
+        gl.toneMappingExposure = 0.9;
+        gl.outputColorSpace = THREE.SRGBColorSpace;
+      }}
+    >
       <color attach="background" args={["#101010"]} />
       <Suspense fallback={null}>
-        <Stage environment="city" intensity={0.6} contactShadow={false}>
+        <Stage environment="city" intensity={0.55} contactShadow={false}>
           <CarModel />
         </Stage>
-        <Environment preset="city" />
         <ContactShadows
           position={[0, -0.01, 0]}
           opacity={0.5}

@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import useStore from "../store/useStore";
 import { useProgress } from "@react-three/drei";
+import { preloadModel } from "../utils/modelLoader";
 
 const CarSelect = () => {
   const { allCars, baseCar, setCar } = useStore();
@@ -19,11 +20,42 @@ const CarSelect = () => {
     }
   }, [baseCar.id]);
 
+  useEffect(() => {
+    let cancelled = false;
+    const warm = () => {
+      const candidates = allCars
+        .slice(0, 8)
+        .map((c) => c.modelPath)
+        .filter(Boolean);
+
+      candidates.forEach((path) => {
+        if (cancelled) return;
+        preloadModel(path);
+      });
+    };
+
+    const handle =
+      typeof window !== "undefined" && "requestIdleCallback" in window
+        ? window.requestIdleCallback(warm, { timeout: 2000 })
+        : setTimeout(warm, 500);
+
+    return () => {
+      cancelled = true;
+      if (typeof handle === "number") clearTimeout(handle);
+      else if (
+        typeof window !== "undefined" &&
+        "cancelIdleCallback" in window
+      ) {
+        window.cancelIdleCallback(handle);
+      }
+    };
+  }, [allCars]);
+
   return (
     <div className="absolute inset-0 top-24 bottom-0 flex pointer-events-none z-10">
       {/* Loading Overlay */}
       {active && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-300">
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-300 pointer-events-none">
           <div className="flex flex-col items-center">
             <div className="w-6 h-6 border-2 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
 
@@ -113,6 +145,7 @@ const CarSelect = () => {
                   key={car.id}
                   ref={isSelected ? selectedRef : null}
                   onClick={() => setCar(car.id)}
+                  onPointerEnter={() => preloadModel(car.modelPath)}
                   className={`
                     w-full p-4 rounded-xl text-left border transition-all duration-200 group relative overflow-hidden
                     ${
@@ -125,7 +158,7 @@ const CarSelect = () => {
                   <div className="flex items-center justify-between relative z-10">
                     <div className="min-w-0 flex-1 pr-4">
                       <div
-                        className={`text-[10px] font-bold uppercase tracking-wider mb-0.5 ${isSelected ? "text-black/60" : "text-white/40"}`}
+                        className={`text-[12px] font-bold uppercase tracking-wider mb-0.5 ${isSelected ? "text-black/90" : "text-white/90"}`}
                       >
                         {car.brand}
                       </div>
@@ -155,9 +188,6 @@ const CarSelect = () => {
                     >
                       <div className="text-sm italic text-white leading-none">
                         {car.class}
-                      </div>
-                      <div className="text-[8px] font-mono text-white/90 leading-none mt-0.5">
-                        {car.pi}
                       </div>
                     </div>
                   </div>

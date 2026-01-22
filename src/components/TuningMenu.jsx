@@ -121,7 +121,7 @@ const TuningMenu = () => {
   }, [tuningSettings, activeSection, performanceStats.rpmLimit, baseCar]);
 
   // Helper to check if a category is unlocked for tuning
-  const isUnlocked = (category) => {
+  const isUnlocked = () => {
     // Unlock all options for tuning
     return true;
   };

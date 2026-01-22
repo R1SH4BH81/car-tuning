@@ -7,7 +7,7 @@ import PerformanceStats from "./components/PerformanceStats";
 import ShowCar from "./components/ShowCar";
 import Telemetry from "./components/Telemetry";
 import CarSelect from "./components/CarSelect";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaDatabase, FaGlobe } from "react-icons/fa";
 
 function App() {
   const [currentView, setView] = useState("garage");
@@ -32,10 +32,10 @@ function App() {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen bg-black overflow-hidden font-sans select-none text-white">
+    <div className="relative w-screen h-screen  overflow-hidden font-sans select-none text-white">
       {/* Cache Notification Toast */}
-      {/* {cacheNotification && (
-        <div className="absolute bottom-4 right-4 z-50 flex items-center gap-3 bg-black/80 backdrop-blur-md border border-white/10 px-4 py-3 rounded-lg shadow-xl animate-bounce-in">
+      {cacheNotification && (
+        <div className="absolute bottom-4 right-4 z-50 flex items-center gap-3   px-4 py-3 rounded-lg shadow-xl animate-bounce-in">
           <div
             className={`p-2 rounded-full ${cacheNotification.source === "cache" ? "bg-green-500/20 text-green-500" : "bg-blue-500/20 text-blue-500"}`}
           >
@@ -45,15 +45,15 @@ function App() {
               <FaGlobe />
             )}
           </div>
-          <div>
+          {/* <div>
             <div className="text-xs font-bold uppercase tracking-wider text-gray-400">
               {cacheNotification.source === "cache"
                 ? "IndexedDB Cache"
                 : "Network Request"}
             </div>
-          </div>
+          </div> */}
         </div>
-      )} */}
+      )}
 
       {/* 3D Background */}
       <div className="absolute inset-0 z-0">
