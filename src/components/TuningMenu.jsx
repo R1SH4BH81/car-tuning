@@ -1,10 +1,22 @@
 import React, { useState, useMemo } from "react";
 import useStore from "../store/useStore";
 import { PARTS_DB, INITIAL_TUNING } from "../data/parts";
-import { calculatePerformance } from "../utils/physicsEngine";
+import {
+  calculatePerformance,
+  generateGearingGraphData,
+} from "../utils/physicsEngine";
 import tuningData from "../data/tuningData.json";
 import TuningModelViewer from "./TuningModelViewer";
 import { FaLock } from "react-icons/fa";
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
 
 const TUNING_SECTIONS = [
   { id: "tires", label: "Tires" },
@@ -28,6 +40,7 @@ const TuningSlider = ({
   unit = "",
   locked = false,
   description,
+  displayValue,
 }) => (
   <div
     className={` group relative ${locked ? "opacity-50 pointer-events-none" : ""}`}
@@ -40,8 +53,7 @@ const TuningSlider = ({
         <FaLock className="text-gray-500" />
       ) : (
         <span className="font-mono text-yellow-500">
-          {value}
-          {unit}
+          {displayValue || `${value}${unit}`}
         </span>
       )}
     </div>
@@ -90,8 +102,23 @@ const TuningMenu = () => {
   // Calculate baseline stats for comparison (stock tuning with current parts)
   const baselineStats = useMemo(() => {
     if (!baseCar || !carConfig) return null;
-    return calculatePerformance(baseCar.baseStats, carConfig, INITIAL_TUNING);
+    return calculatePerformance(
+      baseCar.baseStats,
+      carConfig,
+      INITIAL_TUNING,
+      baseCar.transmission.gears || 6,
+    );
   }, [baseCar, carConfig]);
+
+  // Generate Gearing Data
+  const gearingData = useMemo(() => {
+    if (activeSection !== "gearing") return [];
+    return generateGearingGraphData(
+      tuningSettings,
+      performanceStats.rpmLimit,
+      baseCar.transmission.gears || 6,
+    );
+  }, [tuningSettings, activeSection, performanceStats.rpmLimit, baseCar]);
 
   // Helper to check if a category is unlocked for tuning
   const isUnlocked = (category) => {
@@ -149,6 +176,23 @@ const TuningMenu = () => {
         const numGears = baseCar?.transmission?.gears || 6;
         const gearsArray = Array.from({ length: numGears }, (_, i) => i + 1);
 
+        const calcGearSpeed = (ratio) => {
+          if (!performanceStats?.rpmLimit) return 0;
+          const finalDrive = tuningSettings.final_drive;
+          const effectiveRatio = ratio * finalDrive;
+          const rpm = performanceStats.rpmLimit;
+          // Tire radius approx 0.33m (26 inch diameter)
+          const tireRadius = 0.33;
+
+          if (effectiveRatio <= 0) return 0;
+
+          const wheelRpm = rpm / effectiveRatio;
+          // Speed in m/s = (wheelRpm / 60) * Circumference
+          const speedMs = (wheelRpm / 60) * (2 * Math.PI * tireRadius);
+          // Convert to MPH
+          return (speedMs * 2.23694).toFixed(0);
+        };
+
         return (
           <>
             <div className="mb-4 text-sm text-gray-400">
@@ -164,18 +208,52 @@ const TuningMenu = () => {
               onChange={(v) => setTuning("final_drive", v)}
               description="Adjusts the entire gear set simultaneously for either Top Speed or Acceleration."
             />
-            {gearsArray.map((gear) => (
-              <TuningSlider
-                key={gear}
-                label={`${gear}${gear === 1 ? "st" : gear === 2 ? "nd" : gear === 3 ? "rd" : "th"} Gear`}
-                locked={!unlocked}
-                value={tuningSettings[`gear_${gear}`]}
-                min={0.5}
-                max={6.0}
-                step={0.01}
-                onChange={(v) => setTuning(`gear_${gear}`, v)}
-              />
-            ))}
+            {gearsArray.map((gear) => {
+              // Constraints:
+              // Gear N must be < Gear N-1 (numerically smaller ratio for higher gear?)
+              // Actually: Gear 1 (High Ratio, e.g. 3.0) -> Gear 6 (Low Ratio, e.g. 0.7)
+              // So Gear N < Gear N-1.
+              // Max value for Gear N is Gear N-1's value.
+              // Min value for Gear N is Gear N+1's value.
+
+              const prevGearVal =
+                gear > 1 ? tuningSettings[`gear_${gear - 1}`] : 6.0;
+              const nextGearVal =
+                gear < numGears ? tuningSettings[`gear_${gear + 1}`] : 0.4; // 0.4 absolute min
+
+              // Add a small buffer so they don't overlap exactly if desired,
+              // but standard is allowing them to touch or be close.
+              // We'll enforce: Gear N <= Gear N-1 - 0.01
+              // And Gear N >= Gear N+1 + 0.01
+
+              const maxLimit = prevGearVal ? prevGearVal - 0.01 : 6.0;
+              const minLimit = nextGearVal ? nextGearVal + 0.01 : 0.4;
+
+              // Ensure slider min/max are valid
+              const sliderMin = Math.max(0.4, minLimit);
+              const sliderMax = Math.min(6.0, maxLimit);
+
+              // If current value is out of bounds due to neighbor change, clamp it?
+              // The slider will visually clamp, but state might be out.
+              // We won't auto-update state here to avoid loops, but slider limits prevent new invalid inputs.
+
+              const currentVal = tuningSettings[`gear_${gear}`];
+              const topSpeed = calcGearSpeed(currentVal);
+
+              return (
+                <TuningSlider
+                  key={gear}
+                  label={`${gear}${gear === 1 ? "st" : gear === 2 ? "nd" : gear === 3 ? "rd" : "th"} Gear`}
+                  locked={!unlocked}
+                  value={currentVal}
+                  min={sliderMin}
+                  max={sliderMax}
+                  step={0.01}
+                  displayValue={`${currentVal.toFixed(2)} (${topSpeed} MPH)`}
+                  onChange={(v) => setTuning(`gear_${gear}`, v)}
+                />
+              );
+            })}
           </>
         );
       }
@@ -569,12 +647,12 @@ const TuningMenu = () => {
                 {/* Simplified estimate for 0-100 based on 0-60 */}
                 <span
                   className={`font-mono ${getStatColor(
-                    (performanceStats?.acceleration060 * 2.1).toFixed(3),
-                    (baselineStats?.acceleration060 * 2.1).toFixed(3),
+                    (performanceStats?.acceleration060 * 2.1).toFixed(2),
+                    (baselineStats?.acceleration060 * 2.1).toFixed(2),
                     true,
                   )}`}
                 >
-                  {(performanceStats?.acceleration060 * 2.1).toFixed(3)} s
+                  {(performanceStats?.acceleration060 * 2.1).toFixed(2)} s
                 </span>
               </div>
               <div className="flex justify-between text-sm">
@@ -645,14 +723,64 @@ const TuningMenu = () => {
         </div>
 
         {/* Right: Helper Info/Image */}
-        <div className="w-1/3 bg-black/80 backdrop-blur-md border-l border-white/10 p-8 pt-12">
-          <div className="aspect-video bg-white/5 rounded-lg mb-4 flex items-center justify-center border border-white/10 overflow-hidden">
-            {/* 3D Model Viewer */}
-            <TuningModelViewer
-              modelPath={tuningData[activeSection]?.modelPath}
-            />
+        <div className="w-1/3 bg-black/80 backdrop-blur-md border-l border-white/10 p-8 pt-12 flex flex-col">
+          <div className="flex-1 bg-white/5 rounded-lg mb-4 flex items-center justify-center border border-white/10 overflow-hidden relative">
+            {activeSection === "gearing" ? (
+              <div className="w-full h-full p-2 relative">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart
+                    data={gearingData}
+                    margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+                    <XAxis
+                      dataKey="speed"
+                      type="number"
+                      unit=" MPH"
+                      domain={[0, "auto"]}
+                      tick={{ fill: "#9ca3af", fontSize: 10 }}
+                    />
+                    <YAxis
+                      dataKey="rpm"
+                      type="number"
+                      domain={[0, performanceStats.rpmLimit]}
+                      tick={{ fill: "#9ca3af", fontSize: 10 }}
+                      unit=" RPM"
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#000",
+                        borderColor: "#333",
+                      }}
+                      itemStyle={{ fontSize: 12 }}
+                      labelStyle={{ color: "#fbbf24" }}
+                      cursor={{ stroke: "rgba(255,255,255,0.2)" }}
+                      formatter={(value, name) => [
+                        value,
+                        name === "speed" ? "Speed (MPH)" : "RPM",
+                      ]}
+                    />
+                    <Line
+                      type="linear"
+                      dataKey="rpm"
+                      stroke="#fbbf24"
+                      strokeWidth={2}
+                      dot={false}
+                      isAnimationActive={false}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+                <div className="absolute top-1 right-2 text-[10px] text-gray-500 font-mono">
+                  RPM vs SPEED
+                </div>
+              </div>
+            ) : (
+              <TuningModelViewer
+                modelPath={tuningData[activeSection]?.modelPath}
+              />
+            )}
           </div>
-          <p className="text-gray-300 leading-relaxed text-sm">
+          <p className="text-gray-300 leading-relaxed text-sm h-24">
             {tuningData[activeSection]?.description}
           </p>
         </div>

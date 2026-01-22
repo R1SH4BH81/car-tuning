@@ -42,6 +42,7 @@ const useStore = create((set, get) => ({
     { ...defaultCar.baseStats, pi: defaultCar.pi },
     INITIAL_CONFIG,
     INITIAL_TUNING,
+    defaultCar.transmission.gears || 6,
   ),
 
   dynoData: generateDynoData(
@@ -62,6 +63,7 @@ const useStore = create((set, get) => ({
       { ...newCar.baseStats, pi: newCar.pi },
       newConfig,
       newTuning,
+      newCar.transmission.gears || 6,
     );
     const newDyno = generateDynoData(newStats.hp, newStats.torque);
 
@@ -82,6 +84,7 @@ const useStore = create((set, get) => ({
       { ...baseCar.baseStats, pi: baseCar.pi },
       newConfig,
       tuningSettings,
+      baseCar.transmission.gears || 6,
     );
     const newDyno = generateDynoData(newStats.hp, newStats.torque);
 
@@ -100,6 +103,7 @@ const useStore = create((set, get) => ({
       { ...baseCar.baseStats, pi: baseCar.pi },
       carConfig,
       newTuning,
+      baseCar.transmission.gears || 6,
     );
 
     set({
@@ -116,6 +120,7 @@ const useStore = create((set, get) => ({
       { ...baseCar.baseStats, pi: baseCar.pi },
       tempConfig,
       tuningSettings,
+      baseCar.transmission.gears || 6,
     );
   },
 }));

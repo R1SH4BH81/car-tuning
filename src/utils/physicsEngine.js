@@ -1,5 +1,98 @@
 import { PARTS_DB } from "../data/parts";
 
+export const generateGearingGraphData = (
+  tuningSettings,
+  rpmLimit = 8000,
+  numberOfGears = 6,
+) => {
+  const data = [];
+  const tireRadius = 0.33; // m
+  const finalDrive = tuningSettings.final_drive;
+
+  const gears = [];
+  for (let i = 1; i <= numberOfGears; i++) {
+    const gearRatio = tuningSettings[`gear_${i}`];
+    if (gearRatio) {
+      gears.push(gearRatio);
+    }
+  }
+
+  // For the "Stairs" effect, we need a single connected line that represents the car accelerating through gears.
+  // Gear 1: 0 RPM -> Redline
+  // Shift: RPM Drop
+  // Gear 2: Drop RPM -> Redline
+  // ...
+
+  // We need to calculate the RPM drop at shift point.
+  // Shift Point is usually at rpmLimit.
+  // When shifting from Gear N to N+1 at Speed S:
+  // RPM_N = rpmLimit
+  // RPM_N+1 = RPM_N * (Ratio_N+1 / Ratio_N)
+
+  let currentSpeed = 0;
+
+  gears.forEach((gearRatio, index) => {
+    const gearNum = index + 1;
+    const effectiveRatio = gearRatio * finalDrive;
+    const nextGearRatio = gears[index + 1];
+
+    // Start of gear (or post-shift RPM)
+    // For 1st gear, start at 0 (or idle)
+    // For others, start at the RPM we dropped to
+    let startRpm = 0;
+    if (index > 0) {
+      const prevGearRatio = gears[index - 1];
+      startRpm = rpmLimit * (gearRatio / prevGearRatio);
+    }
+
+    // End of gear (Redline)
+    const endRpm = rpmLimit;
+
+    // Calculate Speed at Start and End RPM for this gear
+    // Speed = (RPM / (Ratio * Final)) * Circumference * Conversion
+    const calcSpeed = (rpm) => {
+      const wheelRpm = rpm / effectiveRatio;
+      const speedMs = (wheelRpm / 60) * (2 * Math.PI * tireRadius);
+      return speedMs * 2.23694; // to MPH
+    };
+
+    const startSpeed = calcSpeed(startRpm);
+    const endSpeed = calcSpeed(endRpm);
+
+    // Add points for this gear line
+    // We add a specific 'gear' key to identify segments if needed, but for a single continuous line:
+    // We need "vertical drop" visual.
+    // Recharts LineChart connects points.
+    // Point 1: Start of Gear (Speed, RPM)
+    // Point 2: End of Gear (Speed, RPM)
+
+    // If it's not 1st gear, we add a "drop" point from previous max RPM to current start RPM at the SAME speed.
+    // But physically, speed doesn't change instantly during shift (ignoring drag decel for graph).
+    // So:
+    // Gear 1 End: { speed: 40, rpm: 8000 }
+    // Gear 2 Start: { speed: 40, rpm: 5000 }
+    // This creates the vertical line.
+
+    if (index === 0) {
+      data.push({ speed: 0, rpm: 0, gear: gearNum });
+    } else {
+      // The vertical drop is implicit if we just push the new start point which has same speed as prev end point
+      // but lower RPM.
+      // However, floating point might make them slightly different.
+      // Let's force the start speed of this gear to match end speed of previous gear for graph continuity.
+      // data.push({ speed: startSpeed, rpm: startRpm, gear: gearNum }); // Calculated
+
+      // Use previous gear's end speed for perfect vertical line
+      const prevEndSpeed = data[data.length - 1].speed;
+      data.push({ speed: prevEndSpeed, rpm: startRpm, gear: gearNum });
+    }
+
+    data.push({ speed: endSpeed, rpm: endRpm, gear: gearNum });
+  });
+
+  return data;
+};
+
 const getTorqueAtRPM = (rpm, peakTorque) => {
   if (rpm < 1000) return peakTorque * 0.6;
   if (rpm < 5000) return peakTorque;
@@ -14,6 +107,7 @@ const simulateAcceleration = (
   drag,
   gears,
   finalDrive,
+  shiftTimeValue = 0.3, // Default shift time
 ) => {
   // Physics constants
   const rho = 1.225; // Air density
@@ -29,7 +123,6 @@ const simulateAcceleration = (
   let currentGear = 0;
   let rpm = 1000; // Launch RPM
   const dt = 0.05; // Time step
-  const shiftTime = 0.15; // s (fast shift)
   let shiftTimer = 0;
 
   // Simulate until 60 mph (26.8224 m/s)
@@ -50,43 +143,45 @@ const simulateAcceleration = (
     const gearRatio = gears[currentGear];
     const effectiveRatio = gearRatio * finalDrive;
 
-    // v = w * r -> w = v / r
-    // rpm = w * 60 / 2pi
-    // rpm = (v / r) * (60 / 2pi) * ratio
-    // But engine rpm is what we want.
-    // Wheel rpm = speed / (2 * PI * tireRadius) * 60 (This is wrong, speed/circumference gives revs/sec, *60 revs/min)
-    // Wheel RPM = (speed / (2 * Math.PI * tireRadius)) * 60;
-    // Engine RPM = Wheel RPM * effectiveRatio
-
+    // Wheel RPM = (speed / Circumference) * 60
     const wheelRpm = (speed / (2 * Math.PI * tireRadius)) * 60;
+
+    // Engine RPM = Wheel RPM * Gear Ratio * Final Drive
     rpm = wheelRpm * effectiveRatio;
     rpm = Math.max(1000, rpm); // Clutch slip / stall protection at launch
 
     // Shift check
     if (rpm > 8000 && currentGear < gears.length - 1) {
       currentGear++;
-      shiftTimer = shiftTime;
+      shiftTimer = shiftTimeValue;
+      // RPM drops will happen naturally in next loop iteration due to new gear ratio
       continue;
     }
 
     // Calculate Force
+    // 1. Get Engine Torque at current RPM
     const engineTorque = getTorqueAtRPM(rpm, peakTorqueNm);
+
+    // 2. Wheel Torque = Engine Torque * Gear Ratio * Final Drive
     const wheelTorque = engineTorque * effectiveRatio * (1 - driveTrainLoss);
+
+    // 3. Drive Force = Wheel Torque / Radius
     const driveForce = wheelTorque / tireRadius;
 
     // Traction Limit
     // F_max = mu * m * g
-    // Downforce adds to m*g for traction but we don't calculate speed-dependent downforce in this simple loop yet,
-    // assuming gripMultiplier covers average aero effect or just mechanical grip.
-    // Let's add speed dependent downforce for traction
-    // Downforce = Cl * 0.5 * rho * v^2 * A_wing (Simplified: gripMultiplier handles base grip + tuning adjustments)
-    // We'll stick to simple traction model for now.
     const maxTraction = gripMultiplier * mass * 9.81;
 
+    // Limited Force (Wheelspin logic)
     const limitedForce = Math.min(driveForce, maxTraction);
+
+    // Aerodynamic Drag
     const dragForce = 0.5 * rho * Cd * A * speed * speed;
+
+    // Net Force = Drive - Drag
     const netForce = limitedForce - dragForce;
 
+    // F = ma -> a = F/m
     const accel = netForce / mass;
     speed += accel * dt;
   }
@@ -101,7 +196,12 @@ const calculatePartGain = (baseHp, category, partMultiplier) => {
   return baseHp * partMultiplier * diminishingReturn;
 };
 
-export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
+export const calculatePerformance = (
+  baseStats,
+  carConfig,
+  tuningSettings,
+  numberOfGears = 6,
+) => {
   // 1. Calculate Core Stats (HP, Torque, Weight)
   let hp = baseStats.hp;
   let torque = baseStats.torque;
@@ -110,6 +210,7 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
   let brakingMultiplier = 1.0;
   let handlingMultiplier = 1.0;
   let rpmLimit = 8000; // Default Redline
+  let shiftTime = 0.3; // Default stock shift time
 
   // Handle Engine Swap Override
   if (carConfig.engine_swap && carConfig.engine_swap !== "stock") {
@@ -171,6 +272,7 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
       if (stats.braking) brakingMultiplier *= stats.braking;
       if (stats.handling) handlingMultiplier *= stats.handling;
       if (stats.rpmLimit) rpmLimit += stats.rpmLimit;
+      if (stats.shiftTime !== undefined) shiftTime = stats.shiftTime;
 
       if (stats.downforce) {
         // Base aero added by parts, though usually this is adjustable
@@ -261,14 +363,13 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
   const currentDrag = baseDrag + downforceDragPenalty + toeScrub;
 
   // Acceleration (0-60)
-  const gears = [
-    tuningSettings.gear_1,
-    tuningSettings.gear_2,
-    tuningSettings.gear_3,
-    tuningSettings.gear_4,
-    tuningSettings.gear_5,
-    tuningSettings.gear_6,
-  ];
+  const gears = [];
+  for (let i = 1; i <= numberOfGears; i++) {
+    const gearRatio = tuningSettings[`gear_${i}`];
+    if (gearRatio) {
+      gears.push(gearRatio);
+    }
+  }
 
   let accelTime = simulateAcceleration(
     hp,
@@ -278,6 +379,7 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
     currentDrag,
     gears,
     tuningSettings.final_drive,
+    shiftTime,
   );
 
   // Top Speed
@@ -291,9 +393,12 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
 
   // Gearing limit (Redline in top gear)
   const tireRadius = 0.33;
-  const topGearRatio = tuningSettings.gear_6 * tuningSettings.final_drive;
+  // Use the last gear in the gears array
+  const topGearRatioValue = gears.length > 0 ? gears[gears.length - 1] : 0.75;
+  const topGearRatio = topGearRatioValue * tuningSettings.final_drive;
+
   const gearLimitSpeedMs =
-    (8000 * 2 * Math.PI * tireRadius) / (60 * topGearRatio);
+    (rpmLimit * 2 * Math.PI * tireRadius) / (60 * topGearRatio);
   const gearLimitSpeedMph = gearLimitSpeedMs * 2.23694;
 
   let topSpeed = Math.min(powerLimitSpeedMph, gearLimitSpeedMph);
@@ -353,6 +458,7 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
     lateralG: parseFloat(latG.toFixed(2)),
     pi,
     piClass,
+    rpmLimit, // Exposed for graph
   };
 };
 

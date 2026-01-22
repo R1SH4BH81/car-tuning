@@ -43,13 +43,15 @@ const StatDiff = ({ label, current, preview, unit = "", inverse = false }) => {
       <span className="text-gray-400">{label}</span>
       <div className="flex gap-2">
         <span>
-          {preview}
+          {typeof preview === "number"
+            ? parseFloat(preview.toFixed(2))
+            : preview}
           {unit}
         </span>
         {hasDiff && (
           <span className={colorClass}>
             ({diff > 0 ? "+" : ""}
-            {diff.toFixed(2).replace(/\.00$/, "")})
+            {parseFloat(diff.toFixed(2))})
           </span>
         )}
       </div>
@@ -186,9 +188,24 @@ const UpgradeShop = () => {
         className={`ml-1 text-[10px] ${isGood ? "text-green-500" : "text-red-500"}`}
       >
         ({diff > 0 ? "+" : ""}
-        {diff})
+        {parseFloat(diff.toFixed(2))})
       </span>
     );
+  };
+
+  // Helper to get option count based on filtering
+  const getOptionCount = (subCat) => {
+    const allParts = PARTS_DB[subCat] || {};
+    const partIds = Object.keys(allParts);
+
+    if (subCat === "engine_swap") {
+      return partIds.filter((id) => {
+        if (id === "stock") return true;
+        return baseCar.compatibleSwaps?.includes(id);
+      }).length;
+    }
+
+    return partIds.length;
   };
 
   return (
@@ -249,15 +266,23 @@ const UpgradeShop = () => {
                         </div>
                       )}
                       <div className="mt-4 text-xs opacity-60 uppercase">
-                        {Object.keys(PARTS_DB[subCat] || {}).length} Options
+                        {getOptionCount(subCat)} Options
                       </div>
                     </button>
                   );
                 })
               : // Parts Selection View
                 PARTS_DB[activeSubCategory] &&
-                Object.entries(PARTS_DB[activeSubCategory]).map(
-                  ([id, part]) => {
+                Object.entries(PARTS_DB[activeSubCategory])
+                  .filter(([id]) => {
+                    // Filter engine swaps based on car compatibility
+                    if (activeSubCategory === "engine_swap") {
+                      if (id === "stock") return true;
+                      return baseCar.compatibleSwaps?.includes(id);
+                    }
+                    return true;
+                  })
+                  .map(([id, part]) => {
                     const isInstalled = carConfig[activeSubCategory] === id;
                     const isInstalling = installingPart === id;
 
@@ -319,7 +344,9 @@ const UpgradeShop = () => {
                                 >
                                   <span>{stat}</span>
                                   <span>
-                                    {val}
+                                    {typeof val === "number"
+                                      ? parseFloat(val.toFixed(2))
+                                      : val}
                                     {getRelativeStat(stat, val, id)}
                                   </span>
                                 </div>
@@ -351,7 +378,9 @@ const UpgradeShop = () => {
                                       <span>{stat}</span>
                                       <span>
                                         {val > 0 ? "+" : ""}
-                                        {val}
+                                        {typeof val === "number"
+                                          ? parseFloat(val.toFixed(2))
+                                          : val}
                                         {getRelativeStat(stat, val, id)}
                                       </span>
                                     </div>
@@ -362,8 +391,7 @@ const UpgradeShop = () => {
                         </div>
                       </button>
                     );
-                  },
-                )}
+                  })}
           </div>
         </div>
 

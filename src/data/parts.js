@@ -454,6 +454,10 @@ export const INITIAL_TUNING = {
   gear_4: 1.2,
   gear_5: 0.9,
   gear_6: 0.75,
+  gear_7: 0.65,
+  gear_8: 0.55,
+  gear_9: 0.45,
+  gear_10: 0.4,
 
   // Alignment
   camber_f: -0.5,

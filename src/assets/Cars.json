@@ -3,7 +3,7 @@
     {
       "id": "ferrari-f40",
       "name": "Ferrari F40",
-      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/lb-works_ferrari_f40_-__free.glb?alt=media&token=fe006a35-76b7-400a-8dca-6c9c6d9acb9d",
+      "modelPath": "https://rishabh81.sirv.com/models/lb-works_ferrari_f40_-__free.glb",
       "brand": "Ferrari",
       "year": 1987,
       "class": "A",
@@ -24,12 +24,12 @@
         "driveType": "RWD",
         "brakingDistance600": 118
       },
-      "compatibleSwaps": ["racing_v12", "racing_v8"]
+      "compatibleSwaps": ["racing_v8", "racing_v12", "v10_n_a"]
     },
     {
       "id": "nissan-gtr-r35",
       "name": "Nissan GT-R (R35)",
-      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/nissan_gt-r.glb?alt=media&token=1196e8ac-116d-4900-b06f-a0c3c3578df4",
+      "modelPath": "https://rishabh81.sirv.com/models/nissan_gt-r.glb",
       "brand": "Nissan",
       "year": 2024,
       "class": "S1",
@@ -50,12 +50,12 @@
         "driveType": "AWD",
         "brakingDistance600": 105
       },
-      "compatibleSwaps": ["racing_v6_tt", "v10_n/a"]
+      "compatibleSwaps": ["racing_v6_tt", "v10_n_a", "racing_v12"]
     },
     {
       "id": "porsche-911-gt3rs",
       "name": "Porsche 911 GT3 RS (992)",
-      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/porsche_gt3_rs.glb?alt=media&token=074ca0d2-696f-49f4-ae3c-f06bf61aca81",
+      "modelPath": "https://rishabh81.sirv.com/models/porsche_gt3_rs.glb",
       "brand": "Porsche",
       "year": 2024,
       "class": "S1",
@@ -82,12 +82,12 @@
           "rearDownforce": { "min": 250, "max": 900 }
         }
       },
-      "compatibleSwaps": ["flat6_tt"]
+      "compatibleSwaps": ["flat6_tt", "racing_v10"]
     },
     {
       "id": "koenigsegg-one-1",
       "name": "Koenigsegg One:1",
-      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/koenigsegg_one1_low_poly.glb?alt=media&token=27caa605-3894-4561-89ea-9b35f98ce9db",
+      "modelPath": "https://rishabh81.sirv.com/models/koenigsegg_one1_low_poly.glb",
       "brand": "Koenigsegg",
       "year": 2014,
       "class": "S2",
@@ -108,12 +108,12 @@
         "driveType": "RWD",
         "brakingDistance600": 91
       },
-      "compatibleSwaps": []
+      "compatibleSwaps": ["racing_v12"]
     },
     {
       "id": "ford-mustang-1965",
       "name": "1965 Ford Mustang GT",
-      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/ford_mustang_1965.glb?alt=media&token=d85cd4c6-34f4-4aac-9d6e-574d4840511c",
+      "modelPath": "https://rishabh81.sirv.com/models/ford_mustang_1965.glb",
       "brand": "Ford",
       "year": 1965,
       "class": "D",
@@ -134,16 +134,12 @@
         "driveType": "RWD",
         "brakingDistance600": 165
       },
-      "upgradePotential": {
-        "engineSwaps": ["v8_modern", "v12_racing"],
-        "conversions": ["AWD_swap"]
-      },
-      "compatibleSwaps": ["v8_modern", "v12_racing", "turbo_rally_i4"]
+      "compatibleSwaps": ["v8_modern", "racing_v8", "turbo_rally_i4"]
     },
     {
       "id": "porsche-911-930-turbo",
       "name": "1975 Porsche 911 (930) Turbo",
-      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/porsche_911_930_turbo_1975.glb?alt=media&token=93e9c27e-9c09-40eb-9d3a-bdf2bea45d53",
+      "modelPath": "https://rishabh81.sirv.com/models/porsche_911_930_turbo_1975.glb",
       "brand": "Porsche",
       "year": 1975,
       "class": "B",
@@ -164,12 +160,12 @@
         "driveType": "RWD",
         "brakingDistance600": 135
       },
-      "compatibleSwaps": ["flat6_modern", "racing_v8"]
+      "compatibleSwaps": ["flat6_modern", "flat6_tt", "racing_v8"]
     },
     {
       "id": "bmw-m3-gtr-e46",
       "name": "BMW M3 GTR (E46) - NFS Edition",
-      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/bmw_m3_gtr_-_nfs_mw.glb?alt=media&token=eced6ec0-9fe0-48f7-8df9-de015df6e668",
+      "modelPath": "https://rishabh81.sirv.com/models/bmw_m3_gtr_-_nfs_mw.glb",
       "brand": "BMW",
       "year": 2001,
       "class": "S1",
@@ -190,12 +186,12 @@
         "driveType": "RWD",
         "brakingDistance600": 110
       },
-      "compatibleSwaps": ["racing_v10", "racing_v12"]
+      "compatibleSwaps": ["racing_v10", "racing_v12", "racing_v8"]
     },
     {
       "id": "mclaren-p1-mso",
       "name": "McLaren P1 MSO",
-      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/free_-_mclaren_p1_mso.glb?alt=media&token=35e416d7-47dc-49f6-afed-eb626b5359da",
+      "modelPath": "https://rishabh81.sirv.com/models/free_-_mclaren_p1_mso.glb",
       "brand": "McLaren",
       "year": 2015,
       "class": "S2",
@@ -216,12 +212,12 @@
         "driveType": "RWD",
         "brakingDistance600": 98
       },
-      "compatibleSwaps": []
+      "compatibleSwaps": ["racing_v12"]
     },
     {
       "id": "mercedes-amg-one",
-      "name": "2023 Mercedes-Benz AMG ONE",
-      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/2023_mercedes-benz_amg_one.glb?alt=media&token=693dfcc6-d870-4f51-a4a0-cc7652c3cad8",
+      "name": " Mercedes-Benz AMG ONE",
+      "modelPath": "https://rishabh81.sirv.com/models/2023_mercedes-benz_amg_one.glb",
       "brand": "Mercedes-Benz",
       "year": 2023,
       "class": "S2",
@@ -242,7 +238,7 @@
         "driveType": "AWD",
         "brakingDistance600": 92
       },
-      "compatibleSwaps": []
+      "compatibleSwaps": ["racing_v12"]
     }
   ]
 }

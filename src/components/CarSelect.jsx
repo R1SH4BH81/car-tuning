@@ -1,9 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useStore from "../store/useStore";
+import { useProgress } from "@react-three/drei";
 
 const CarSelect = () => {
   const { allCars, baseCar, setCar } = useStore();
   const selectedRef = useRef(null);
+  const { active, progress } = useProgress();
+  // We want to show loader if active is true (loading happening)
+  // But useProgress is global for all three fiber loaders.
+  // It works well enough for this context as we switch cars.
 
   useEffect(() => {
     if (selectedRef.current) {
@@ -16,6 +21,19 @@ const CarSelect = () => {
 
   return (
     <div className="absolute inset-0 top-24 bottom-0 flex pointer-events-none z-10">
+      {/* Loading Overlay */}
+      {active && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-300">
+          <div className="flex flex-col items-center">
+            <div className="w-6 h-6 border-2 border-yellow-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+
+            <div className="font-mono text-yellow-500 mt-2">
+              {progress.toFixed(0)}%
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Center: Selected Car Details */}
       <div className="flex-1 flex flex-col items-center justify-end pb-12 pointer-events-none">
         <div className=" p-1 rounded-2xl   max-w-3xl w-full mx-2 pointer-events-auto ">

@@ -1,40 +1,40 @@
 {
   "tires": {
-    "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/off-road_wheel_and_tire.glb?alt=media&token=ae30f2c6-ab48-4faa-b7b6-edaaea9daa09",
+    "modelPath": "https://rishabh81.sirv.com/models/off-road_wheel_and_tire.glb",
     "description": "Tire pressure has an effect on peak grip, responsiveness and wear. Excessively high or low pressures can adversely affect the contact area."
   },
   "gearing": {
-    "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/manual_transmission_gear_box.glb?alt=media&token=dc18c81a-bf98-45db-ab4c-e3ec260c44eb",
+    "modelPath": "",
     "description": "Final Drive ratio adjusts the entire gear set simultaneously. Higher ratio = Acceleration, Lower ratio = Top Speed."
   },
   "alignment": {
-    "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/4x4_independent_rh_front_suspension.glb?alt=media&token=726b043e-39da-4a3a-b3ea-5b9e0da372f3",
+    "modelPath": "https://rishabh81.sirv.com/models/4x4_independent_rh_front_suspension.glb",
     "description": "Adjust camber, toe and caster to optimize the tire contact patch during cornering and straight line stability."
   },
 
   "springs": {
-    "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/rigged_suspension.glb?alt=media&token=12dc543b-8982-4869-bab5-0420d23a44ce",
+    "modelPath": "https://rishabh81.sirv.com/models/rigged_suspension.glb",
     "description": "Spring stiffness affects how the car supports its weight and absorbs bumps. Ride height affects the center of gravity and aerodynamic downforce."
   },
   "damping": {
-    "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/rwd_car_suspensionchassis.glb?alt=media&token=0b3fca29-452a-4cfc-a635-9f01fdcd9bd5",
+    "modelPath": "https://rishabh81.sirv.com/models/rwd_car_suspensionchassis.glb",
 
     "description": "Damping controls how quickly the suspension compresses (bump) and extends (rebound). It fine-tunes the transition of weight during braking, acceleration, and cornering."
   },
   "aero": {
-    "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/spoiler.glb?alt=media&token=6b0ebdb8-4095-4218-a0e2-5e32c38ade14",
+    "modelPath": "https://rishabh81.sirv.com/models/spoiler.glb",
     "description": "Aerodynamic downforce increases grip at high speeds but adds drag, which reduces top speed."
   },
   "brake": {
-    "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/brake_disk_and_caliper.glb?alt=media&token=597978fd-1562-4de8-98a2-2bb576ebfcc8",
+    "modelPath": "https://rishabh81.sirv.com/models/brake_disk_and_caliper.glb",
     "description": "Brake balance adjusts the distribution of braking force between front and rear. Pressure affects the maximum braking force applied."
   },
   "differential": {
-    "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/gearbox_propeller_turbine.glb?alt=media&token=490c1dac-f737-491b-823f-1cd2752fe2b1",
+    "modelPath": "https://rishabh81.sirv.com/models/gearbox_propeller_turbine.glb",
     "description": "The differential controls how power is distributed between the left and right wheels (or front and rear axles). It affects traction and cornering behavior."
   },
   "arbs": {
-    "modelPath": "/models/tuning/arbs.glb",
+    "modelPath": "https://rishabh81.sirv.com/models/arbs.glb",
     "description": "Anti-roll bars link the left and right suspension components. Stiffer bars reduce body roll but can make the suspension less independent."
   }
 }

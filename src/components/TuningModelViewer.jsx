@@ -31,6 +31,34 @@ function Model({ path }) {
   return <primitive object={scene} />;
 }
 
+import { useProgress } from "@react-three/drei";
+import { useCachedModelUrl } from "../utils/modelLoader";
+
+function Loader() {
+  const { progress } = useProgress();
+  return (
+    <Html center>
+      <div className="flex flex-col items-center whitespace-nowrap">
+        <div className="w-8 h-8 border-2 border-yellow-500 border-t-transparent rounded-full animate-spin mb-2"></div>
+        <div className="text-[10px] font-black italic uppercase text-white tracking-widest">
+          Loading
+        </div>
+        <div className="font-mono text-[8px] text-yellow-500 mt-1">
+          {progress.toFixed(0)}%
+        </div>
+      </div>
+    </Html>
+  );
+}
+
+function CachedModel({ path }) {
+  const cachedUrl = useCachedModelUrl(path);
+
+  if (!cachedUrl) return <Loader />;
+
+  return <Model path={cachedUrl} />;
+}
+
 export default function TuningModelViewer({ modelPath }) {
   return (
     <div className="w-full h-full min-h-[200px]">
@@ -47,15 +75,9 @@ export default function TuningModelViewer({ modelPath }) {
             </Html>
           }
         >
-          <Suspense
-            fallback={
-              <Html center>
-                <div className="text-white text-xs">Loading </div>
-              </Html>
-            }
-          >
+          <Suspense fallback={<Loader />}>
             <Stage environment="city" intensity={0.5} adjustCamera={1.2}>
-              {modelPath ? <Model path={modelPath} /> : null}
+              {modelPath ? <CachedModel path={modelPath} /> : null}
             </Stage>
           </Suspense>
         </ErrorBoundary>

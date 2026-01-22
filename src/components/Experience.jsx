@@ -9,15 +9,13 @@ import {
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import useStore from "../store/useStore";
+import { useCachedModelUrl } from "../utils/modelLoader";
 
-const CarModel = () => {
+const InnerCarModel = ({ url }) => {
   const { carConfig, baseCar } = useStore();
   const meshRef = useRef();
 
-  // Use the modelPath from the car data
-  const modelUrl = baseCar.modelPath;
-
-  const gltf = useLoader(GLTFLoader, modelUrl);
+  const gltf = useLoader(GLTFLoader, url);
   
   // Clone the scene to avoid modifying the cached original if we switch back and forth
   const scene = React.useMemo(() => gltf.scene.clone(), [gltf]);
@@ -54,6 +52,15 @@ const CarModel = () => {
   }, [carConfig, scene]);
 
   return <primitive object={scene} ref={meshRef} />;
+};
+
+const CarModel = () => {
+  const { baseCar } = useStore();
+  const cachedUrl = useCachedModelUrl(baseCar.modelPath);
+
+  if (!cachedUrl) return null;
+
+  return <InnerCarModel url={cachedUrl} />;
 };
 
 const Experience = () => {
