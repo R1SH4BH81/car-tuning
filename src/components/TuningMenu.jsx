@@ -144,6 +144,9 @@ const TuningMenu = () => {
         );
       case "gearing": {
         const unlocked = isUnlocked("transmission");
+        const numGears = baseCar?.transmission?.gears || 6;
+        const gearsArray = Array.from({ length: numGears }, (_, i) => i + 1);
+
         return (
           <>
             <div className="mb-4 text-sm text-gray-400">
@@ -159,7 +162,7 @@ const TuningMenu = () => {
               onChange={(v) => setTuning("final_drive", v)}
               description="Adjusts the entire gear set simultaneously for either Top Speed or Acceleration."
             />
-            {[1, 2, 3, 4, 5, 6].map((gear) => (
+            {gearsArray.map((gear) => (
               <TuningSlider
                 key={gear}
                 label={`${gear}${gear === 1 ? "st" : gear === 2 ? "nd" : gear === 3 ? "rd" : "th"} Gear`}
