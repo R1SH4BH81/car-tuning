@@ -1,0 +1,7 @@
+Category,Sub-Tabs / Parts
+Engine,"Air Filter, Intake Manifold, Fuel System, Ignition, Exhaust, Camshafts, Valves, Displacement, Pistons & Compression, Oil & Cooling, Flywheel."
+Platform & Handling,"Brakes, Springs & Dampers, Front Anti-Roll Bars, Rear Anti-Roll Bars, Chassis Reinforcement (Roll Cage), Weight Reduction."
+Drivetrain,"Clutch, Transmission, Driveline, Differential."
+Tires & Rims,"Tire Compound (Street, Sport, Race, Drag, Drift), Front/Rear Tire Width, Rim Style (Sport, Multi-piece, specialized), Rim Size."
+Aero & Appearance,"Front Bumper, Rear Wing, Rear Bumper, Side Skirts, Hood."
+Conversions,"Engine Swap (e.g., V8 Swap), Drivetrain Swap (RWD to AWD), Aspiration (Turbo, Twin Turbo, Supercharger)."
