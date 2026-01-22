@@ -114,32 +114,6 @@
     },
 
     {
-      "id": "honda-nsx-lb-works",
-      "name": "Honda NSX LB-Works",
-      "modelPath": "https://rishabh81.sirv.com/models/2020_honda_nsx_na1_lbworks.glb",
-      "brand": "Honda",
-      "year": 2017,
-      "class": "S1",
-      "pi": 875,
-      "transmission": {
-        "gears": 9,
-        "type": "DCT",
-        "adjustable": true
-      },
-      "baseStats": {
-        "hp": 573,
-        "torque": 476,
-        "weight": 1725,
-        "topSpeed": 191,
-        "acceleration060": 2.9,
-        "handling": 8.8,
-        "braking": 8.9,
-        "driveType": "AWD",
-        "brakingDistance600": 101
-      },
-      "compatibleSwaps": ["racing_v6_tt", "racing_v8"]
-    },
-    {
       "id": "nissan-gtr-r35",
       "name": "Nissan GT-R (R35)",
       "modelPath": "https://rishabh81.sirv.com/models/nissan_skyline_gtr_r35.glb",
