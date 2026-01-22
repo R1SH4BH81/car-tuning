@@ -61,16 +61,10 @@ const InnerCarModel = ({ url }) => {
   return <primitive object={scene} ref={meshRef} />;
 };
 
-const CarModel = () => {
+const Experience = () => {
   const { baseCar } = useStore();
   const cachedUrl = useCachedModelUrl(baseCar.modelPath);
 
-  if (!cachedUrl) return null;
-
-  return <InnerCarModel url={cachedUrl} />;
-};
-
-const Experience = () => {
   return (
     <Canvas
       shadows
@@ -84,9 +78,16 @@ const Experience = () => {
     >
       <color attach="background" args={["#101010"]} />
       <Suspense fallback={null}>
-        <Stage environment="city" intensity={0.55} contactShadow={false}>
-          <CarModel />
-        </Stage>
+        {cachedUrl ? (
+          <Stage
+            key={cachedUrl}
+            environment="city"
+            intensity={0.55}
+            contactShadow={false}
+          >
+            <InnerCarModel url={cachedUrl} />
+          </Stage>
+        ) : null}
         <ContactShadows
           position={[0, -0.01, 0]}
           opacity={0.5}
@@ -96,6 +97,7 @@ const Experience = () => {
         />
       </Suspense>
       <OrbitControls
+        key={baseCar.id}
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
         enableZoom={true}
