@@ -7,7 +7,17 @@ import carsData from "../assets/Cars.json";
 const defaultCar = carsData.cars[0];
 
 const INITIAL_CONFIG = {
-  engine: "stock",
+  engine_swap: "stock",
+  pistons: "stock",
+  valves: "stock",
+  camshaft: "stock",
+  ignition: "stock",
+  exhaust: "stock",
+  intake_manifold: "stock",
+  fuel_system: "stock",
+  turbo: "stock",
+  intercooler: "stock",
+  flywheel: "stock",
   tires: "stock",
   weight_reduction: "stock",
   brakes: "stock",

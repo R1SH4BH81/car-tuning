@@ -23,7 +23,8 @@
         "braking": 7.5,
         "driveType": "RWD",
         "brakingDistance600": 118
-      }
+      },
+      "compatibleSwaps": ["racing_v12", "racing_v8"]
     },
     {
       "id": "nissan-gtr-r35",
@@ -48,7 +49,8 @@
         "braking": 8.5,
         "driveType": "AWD",
         "brakingDistance600": 105
-      }
+      },
+      "compatibleSwaps": ["racing_v6_tt", "v10_n/a"]
     },
     {
       "id": "porsche-911-gt3rs",
@@ -79,9 +81,9 @@
           "frontDownforce": { "min": 100, "max": 400 },
           "rearDownforce": { "min": 250, "max": 900 }
         }
-      }
+      },
+      "compatibleSwaps": ["flat6_tt"]
     },
-
     {
       "id": "koenigsegg-one-1",
       "name": "Koenigsegg One:1",
@@ -105,7 +107,8 @@
         "braking": 10,
         "driveType": "RWD",
         "brakingDistance600": 91
-      }
+      },
+      "compatibleSwaps": []
     },
     {
       "id": "ford-mustang-1965",
@@ -134,7 +137,8 @@
       "upgradePotential": {
         "engineSwaps": ["v8_modern", "v12_racing"],
         "conversions": ["AWD_swap"]
-      }
+      },
+      "compatibleSwaps": ["v8_modern", "v12_racing", "turbo_rally_i4"]
     },
     {
       "id": "porsche-911-930-turbo",
@@ -159,7 +163,8 @@
         "braking": 5.5,
         "driveType": "RWD",
         "brakingDistance600": 135
-      }
+      },
+      "compatibleSwaps": ["flat6_modern", "racing_v8"]
     },
     {
       "id": "bmw-m3-gtr-e46",
@@ -184,7 +189,8 @@
         "braking": 8.2,
         "driveType": "RWD",
         "brakingDistance600": 110
-      }
+      },
+      "compatibleSwaps": ["racing_v10", "racing_v12"]
     },
     {
       "id": "mclaren-p1-mso",
@@ -209,7 +215,8 @@
         "braking": 9.8,
         "driveType": "RWD",
         "brakingDistance600": 98
-      }
+      },
+      "compatibleSwaps": []
     },
     {
       "id": "mercedes-amg-one",
@@ -234,7 +241,8 @@
         "braking": 10,
         "driveType": "AWD",
         "brakingDistance600": 92
-      }
+      },
+      "compatibleSwaps": []
     }
   ]
 }

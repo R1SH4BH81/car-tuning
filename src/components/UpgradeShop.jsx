@@ -5,11 +5,38 @@ import { AnimatePresence } from "framer-motion";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis } from "recharts";
 import { generateDynoData } from "../utils/physicsEngine";
 
+// Group definitions
+const CATEGORY_GROUPS = {
+  Engine: [
+    "engine_swap",
+    "intake_manifold",
+    "fuel_system",
+    "ignition",
+    "exhaust",
+    "camshaft",
+    "valves",
+    "pistons",
+    "turbo",
+    "intercooler",
+    "flywheel",
+  ],
+  Platform: ["brakes", "suspension", "arbs", "weight_reduction"],
+  Drivetrain: ["transmission", "differential"],
+  Tires: ["tires"],
+  Aero: ["aero"],
+};
+
 // Helper to show stat diff
-const StatDiff = ({ label, current, preview, unit = "" }) => {
+const StatDiff = ({ label, current, preview, unit = "", inverse = false }) => {
   const diff = preview - current;
   // Float tolerance
   const hasDiff = Math.abs(diff) > 0.001;
+
+  // Determine color:
+  // Normal: Increase (Diff > 0) is Green, Decrease is Red
+  // Inverse (e.g. Time, Weight): Increase (Diff > 0) is Red, Decrease is Green
+  const isGood = inverse ? diff < 0 : diff > 0;
+  const colorClass = isGood ? "text-green-500" : "text-red-500";
 
   return (
     <div className="flex justify-between text-sm">
@@ -20,7 +47,7 @@ const StatDiff = ({ label, current, preview, unit = "" }) => {
           {unit}
         </span>
         {hasDiff && (
-          <span className={diff > 0 ? "text-green-500" : "text-red-500"}>
+          <span className={colorClass}>
             ({diff > 0 ? "+" : ""}
             {diff.toFixed(2).replace(/\.00$/, "")})
           </span>
@@ -31,13 +58,32 @@ const StatDiff = ({ label, current, preview, unit = "" }) => {
 };
 
 const UpgradeShop = () => {
-  const { carConfig, setPart, getPreviewStats, performanceStats, dynoData } =
-    useStore();
-  const [selectedCategory, setSelectedCategory] = useState("engine");
+  const {
+    carConfig,
+    setPart,
+    getPreviewStats,
+    performanceStats,
+    dynoData,
+    baseCar,
+  } = useStore();
+
+  const [activeGroup, setActiveGroup] = useState("Engine");
+  const [activeSubCategory, setActiveSubCategory] = useState(null); // If null, show sub-category list
   const [hoveredPart, setHoveredPart] = useState(null);
   const [installingPart, setInstallingPart] = useState(null);
 
-  const categories = Object.keys(PARTS_DB);
+  // Helper to handle group change
+  const handleGroupChange = (group) => {
+    setActiveGroup(group);
+    setActiveSubCategory(null);
+    setHoveredPart(null);
+  };
+
+  // Helper to handle sub-category selection
+  const handleSubCategorySelect = (subCat) => {
+    setActiveSubCategory(subCat);
+    setHoveredPart(null);
+  };
 
   // Handle part installation with delay
   const handleInstall = (category, partId) => {
@@ -56,10 +102,9 @@ const UpgradeShop = () => {
     // If installing, show the stats of the part being installed as "preview"
     // or just keep showing current until done.
     // Standard behavior: show preview on hover.
-    return hoveredPart
-      ? getPreviewStats(selectedCategory, hoveredPart)
-      : performanceStats;
-  }, [hoveredPart, selectedCategory, getPreviewStats, performanceStats]);
+    if (!activeSubCategory || !hoveredPart) return performanceStats;
+    return getPreviewStats(activeSubCategory, hoveredPart);
+  }, [activeSubCategory, hoveredPart, getPreviewStats, performanceStats]);
 
   // Calculate preview dyno data
   const previewDynoData = useMemo(() => {
@@ -67,28 +112,173 @@ const UpgradeShop = () => {
     return generateDynoData(previewStats.hp, previewStats.torque);
   }, [hoveredPart, dynoData, previewStats]);
 
+  // Helper to get relative stat value for cards
+  const getRelativeStat = (stat, val, partId) => {
+    // If we are looking at the installed part, diff is 0
+    if (!activeSubCategory) return null;
+    if (carConfig[activeSubCategory] === partId) return null;
+
+    // We need the value of this stat on the CURRENTLY INSTALLED part.
+    // 1. Get current part ID
+    const currentPartId = carConfig[activeSubCategory];
+
+    // 2. Get current part object
+    const currentPart = PARTS_DB[activeSubCategory]?.[currentPartId];
+
+    if (!currentPart) return null;
+
+    // 3. Get value.
+    // stat could be in 'stats', 'baseStats' or calculated from 'multiplier'
+    // But 'val' passed in is the absolute value/multiplier of the part we are rendering.
+
+    // Check if the current part has this stat
+    let currentVal = 0;
+
+    // Special handling for STOCK ENGINE SWAP which uses baseCar stats
+    if (activeSubCategory === "engine_swap" && currentPartId === "stock") {
+      if (baseCar.baseStats[stat] !== undefined) {
+        currentVal = baseCar.baseStats[stat];
+      }
+    } else {
+      if (currentPart.stats && currentPart.stats[stat] !== undefined) {
+        currentVal = currentPart.stats[stat];
+      } else if (
+        currentPart.baseStats &&
+        currentPart.baseStats[stat] !== undefined
+      ) {
+        currentVal = currentPart.baseStats[stat];
+      } else if (
+        stat === "multiplier" &&
+        currentPart.multiplier !== undefined
+      ) {
+        currentVal = currentPart.multiplier;
+      } else {
+        currentVal = 0;
+      }
+    }
+
+    const diff = val - currentVal;
+    if (Math.abs(diff) < 0.001) return null;
+
+    // Determine color
+    const isInverse = [
+      "weight",
+      "shiftTime",
+      "acceleration060",
+      "brakingDistance600",
+    ].includes(stat);
+    const isGood = isInverse ? diff < 0 : diff > 0;
+
+    // Format for multiplier
+    if (stat === "multiplier") {
+      return (
+        <span
+          className={`ml-1 text-[10px] ${isGood ? "text-green-500" : "text-red-500"}`}
+        >
+          ({diff > 0 ? "+" : ""}
+          {(diff * 100).toFixed(0)}%)
+        </span>
+      );
+    }
+
+    return (
+      <span
+        className={`ml-1 text-[10px] ${isGood ? "text-green-500" : "text-red-500"}`}
+      >
+        ({diff > 0 ? "+" : ""}
+        {diff})
+      </span>
+    );
+  };
+
   return (
     <div className="absolute inset-0 top-24 bottom-0 flex flex-col pointer-events-none z-10">
       <div className="flex flex-1 overflow-hidden">
         {/* Parts List */}
         <div className="flex-1 p-8 pointer-events-auto overflow-y-auto">
-          <h2 className="text-4xl font-black italic uppercase text-white mb-8 drop-shadow-lg">
-            {selectedCategory.replace("_", " ")}
-          </h2>
+          {/* Header */}
+          <div className="flex items-center gap-4 mb-8">
+            {activeSubCategory && (
+              <button
+                onClick={() => setActiveSubCategory(null)}
+                className="bg-white/10 hover:bg-white/20 p-2 rounded text-white transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+            )}
+            <h2 className="text-4xl font-black italic uppercase text-white drop-shadow-lg">
+              {activeSubCategory
+                ? activeSubCategory.replace("_", " ")
+                : activeGroup}
+            </h2>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-24">
-            {Object.entries(PARTS_DB[selectedCategory]).map(([id, part]) => {
-              const isInstalled = carConfig[selectedCategory] === id;
-              const isInstalling = installingPart === id;
+            {!activeSubCategory
+              ? // Sub-Category Selection View
+                CATEGORY_GROUPS[activeGroup].map((subCat) => {
+                  // Get currently installed part name
+                  const installedPartId = carConfig[subCat];
+                  const installedPart = PARTS_DB[subCat]?.[installedPartId];
 
-              return (
-                <button
-                  key={id}
-                  onClick={() => handleInstall(selectedCategory, id)}
-                  onMouseEnter={() => setHoveredPart(id)}
-                  onMouseLeave={() => setHoveredPart(null)}
-                  disabled={isInstalling}
-                  className={`
+                  return (
+                    <button
+                      key={subCat}
+                      onClick={() => handleSubCategorySelect(subCat)}
+                      className="relative p-6 rounded-sm text-left border bg-black/80 text-white border-white/10 hover:border-white/40 hover:scale-[1.02] active:scale-[0.98] transition-all group"
+                    >
+                      <div className="text-lg font-bold mb-1 uppercase">
+                        {subCat.replace("_", " ")}
+                      </div>
+                      {installedPart && (
+                        <div className="text-xs text-yellow-500 uppercase tracking-wide">
+                          Installed: {installedPart.name}
+                        </div>
+                      )}
+                      <div className="mt-4 text-xs opacity-60 uppercase">
+                        {Object.keys(PARTS_DB[subCat] || {}).length} Options
+                      </div>
+                    </button>
+                  );
+                })
+              : // Parts Selection View
+                PARTS_DB[activeSubCategory] &&
+                Object.entries(PARTS_DB[activeSubCategory]).map(
+                  ([id, part]) => {
+                    const isInstalled = carConfig[activeSubCategory] === id;
+                    const isInstalling = installingPart === id;
+
+                    // Override for Stock Engine Swap display
+                    let displayBaseStats = part.baseStats;
+                    if (activeSubCategory === "engine_swap" && id === "stock") {
+                      displayBaseStats = {
+                        hp: baseCar.baseStats.hp,
+                        torque: baseCar.baseStats.torque,
+                        weight: baseCar.baseStats.weight,
+                      };
+                    }
+
+                    return (
+                      <button
+                        key={id}
+                        onClick={() => handleInstall(activeSubCategory, id)}
+                        onMouseEnter={() => setHoveredPart(id)}
+                        onMouseLeave={() => setHoveredPart(null)}
+                        disabled={isInstalling}
+                        className={`
                   relative p-6 rounded-sm text-left border transition-all group hover:scale-[1.02] active:scale-[0.98]
                   ${
                     isInstalled
@@ -97,43 +287,83 @@ const UpgradeShop = () => {
                   }
                   ${isInstalling ? "opacity-100 cursor-wait" : ""}
                 `}
-                >
-                  {isInstalling && (
-                    <div className="absolute inset-0 z-20 bg-black/80 flex items-center justify-center backdrop-blur-sm rounded-sm">
-                      <div className="traffic-loader scale-50"></div>
-                    </div>
-                  )}
-
-                  {isInstalled && !isInstalling && (
-                    <div className="absolute top-2 right-2 bg-black/20 px-2 py-0.5 text-xs font-bold uppercase rounded">
-                      Installed
-                    </div>
-                  )}
-                  <div className="text-lg font-bold mb-1">{part.name}</div>
-                  {part.description && (
-                    <div className="text-xs opacity-70 mb-2 uppercase tracking-wide">
-                      {part.description}
-                    </div>
-                  )}
-
-                  {/* Mini Stats Preview */}
-                  <div className="mt-4 text-xs space-y-1 opacity-60 group-hover:opacity-100">
-                    {Object.entries(part.stats).map(([stat, val]) => (
-                      <div
-                        key={stat}
-                        className="flex justify-between uppercase"
                       >
-                        <span>{stat}</span>
-                        <span>
-                          {val > 0 ? "+" : ""}
-                          {val}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </button>
-              );
-            })}
+                        {isInstalling && (
+                          <div className="absolute inset-0 z-20 bg-black/80 flex items-center justify-center backdrop-blur-sm rounded-sm">
+                            <div className="traffic-loader scale-50"></div>
+                          </div>
+                        )}
+
+                        {isInstalled && !isInstalling && (
+                          <div className="absolute top-2 right-2 bg-black/20 px-2 py-0.5 text-xs font-bold uppercase rounded">
+                            Installed
+                          </div>
+                        )}
+                        <div className="text-lg font-bold mb-1">
+                          {part.name}
+                        </div>
+                        {part.description && (
+                          <div className="text-xs opacity-70 mb-2 uppercase tracking-wide">
+                            {part.description}
+                          </div>
+                        )}
+
+                        {/* Mini Stats Preview */}
+                        <div className="mt-4 text-xs space-y-1 opacity-60 group-hover:opacity-100">
+                          {displayBaseStats ? (
+                            Object.entries(displayBaseStats).map(
+                              ([stat, val]) => (
+                                <div
+                                  key={stat}
+                                  className="flex justify-between uppercase"
+                                >
+                                  <span>{stat}</span>
+                                  <span>
+                                    {val}
+                                    {getRelativeStat(stat, val, id)}
+                                  </span>
+                                </div>
+                              ),
+                            )
+                          ) : (
+                            <>
+                              {part.multiplier !== undefined &&
+                                part.multiplier > 0 && (
+                                  <div className="flex justify-between uppercase text-yellow-500 font-bold">
+                                    <span>Power Gain</span>
+                                    <span>
+                                      +{(part.multiplier * 100).toFixed(0)}%
+                                      {getRelativeStat(
+                                        "multiplier",
+                                        part.multiplier,
+                                        id,
+                                      )}
+                                    </span>
+                                  </div>
+                                )}
+                              {part.stats &&
+                                Object.entries(part.stats).map(
+                                  ([stat, val]) => (
+                                    <div
+                                      key={stat}
+                                      className="flex justify-between uppercase"
+                                    >
+                                      <span>{stat}</span>
+                                      <span>
+                                        {val > 0 ? "+" : ""}
+                                        {val}
+                                        {getRelativeStat(stat, val, id)}
+                                      </span>
+                                    </div>
+                                  ),
+                                )}
+                            </>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  },
+                )}
           </div>
         </div>
 
@@ -157,6 +387,7 @@ const UpgradeShop = () => {
               current={performanceStats.acceleration060}
               preview={previewStats.acceleration060}
               unit="s"
+              inverse={true}
             />
             <StatDiff
               label="Handling"
@@ -169,6 +400,7 @@ const UpgradeShop = () => {
               current={performanceStats.brakingDistance600}
               preview={previewStats.brakingDistance600}
               unit=" FT"
+              inverse={true}
             />
 
             <div className="mt-4 border-t border-white/10 pt-4 text-xs text-gray-500 font-mono">
@@ -266,20 +498,20 @@ const UpgradeShop = () => {
 
       {/* Categories Bottom Bar */}
       <div className="h-24 bg-black/90 backdrop-blur-md border-t border-white/10 pointer-events-auto overflow-x-auto flex items-center px-8 gap-4">
-        {categories.map((cat) => (
+        {Object.keys(CATEGORY_GROUPS).map((group) => (
           <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
+            key={group}
+            onClick={() => handleGroupChange(group)}
             className={`
                 px-6 py-3 uppercase font-bold tracking-wider transition-all border-b-4 whitespace-nowrap
                 ${
-                  selectedCategory === cat
+                  activeGroup === group
                     ? "border-yellow-500 text-white bg-white/10"
                     : "border-transparent text-gray-400 hover:text-white hover:bg-white/5"
                 }
               `}
           >
-            {cat.replace("_", " ")}
+            {group}
           </button>
         ))}
       </div>

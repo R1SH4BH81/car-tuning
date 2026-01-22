@@ -1,36 +1,328 @@
 export const PARTS_DB = {
-  engine: {
+  engine_swap: {
     stock: {
       name: "Stock Engine",
-      description: "Factory balanced internals",
+      description: "Original factory engine",
       price: 0,
-      stats: { hp: 0, torque: 0, weight: 0 },
+      stats: { hp: 0, torque: 0, weight: 0 }, // Relative to base, handled specially
     },
-    sport_intake: {
-      name: "Sport Intake",
-      description: "Cold air intake with high-flow filter",
+    // Generic Swaps (Legacy support if needed, or specific mapped ones)
+    v8_modern: {
+      name: "6.2L V8",
+      description: "Naturally Aspirated Modern V8",
+      price: 12000,
+      baseStats: { hp: 450, torque: 450, weight: 200 }, // Absolute stats
+    },
+    racing_v8: {
+      name: "5.0L Racing V8",
+      description: "High-revving Racing V8",
+      price: 25000,
+      baseStats: { hp: 600, torque: 500, weight: 180 },
+    },
+    racing_v12: {
+      name: "6.0L Racing V12",
+      description: "Le Mans Prototype Engine",
+      price: 45000,
+      baseStats: { hp: 800, torque: 700, weight: 220 },
+    },
+    racing_v10: {
+      name: "5.2L V10",
+      description: "High performance V10",
+      price: 35000,
+      baseStats: { hp: 600, torque: 400, weight: 190 },
+    },
+    flat6_tt: {
+      name: "3.8L Flat-6 Twin Turbo",
+      description: "Modern Turbocharged Flat-6",
+      price: 28000,
+      baseStats: { hp: 640, torque: 590, weight: 210 },
+    },
+    flat6_modern: {
+      name: "4.0L Flat-6 NA",
+      description: "Modern Naturally Aspirated Flat-6",
+      price: 22000,
+      baseStats: { hp: 500, torque: 340, weight: 190 },
+    },
+    racing_v6_tt: {
+      name: "3.8L V6 Twin Turbo",
+      description: "VR38DETT Spec",
+      price: 30000,
+      baseStats: { hp: 600, torque: 480, weight: 230 },
+    },
+    v10_n_a: {
+      name: "5.2L V10 NA",
+      description: "Naturally Aspirated V10",
+      price: 28000,
+      baseStats: { hp: 602, torque: 413, weight: 240 },
+    },
+    turbo_rally_i4: {
+      name: "1.6L Turbo Rally",
+      description: "WRC Spec Inline-4",
+      price: 15000,
+      baseStats: { hp: 380, torque: 450, weight: 120 },
+    },
+  },
+
+  // Engine Internals
+  intake_manifold: {
+    stock: { name: "Stock Intake", price: 0, multiplier: 0, grade: "stock" },
+    street: {
+      name: "Street Intake",
       price: 500,
-      stats: { hp: 18, torque: 12, weight: -3 },
+      multiplier: 0.05,
+      grade: "street",
+      stats: { torque: 5 },
+    },
+    sport: {
+      name: "Sport Intake",
+      price: 1500,
+      multiplier: 0.1,
+      grade: "sport",
+      stats: { weight: -2 },
+    },
+    race: {
+      name: "Race Intake",
+      price: 3000,
+      multiplier: 0.15,
+      grade: "race",
+      stats: { weight: -5 },
+    },
+  },
+  fuel_system: {
+    stock: {
+      name: "Stock Fuel System",
+      price: 0,
+      multiplier: 0,
+      grade: "stock",
+    },
+    street: {
+      name: "Street Fuel System",
+      price: 800,
+      multiplier: 0.05,
+      grade: "street",
+    },
+    sport: {
+      name: "Sport Fuel System",
+      price: 2000,
+      multiplier: 0.12,
+      grade: "sport",
+    },
+    race: {
+      name: "Race Fuel System",
+      price: 4500,
+      multiplier: 0.2,
+      grade: "race",
+    },
+  },
+  ignition: {
+    // ECU
+    stock: { name: "Stock Ignition", price: 0, multiplier: 0, grade: "stock" },
+    street: {
+      name: "Street Ignition",
+      price: 1000,
+      multiplier: 0.08,
+      grade: "street",
+    },
+    sport: {
+      name: "Sport Ignition",
+      price: 2500,
+      multiplier: 0.15,
+      grade: "sport",
+    },
+    race: {
+      name: "Race Ignition",
+      price: 6000,
+      multiplier: 0.25,
+      grade: "race",
+    },
+  },
+  exhaust: {
+    stock: {
+      name: "Stock Exhaust",
+      price: 0,
+      multiplier: 0,
+      grade: "stock",
+      stats: { weight: 0 },
+    },
+    street: {
+      name: "Street Exhaust",
+      price: 900,
+      multiplier: 0.05,
+      grade: "street",
+      stats: { weight: -5 },
+    },
+    sport: {
+      name: "Sport Exhaust",
+      price: 2200,
+      multiplier: 0.1,
+      grade: "sport",
+      stats: { weight: -12 },
+    },
+    race: {
+      name: "Race Exhaust",
+      price: 5000,
+      multiplier: 0.18,
+      grade: "race",
+      stats: { weight: -25 },
+    },
+  },
+  camshaft: {
+    stock: {
+      name: "Stock Camshaft",
+      price: 0,
+      multiplier: 0,
+      grade: "stock",
+      stats: { rpmLimit: 0 },
+    },
+    street: {
+      name: "Street Camshaft",
+      price: 1200,
+      multiplier: 0.08,
+      grade: "street",
+      stats: { rpmLimit: 500 },
+    },
+    sport: {
+      name: "Sport Camshaft",
+      price: 3000,
+      multiplier: 0.15,
+      grade: "sport",
+      stats: { rpmLimit: 1000 },
+    },
+    race: {
+      name: "Race Camshaft",
+      price: 7000,
+      multiplier: 0.25,
+      grade: "race",
+      stats: { rpmLimit: 2000 },
+    },
+  },
+  valves: {
+    stock: { name: "Stock Valves", price: 0, multiplier: 0, grade: "stock" },
+    street: {
+      name: "Street Valves",
+      price: 800,
+      multiplier: 0.04,
+      grade: "street",
+    },
+    sport: {
+      name: "Sport Valves",
+      price: 2000,
+      multiplier: 0.09,
+      grade: "sport",
+    },
+    race: { name: "Race Valves", price: 4000, multiplier: 0.15, grade: "race" },
+  },
+  pistons: {
+    // Displacement/Compression
+    stock: {
+      name: "Stock Block",
+      price: 0,
+      multiplier: 0,
+      grade: "stock",
+      stats: { weight: 0 },
+    },
+    street: {
+      name: "Street Block",
+      price: 1500,
+      multiplier: 0.06,
+      grade: "street",
+      stats: { weight: -2 },
+    },
+    sport: {
+      name: "Sport Block",
+      price: 4000,
+      multiplier: 0.12,
+      grade: "sport",
+      stats: { weight: -5 },
+    },
+    race: {
+      name: "Race Block",
+      price: 9000,
+      multiplier: 0.2,
+      grade: "race",
+      stats: { weight: -10 },
+    },
+  },
+  turbo: {
+    // Turbo/Supercharger
+    stock: {
+      name: "Stock Aspiration",
+      price: 0,
+      multiplier: 0,
+      grade: "stock",
+      stats: { weight: 0 },
+    },
+    sport_turbo: {
+      name: "Sport Turbo",
+      price: 4000,
+      multiplier: 0.25,
+      grade: "sport",
+      stats: { weight: 10 },
     },
     race_turbo: {
       name: "Race Turbo",
-      description: "Ball-bearing twin-scroll turbocharger",
-      price: 5000,
-      stats: { hp: 165, torque: 140, weight: 12 },
-    },
-    v8_swap: {
-      name: "6.2L V8 Swap",
-      description: "Naturally Aspirated American V8",
-      price: 12000,
-      stats: { hp: 120, torque: 110, weight: 55 },
-    },
-    v12_swap: {
-      name: "6.5L V12 Swap",
-      description: "Hand-built high-revving V12",
-      price: 25000,
-      stats: { hp: 320, torque: 215, weight: 95 },
+      price: 9000,
+      multiplier: 0.45,
+      grade: "race",
+      stats: { weight: 15 },
     },
   },
+  intercooler: {
+    stock: {
+      name: "Stock Intercooler",
+      price: 0,
+      multiplier: 0,
+      grade: "stock",
+      stats: { weight: 0 },
+    },
+    sport: {
+      name: "Sport Intercooler",
+      price: 1200,
+      multiplier: 0.08,
+      grade: "sport",
+      stats: { weight: 5 },
+    },
+    race: {
+      name: "Race Intercooler",
+      price: 3000,
+      multiplier: 0.15,
+      grade: "race",
+      stats: { weight: 10 },
+    },
+  },
+  flywheel: {
+    // Crankshaft/Flywheel
+    stock: {
+      name: "Stock Flywheel",
+      price: 0,
+      multiplier: 0,
+      grade: "stock",
+      stats: { weight: 0 },
+    },
+    street: {
+      name: "Street Flywheel",
+      price: 600,
+      multiplier: 0.02,
+      grade: "street",
+      stats: { weight: -2 },
+    },
+    sport: {
+      name: "Sport Flywheel",
+      price: 1500,
+      multiplier: 0.05,
+      grade: "sport",
+      stats: { weight: -4 },
+    },
+    race: {
+      name: "Race Flywheel",
+      price: 3500,
+      multiplier: 0.08,
+      grade: "race",
+      stats: { weight: -7 },
+    },
+  },
+
+  // Chassis
   tires: {
     stock: { name: "Stock Compound", price: 0, stats: { grip: 1.0 } },
     street: { name: "Street Compound", price: 800, stats: { grip: 1.12 } },

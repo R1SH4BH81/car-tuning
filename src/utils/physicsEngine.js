@@ -94,6 +94,13 @@ const simulateAcceleration = (
   return time;
 };
 
+const calculatePartGain = (baseHp, category, partMultiplier) => {
+  // High-performance cars (S1/S2) gain less % than D/C class cars
+  // Diminishing returns starts kicking in after 600 HP
+  const diminishingReturn = baseHp > 600 ? 0.7 : 1.0;
+  return baseHp * partMultiplier * diminishingReturn;
+};
+
 export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
   // 1. Calculate Core Stats (HP, Torque, Weight)
   let hp = baseStats.hp;
@@ -102,18 +109,69 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
   let gripMultiplier = 1.0;
   let brakingMultiplier = 1.0;
   let handlingMultiplier = 1.0;
+  let rpmLimit = 8000; // Default Redline
+
+  // Handle Engine Swap Override
+  if (carConfig.engine_swap && carConfig.engine_swap !== "stock") {
+    const swapPart = PARTS_DB.engine_swap?.[carConfig.engine_swap];
+    if (swapPart && swapPart.baseStats) {
+      hp = swapPart.baseStats.hp;
+      torque = swapPart.baseStats.torque;
+      // Weight: Treat swap baseStats.weight as the Engine Weight.
+      // We need to swap the engine.
+      // Approx stock engine weight = 150kg (arbitrary baseline for simplicity)
+      // newWeight = oldWeight - 150 + newEngineWeight
+      weight = weight - 150 + swapPart.baseStats.weight;
+    }
+  }
+
+  // Base Engine Stats (after swap) to use for multiplier calculations
+  const engineBaseHp = hp;
+  const engineBaseTorque = torque;
 
   // Apply Parts
   Object.keys(carConfig).forEach((category) => {
+    // Skip engine_swap as it's handled above
+    if (category === "engine_swap") return;
+
     const partId = carConfig[category];
     if (PARTS_DB[category] && PARTS_DB[category][partId]) {
-      const stats = PARTS_DB[category][partId].stats;
-      if (stats.hp) hp += stats.hp;
+      const part = PARTS_DB[category][partId];
+      const stats = part.stats || {};
+      const multiplier = part.multiplier || 0;
+
+      // Apply Multiplier-based gains (Dynamic Power Scaling)
+      if (multiplier > 0) {
+        // If it's a Turbo/Supercharger, it adds a LOT more power
+        if (category === "turbo") {
+          // Turbos scale off base displacement/power heavily
+          hp += calculatePartGain(engineBaseHp, category, multiplier);
+          torque += calculatePartGain(
+            engineBaseTorque,
+            category,
+            multiplier * 0.9,
+          ); // Torque usually follows HP
+        } else {
+          // Standard parts (Intake, Exhaust, etc.)
+          hp += calculatePartGain(engineBaseHp, category, multiplier);
+          // Torque gains are usually about 70% of HP gains for breathing mods
+          torque += calculatePartGain(
+            engineBaseTorque,
+            category,
+            multiplier * 0.7,
+          );
+        }
+      }
+
+      // Apply flat stats (Weight, Grip, specific Torque adjustments)
+      if (stats.hp) hp += stats.hp; // Legacy or specific flat bonuses
       if (stats.torque) torque += stats.torque;
       if (stats.weight) weight += stats.weight;
       if (stats.grip) gripMultiplier *= stats.grip;
       if (stats.braking) brakingMultiplier *= stats.braking;
       if (stats.handling) handlingMultiplier *= stats.handling;
+      if (stats.rpmLimit) rpmLimit += stats.rpmLimit;
+
       if (stats.downforce) {
         // Base aero added by parts, though usually this is adjustable
         // For simplicity, we treat the 'tuningSettings' as the definitive source for aero if adjustable parts are installed
@@ -298,14 +356,30 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
   };
 };
 
-export const generateDynoData = (hp, torque) => {
+export const generateDynoData = (hp, torque, rpmLimit = 8000) => {
   const data = [];
-  const maxRpm = 8000;
+  const maxRpm = rpmLimit;
+  // Peak power RPM shifts higher with race cams (simplified simulation)
+  // Assuming 'rpmLimit' > 8000 implies race cams
+  const peakPowerRpm = rpmLimit > 8500 ? 7500 : 6000;
+
   for (let rpm = 0; rpm <= maxRpm; rpm += 500) {
     let tq = 0;
-    if (rpm < 1000) tq = torque * 0.6;
-    else if (rpm < 5000) tq = torque;
-    else tq = torque * (1 - (rpm - 5000) / 4000);
+
+    // Simulate Torque Curve
+    if (rpm < 1000) {
+      tq = torque * 0.6;
+    } else if (rpm < peakPowerRpm - 1000) {
+      // Flat torque plateau (modern turbo/big V8)
+      tq = torque;
+    } else {
+      // Torque drops off after peak
+      const dropoffFactor = (rpm - (peakPowerRpm - 1000)) / 4000;
+      tq = torque * (1 - dropoffFactor);
+    }
+
+    // Safety clamp
+    tq = Math.max(0, tq);
 
     let h = (tq * rpm) / 5252;
 
