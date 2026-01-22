@@ -6,32 +6,31 @@ import carsData from "../assets/Cars.json";
 // Use the first car as default for now
 const defaultCar = carsData.cars[0];
 
+const INITIAL_CONFIG = {
+  engine: "stock",
+  tires: "stock",
+  weight_reduction: "stock",
+  brakes: "stock",
+  suspension: "stock",
+  transmission: "stock",
+  arbs: "stock",
+  differential: "stock",
+  aero: "stock",
+};
+
 const useStore = create((set, get) => ({
   // Base Car Data
   baseCar: defaultCar,
+  allCars: carsData.cars,
 
   // State
-  carConfig: {
-    engine: "stock",
-    tires: "stock",
-    weight_reduction: "stock",
-    brakes: "stock",
-    suspension: "stock",
-    transmission: "stock",
-  },
+  carConfig: { ...INITIAL_CONFIG },
   tuningSettings: { ...INITIAL_TUNING },
 
   // Computed Performance Stats
   performanceStats: calculatePerformance(
-    defaultCar.baseStats,
-    {
-      engine: "stock",
-      tires: "stock",
-      weight_reduction: "stock",
-      brakes: "stock",
-      suspension: "stock",
-      transmission: "stock",
-    },
+    { ...defaultCar.baseStats, pi: defaultCar.pi },
+    INITIAL_CONFIG,
     INITIAL_TUNING,
   ),
 
@@ -41,12 +40,36 @@ const useStore = create((set, get) => ({
   ),
 
   // Actions
+  setCar: (carId) => {
+    const newCar = carsData.cars.find((c) => c.id === carId);
+    if (!newCar) return;
+
+    // Reset config and tuning when changing car
+    const newConfig = { ...INITIAL_CONFIG };
+    const newTuning = { ...INITIAL_TUNING };
+
+    const newStats = calculatePerformance(
+      { ...newCar.baseStats, pi: newCar.pi },
+      newConfig,
+      newTuning,
+    );
+    const newDyno = generateDynoData(newStats.hp, newStats.torque);
+
+    set({
+      baseCar: newCar,
+      carConfig: newConfig,
+      tuningSettings: newTuning,
+      performanceStats: newStats,
+      dynoData: newDyno,
+    });
+  },
+
   setPart: (category, partId) => {
     const { baseCar, carConfig, tuningSettings } = get();
     const newConfig = { ...carConfig, [category]: partId };
 
     const newStats = calculatePerformance(
-      baseCar.baseStats,
+      { ...baseCar.baseStats, pi: baseCar.pi },
       newConfig,
       tuningSettings,
     );
@@ -64,7 +87,7 @@ const useStore = create((set, get) => ({
     const newTuning = { ...tuningSettings, [setting]: value };
 
     const newStats = calculatePerformance(
-      baseCar.baseStats,
+      { ...baseCar.baseStats, pi: baseCar.pi },
       carConfig,
       newTuning,
     );
@@ -79,7 +102,11 @@ const useStore = create((set, get) => ({
   getPreviewStats: (category, partId) => {
     const { baseCar, carConfig, tuningSettings } = get();
     const tempConfig = { ...carConfig, [category]: partId };
-    return calculatePerformance(baseCar.baseStats, tempConfig, tuningSettings);
+    return calculatePerformance(
+      { ...baseCar.baseStats, pi: baseCar.pi },
+      tempConfig,
+      tuningSettings,
+    );
   },
 }));
 

@@ -39,47 +39,68 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
   gripMultiplier *= avgPressureFactor;
 
   // 2. Aero (Downforce)
+  // Check if aero is adjustable
+  const hasAdjustableAero = PARTS_DB["aero"][carConfig["aero"]]?.allows_tuning;
+
   // Increases grip (handling) but adds drag (reduces top speed)
-  const totalDownforce =
-    (tuningSettings.downforce_f || 0) + (tuningSettings.downforce_r || 0);
+  // Only apply downforce penalty/bonus if aero is adjustable
+  const totalDownforce = hasAdjustableAero
+    ? (tuningSettings.downforce_f || 0) + (tuningSettings.downforce_r || 0)
+    : 0;
+
   const downforceHandlingBonus = totalDownforce * 0.0005; // Arbitrary scaler
   const downforceDragPenalty = totalDownforce * 0.0002;
   handlingMultiplier += downforceHandlingBonus;
 
   // 3. Alignment (Camber, Toe, Caster)
+  // Check if suspension allows tuning
+  const hasTunableSuspension =
+    PARTS_DB["suspension"][carConfig["suspension"]]?.allows_tuning;
+
   // Optimal camber for cornering is usually negative.
   // We'll simulate a "sweet spot" around -1.5 to -2.0.
+  // If suspension is stock (not tunable), assume factory alignment is neutral (no penalty)
   const idealCamber = -1.5;
-  const camberPenaltyF = Math.abs(tuningSettings.camber_f - idealCamber) * 0.01;
-  const camberPenaltyR = Math.abs(tuningSettings.camber_r - idealCamber) * 0.01;
+  const camberPenaltyF = hasTunableSuspension
+    ? Math.abs(tuningSettings.camber_f - idealCamber) * 0.01
+    : 0;
+  const camberPenaltyR = hasTunableSuspension
+    ? Math.abs(tuningSettings.camber_r - idealCamber) * 0.01
+    : 0;
   handlingMultiplier -= camberPenaltyF + camberPenaltyR;
 
   // Toe helps stability (toe-in) or turn-in (toe-out).
   // Extreme values reduce straight line speed (scrubbing).
-  const toeScrub =
-    (Math.abs(tuningSettings.toe_f) + Math.abs(tuningSettings.toe_r)) * 0.002;
+  const toeScrub = hasTunableSuspension
+    ? (Math.abs(tuningSettings.toe_f) + Math.abs(tuningSettings.toe_r)) * 0.002
+    : 0;
 
   // 4. Springs & Damping
   // Too soft = boaty, too stiff = skittish.
   // Simplified: Stiffer is generally better for handling response up to a point.
   // We'll just add a small factor based on "race stiffness" vs stock.
+  // If stock, assume balanced
   const avgStiffness =
     (tuningSettings.springs_f + tuningSettings.springs_r) / 2;
-  const stiffnessBonus = (avgStiffness - 500) * 0.0001; // Small handling bonus for stiffer springs
+  const stiffnessBonus = hasTunableSuspension
+    ? (avgStiffness - 500) * 0.0001
+    : 0; // Small handling bonus for stiffer springs
   handlingMultiplier += stiffnessBonus;
 
   // Ride height: lower is better for CG (handling)
   const avgHeight =
     (tuningSettings.ride_height_f + tuningSettings.ride_height_r) / 2;
-  const heightPenalty = (avgHeight - 10) * 0.002; // Penalty for being high
+  const heightPenalty = hasTunableSuspension ? (avgHeight - 10) * 0.002 : 0; // Penalty for being high
   handlingMultiplier -= heightPenalty;
 
   // 5. Differential
+  const hasTunableDiff =
+    PARTS_DB["differential"][carConfig["differential"]]?.allows_tuning;
   // Affects acceleration out of corners.
   // Higher accel lock = better traction on exit but can cause understeer.
   const diffAccelAvg =
     (tuningSettings.diff_accel_f + tuningSettings.diff_accel_r) / 2;
-  const tractionBonus = diffAccelAvg * 0.001;
+  const tractionBonus = hasTunableDiff ? diffAccelAvg * 0.001 : 0;
 
   // --- Calculate Derived Performance Metrics ---
 
@@ -100,10 +121,15 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
   }
 
   // Final Drive tuning effect
+  const hasTunableTrans =
+    PARTS_DB["transmission"][carConfig["transmission"]]?.allows_tuning;
+
   const baseFinalDrive = 3.5;
-  const fdRatio = tuningSettings.final_drive / baseFinalDrive;
+  const fdRatio = hasTunableTrans
+    ? tuningSettings.final_drive / baseFinalDrive
+    : 1.0;
   // Also consider 1st gear ratio for launch
-  const gear1Ratio = tuningSettings.gear_1 / 3.2;
+  const gear1Ratio = hasTunableTrans ? tuningSettings.gear_1 / 3.2 : 1.0;
 
   // Combined gearing impact on launch
   const launchGearing = Math.sqrt(fdRatio * gear1Ratio);
@@ -143,11 +169,19 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
   const latG = 1.05 * effectiveGrip * handlingMultiplier * (1752 / weight);
 
   // PI (Performance Index)
-  const piScore =
-    (hp / 10 + topSpeed / 2 + latG * 100 + 1000 / accelTime + 10000 / weight) /
-    5;
+  // Calculate relative change from base stats
+  const hpChange = hp / baseStats.hp;
+  const weightChange = baseStats.weight / weight; // Lower weight is better
+  const gripChange = gripMultiplier; // Approximation
 
-  const pi = Math.min(999, Math.max(100, Math.floor(piScore * 1.5)));
+  // Base PI from JSON
+  const basePI = baseStats.pi || 500; // Fallback if missing
+
+  // Calculate PI delta based on performance improvements
+  // Weights: Power (40%), Weight (30%), Grip (30%)
+  const piMultiplier = hpChange * 0.4 + weightChange * 0.3 + gripChange * 0.3;
+
+  const pi = Math.min(999, Math.max(100, Math.floor(basePI * piMultiplier)));
   const piClass =
     pi > 998
       ? "X"

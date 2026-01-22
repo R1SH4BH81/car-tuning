@@ -3,7 +3,7 @@
     {
       "id": "nissan-gtr-r35",
       "name": "Nissan GT-R (R35)",
-      "modelPath": "./assets/models/nissangtr.obj",
+      "modelPath": "./models/nissangtr.obj",
       "brand": "Nissan",
       "year": 2024,
       "class": "S1",
@@ -26,83 +26,134 @@
       }
     },
     {
-      "id": "porsche-911-992",
-      "name": "Porsche 911 Carrera (992)",
-      "modelPath": "/assets/porsche_911_992.glb",
+      "id": "porsche-911-gt3rs",
+      "name": "Porsche 911 GT3 RS (992)",
+      "modelPath": "./assets/models/porsche_911_gt3rs.glb",
       "brand": "Porsche",
-      "year": 2023,
+      "year": 2024,
+      "class": "S1",
+      "pi": 898,
+      "transmission": {
+        "gears": 7,
+        "type": "PDK Sport Dual-Clutch",
+        "adjustable": true
+      },
       "baseStats": {
-        "hp": 379,
-        "torque": 331,
-        "weight": 1520,
-        "topSpeed": 182,
-        "acceleration060": 4.0,
-        "brakingDistance600": 98,
-        "driveType": "RWD"
+        "hp": 518,
+        "torque": 342,
+        "weight": 1450,
+        "topSpeed": 184,
+        "acceleration060": 3.0,
+        "handling": 9.7,
+        "braking": 9.8,
+        "driveType": "RWD",
+        "brakingDistance600": 90
+      },
+      "tuningLimits": {
+        "aero": {
+          "frontDownforce": { "min": 100, "max": 400 },
+          "rearDownforce": { "min": 250, "max": 900 }
+        }
       }
     },
     {
       "id": "porsche-911-930-turbo",
       "name": "1975 Porsche 911 (930) Turbo",
-      "modelPath": "/assets/porsche_930_turbo.glb",
+      "modelPath": "./models/porsche_930_turbo.glb",
       "brand": "Porsche",
       "year": 1975,
+      "class": "B",
+      "pi": 680,
+      "transmission": {
+        "gears": 4,
+        "type": "Manual",
+        "adjustable": false
+      },
       "baseStats": {
         "hp": 260,
         "torque": 253,
         "weight": 1140,
         "topSpeed": 155,
         "acceleration060": 5.2,
-        "brakingDistance600": 135,
-        "driveType": "RWD"
+        "handling": 6.0,
+        "braking": 5.5,
+        "driveType": "RWD",
+        "brakingDistance600": 135
       }
     },
     {
       "id": "bmw-m3-gtr-e46",
       "name": "BMW M3 GTR (E46) - NFS Edition",
-      "modelPath": "/assets/bmw_m3_gtr.glb",
+      "modelPath": "./models/bmw_m3_gtr.glb",
       "brand": "BMW",
       "year": 2001,
+      "class": "S1",
+      "pi": 840,
+      "transmission": {
+        "gears": 6,
+        "type": "Sequential",
+        "adjustable": true
+      },
       "baseStats": {
         "hp": 444,
         "torque": 354,
         "weight": 1350,
         "topSpeed": 174,
         "acceleration060": 3.4,
-        "brakingDistance600": 110,
-        "driveType": "RWD"
+        "handling": 8.5,
+        "braking": 8.2,
+        "driveType": "RWD",
+        "brakingDistance600": 110
       }
     },
     {
       "id": "mclaren-p1-mso",
       "name": "McLaren P1 MSO",
-      "modelPath": "/assets/mclaren_p1_mso.glb",
+      "modelPath": "./models/mclaren_p1_mso.glb",
       "brand": "McLaren",
       "year": 2015,
+      "class": "S2",
+      "pi": 960,
+      "transmission": {
+        "gears": 7,
+        "type": "DCT",
+        "adjustable": true
+      },
       "baseStats": {
         "hp": 903,
         "torque": 664,
         "weight": 1490,
         "topSpeed": 217,
         "acceleration060": 2.8,
-        "brakingDistance600": 98,
-        "driveType": "RWD"
+        "handling": 9.5,
+        "braking": 9.8,
+        "driveType": "RWD",
+        "brakingDistance600": 98
       }
     },
     {
       "id": "mercedes-amg-one",
       "name": "2023 Mercedes-Benz AMG ONE",
-      "modelPath": "/assets/mercedes_amg_one.glb",
+      "modelPath": "./models/mercedes_amg_one.glb",
       "brand": "Mercedes-Benz",
       "year": 2023,
+      "class": "S2",
+      "pi": 998,
+      "transmission": {
+        "gears": 8,
+        "type": "Racing",
+        "adjustable": true
+      },
       "baseStats": {
         "hp": 1049,
         "torque": 800,
         "weight": 1695,
         "topSpeed": 219,
         "acceleration060": 2.9,
-        "brakingDistance600": 92,
-        "driveType": "AWD"
+        "handling": 10,
+        "braking": 10,
+        "driveType": "AWD",
+        "brakingDistance600": 92
       }
     }
   ]

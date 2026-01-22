@@ -9,12 +9,24 @@ import {
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import * as THREE from "three";
 import useStore from "../store/useStore";
+// Import only the Nissan model for now as it's the only one we have
 import nissanObjUrl from "../assets/models/nissangtr.obj?url";
 
 const CarModel = () => {
-  const obj = useLoader(OBJLoader, nissanObjUrl);
-  const { carConfig } = useStore();
+  const { carConfig, baseCar } = useStore();
   const meshRef = useRef();
+
+  // Determine which model to load.
+  // Since we only have the Nissan file, we'll use it as a fallback for others to prevent crashes.
+  // In a real app, we'd dynamically import or have a map of URL imports.
+  const modelUrl =
+    baseCar.id === "nissan-gtr-r35" ? nissanObjUrl : nissanObjUrl;
+
+  // NOTE: If we had the other files, we could do something like:
+  // const modelUrl = useMemo(() => new URL(`../assets/models/${baseCar.modelPath.split('/').pop()}`, import.meta.url).href, [baseCar]);
+  // But Vite needs static analysis or glob imports for that to work reliably in production.
+
+  const obj = useLoader(OBJLoader, modelUrl);
 
   // Clone the object to avoid modifying the cached original
   const scene = React.useMemo(() => obj.clone(), [obj]);
@@ -35,16 +47,18 @@ const CarModel = () => {
           });
         }
 
-        // Visual representation of "Weight Reduction" (just for show)
-        // If race weight reduction, maybe lower the car (handled in suspension logic usually, but here visually)
+        // If it's not the Nissan, maybe change color to indicate it's a placeholder?
+        if (baseCar.id !== "nissan-gtr-r35") {
+          // Placeholder visual: Make it ghost-like or wireframe-ish?
+          // Or just standard grey.
+          child.material.color.setHex(0xaaaaaa);
+        }
       }
     });
-  }, [scene]);
+  }, [scene, baseCar.id]);
 
   // Dynamic updates based on config (Simulated)
   useEffect(() => {
-    // Example: Change paint color based on some state if we had it
-    // or change wheel scale slightly for "Slick Tires"
     scene.traverse((child) => {
       if (child.isMesh) {
         // Hacky way to find wheels if named correctly, otherwise just general logic

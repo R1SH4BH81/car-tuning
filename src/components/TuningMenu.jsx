@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import useStore from "../store/useStore";
-import { PARTS_DB } from "../data/parts";
+import { PARTS_DB, INITIAL_TUNING } from "../data/parts";
+import { calculatePerformance } from "../utils/physicsEngine";
 import { FaLock } from "react-icons/fa";
 
 const TUNING_SECTIONS = [
@@ -27,7 +28,7 @@ const TuningSlider = ({
   description,
 }) => (
   <div
-    className={`mb-6 group relative ${locked ? "opacity-50 pointer-events-none" : ""}`}
+    className={` group relative ${locked ? "opacity-50 pointer-events-none" : ""}`}
   >
     <div className="flex justify-between mb-2 items-center">
       <label className="text-sm uppercase font-bold text-gray-300">
@@ -80,33 +81,34 @@ const TuningSlider = ({
 );
 
 const TuningMenu = () => {
-  const { tuningSettings, setTuning, carConfig } = useStore();
+  const { tuningSettings, setTuning, carConfig, performanceStats, baseCar } =
+    useStore();
   const [activeSection, setActiveSection] = useState("tires");
+
+  // Calculate baseline stats for comparison (stock tuning with current parts)
+  const baselineStats = useMemo(() => {
+    if (!baseCar || !carConfig) return null;
+    return calculatePerformance(baseCar.baseStats, carConfig, INITIAL_TUNING);
+  }, [baseCar, carConfig]);
 
   // Helper to check if a category is unlocked for tuning
   const isUnlocked = (category) => {
-    // Tires are always tunable (pressure)
-    if (category === "tires") return true;
+    // Unlock all options for tuning
+    return true;
+  };
 
-    const partId = carConfig[category];
-    // Special case for 'alignment' which depends on suspension
-    if (category === "alignment") {
-      const suspId = carConfig["suspension"];
-      return PARTS_DB["suspension"][suspId]?.allows_tuning;
-    }
-    // Special case for 'damping' which depends on suspension
-    if (category === "damping") {
-      const suspId = carConfig["suspension"];
-      return PARTS_DB["suspension"][suspId]?.allows_tuning;
-    }
-    // Special case for 'springs' which depends on suspension
-    if (category === "springs") {
-      const suspId = carConfig["suspension"];
-      return PARTS_DB["suspension"][suspId]?.allows_tuning;
-    }
+  // Helper to determine stat color
+  const getStatColor = (current, baseline, inverse = false) => {
+    if (baseline === undefined || baseline === null) return "text-white";
+    const curVal = parseFloat(current);
+    const baseVal = parseFloat(baseline);
 
-    // Default check
-    return PARTS_DB[category]?.[partId]?.allows_tuning;
+    if (isNaN(curVal) || isNaN(baseVal)) return "text-white";
+    // Float tolerance
+    if (Math.abs(curVal - baseVal) < 0.001) return "text-white";
+
+    const improved = inverse ? curVal < baseVal : curVal > baseVal;
+    return improved ? "text-green-500" : "text-red-500";
   };
 
   const renderSection = () => {
@@ -551,15 +553,32 @@ const TuningMenu = () => {
               </h3>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">0-60 MPH</span>{" "}
-                <span>2.900 s</span>
+                <span
+                  className={`font-mono ${getStatColor(performanceStats?.acceleration060, baselineStats?.acceleration060, true)}`}
+                >
+                  {performanceStats?.acceleration060} s
+                </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">0-100 MPH</span>{" "}
-                <span>5.400 s</span>
+                {/* Simplified estimate for 0-100 based on 0-60 */}
+                <span
+                  className={`font-mono ${getStatColor(
+                    (performanceStats?.acceleration060 * 2.1).toFixed(3),
+                    (baselineStats?.acceleration060 * 2.1).toFixed(3),
+                    true,
+                  )}`}
+                >
+                  {(performanceStats?.acceleration060 * 2.1).toFixed(3)} s
+                </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">Top Speed</span>{" "}
-                <span>196.0 MPH</span>
+                <span
+                  className={`font-mono ${getStatColor(performanceStats?.topSpeed, baselineStats?.topSpeed, false)}`}
+                >
+                  {performanceStats?.topSpeed} MPH
+                </span>
               </div>
             </div>
             <div>
@@ -568,11 +587,23 @@ const TuningMenu = () => {
               </h3>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">60-0 MPH</span>{" "}
-                <span>105.0 FT</span>
+                <span
+                  className={`font-mono ${getStatColor(performanceStats?.brakingDistance600, baselineStats?.brakingDistance600, true)}`}
+                >
+                  {performanceStats?.brakingDistance600} FT
+                </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">100-0 MPH</span>{" "}
-                <span>245.0 FT</span>
+                <span
+                  className={`font-mono ${getStatColor(
+                    (performanceStats?.brakingDistance600 * 2.8).toFixed(1),
+                    (baselineStats?.brakingDistance600 * 2.8).toFixed(1),
+                    true,
+                  )}`}
+                >
+                  {(performanceStats?.brakingDistance600 * 2.8).toFixed(1)} FT
+                </span>
               </div>
             </div>
             <div>
@@ -580,10 +611,24 @@ const TuningMenu = () => {
                 Lateral G's
               </h3>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500">60 MPH</span> <span>1.38</span>
+                <span className="text-gray-500">60 MPH</span>{" "}
+                <span
+                  className={`font-mono ${getStatColor(performanceStats?.lateralG, baselineStats?.lateralG, false)}`}
+                >
+                  {performanceStats?.lateralG}
+                </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500">120 MPH</span> <span>1.51</span>
+                <span className="text-gray-500">120 MPH</span>{" "}
+                <span
+                  className={`font-mono ${getStatColor(
+                    (performanceStats?.lateralG * 1.1).toFixed(2),
+                    (baselineStats?.lateralG * 1.1).toFixed(2),
+                    false,
+                  )}`}
+                >
+                  {(performanceStats?.lateralG * 1.1).toFixed(2)}
+                </span>
               </div>
             </div>
           </div>

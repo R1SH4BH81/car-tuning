@@ -2,33 +2,43 @@ export const PARTS_DB = {
   engine: {
     stock: {
       name: "Stock Engine",
+      description: "Factory balanced internals",
       price: 0,
       stats: { hp: 0, torque: 0, weight: 0 },
     },
     sport_intake: {
       name: "Sport Intake",
+      description: "Cold air intake with high-flow filter",
       price: 500,
-      stats: { hp: 15, torque: 10, weight: -2 },
+      stats: { hp: 18, torque: 12, weight: -3 },
     },
     race_turbo: {
       name: "Race Turbo",
+      description: "Ball-bearing twin-scroll turbocharger",
       price: 5000,
-      stats: { hp: 150, torque: 120, weight: 15 },
+      stats: { hp: 165, torque: 140, weight: 12 },
     },
-    titanium_exhaust: {
-      name: "Titanium Race Exhaust",
-      price: 2500,
-      stats: { hp: 25, torque: 15, weight: -10 },
+    v8_swap: {
+      name: "6.2L V8 Swap",
+      description: "Naturally Aspirated American V8",
+      price: 12000,
+      stats: { hp: 120, torque: 110, weight: 55 },
+    },
+    v12_swap: {
+      name: "6.5L V12 Swap",
+      description: "Hand-built high-revving V12",
+      price: 25000,
+      stats: { hp: 320, torque: 215, weight: 95 },
     },
   },
   tires: {
     stock: { name: "Stock Compound", price: 0, stats: { grip: 1.0 } },
-    street: { name: "Street Compound", price: 800, stats: { grip: 1.1 } },
-    sport: { name: "Sport Compound", price: 1500, stats: { grip: 1.25 } },
+    street: { name: "Street Compound", price: 800, stats: { grip: 1.12 } },
+    sport: { name: "Sport Compound", price: 1500, stats: { grip: 1.28 } },
     slick_comp: {
       name: "Race Slick Compound",
       price: 4000,
-      stats: { grip: 1.5 },
+      stats: { grip: 1.55 },
     },
   },
   weight_reduction: {
@@ -36,12 +46,12 @@ export const PARTS_DB = {
     sport: {
       name: "Sport Weight Reduction",
       price: 1200,
-      stats: { weight: -100 },
+      stats: { weight: -120 },
     },
     race: {
       name: "Race Weight Reduction",
       price: 3500,
-      stats: { weight: -250 },
+      stats: { weight: -285 },
     },
   },
   brakes: {
@@ -53,12 +63,12 @@ export const PARTS_DB = {
     sport: {
       name: "Sport Brakes",
       price: 900,
-      stats: { braking: 1.15, weight: -5 },
+      stats: { braking: 1.18, weight: -6 },
     },
     race: {
       name: "Race Brakes",
       price: 2200,
-      stats: { braking: 1.3, weight: -12 },
+      stats: { braking: 1.35, weight: -14 },
       allows_tuning: true,
     },
   },
@@ -67,13 +77,13 @@ export const PARTS_DB = {
     sport: {
       name: "Sport Suspension",
       price: 1400,
-      stats: { handling: 1.15 },
+      stats: { handling: 1.18 },
       allows_tuning: true,
     },
     race: {
       name: "Race Suspension",
       price: 3800,
-      stats: { handling: 1.3 },
+      stats: { handling: 1.32 },
       allows_tuning: true,
     },
   },
@@ -82,13 +92,13 @@ export const PARTS_DB = {
     sport: {
       name: "Sport Transmission",
       price: 1800,
-      stats: { shiftTime: 0.2 },
+      stats: { shiftTime: 0.15 },
       allows_tuning: true,
     },
     race: {
       name: "Race Transmission",
       price: 4500,
-      stats: { shiftTime: 0.1 },
+      stats: { shiftTime: 0.05 },
       allows_tuning: true,
     },
   },
@@ -97,13 +107,13 @@ export const PARTS_DB = {
     sport: {
       name: "Sport ARBs",
       price: 800,
-      stats: { handling: 1.05 },
+      stats: { handling: 1.08 },
       allows_tuning: true,
     },
     race: {
       name: "Race ARBs",
       price: 2000,
-      stats: { handling: 1.1 },
+      stats: { handling: 1.15 },
       allows_tuning: true,
     },
   },
@@ -112,13 +122,13 @@ export const PARTS_DB = {
     sport: {
       name: "Sport Differential",
       price: 1200,
-      stats: { handling: 1.05 },
+      stats: { handling: 1.08 },
       allows_tuning: true,
     },
     race: {
       name: "Race Differential",
       price: 2500,
-      stats: { handling: 1.1 },
+      stats: { handling: 1.14 },
       allows_tuning: true,
     },
   },
@@ -127,13 +137,13 @@ export const PARTS_DB = {
     sport: {
       name: "Sport Aero",
       price: 1000,
-      stats: { downforce: 50 },
+      stats: { downforce: 85 },
       allows_tuning: true,
     },
     race: {
       name: "Race Aero",
       price: 3000,
-      stats: { downforce: 150 },
+      stats: { downforce: 220 },
       allows_tuning: true,
     },
   },
