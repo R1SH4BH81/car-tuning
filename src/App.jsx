@@ -3,11 +3,11 @@ import Experience from "./components/Experience";
 import Navigation from "./components/Navigation";
 import UpgradeShop from "./components/UpgradeShop";
 import TuningMenu from "./components/TuningMenu";
-import PerformanceStats from "./components/PerformanceStats";
+
 import ShowCar from "./components/ShowCar";
 import Telemetry from "./components/Telemetry";
 import CarSelect from "./components/CarSelect";
-import { FaArrowLeft, FaDatabase, FaGlobe } from "react-icons/fa";
+import { FaDatabase, FaGlobe } from "react-icons/fa";
 
 function App() {
   const [currentView, setView] = useState("garage");
