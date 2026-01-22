@@ -1,5 +1,99 @@
 import { PARTS_DB } from "../data/parts";
 
+const getTorqueAtRPM = (rpm, peakTorque) => {
+  if (rpm < 1000) return peakTorque * 0.6;
+  if (rpm < 5000) return peakTorque;
+  return Math.max(0, peakTorque * (1 - (rpm - 5000) / 4000));
+};
+
+const simulateAcceleration = (
+  hp,
+  torque,
+  weight,
+  gripMultiplier,
+  drag,
+  gears,
+  finalDrive,
+) => {
+  // Physics constants
+  const rho = 1.225; // Air density
+  const Cd = drag; // Drag coefficient
+  const A = 2.2; // Frontal area (m^2) approx
+  const tireRadius = 0.33; // m (approx 26 inch tire)
+  const mass = weight * 0.453592; // lbs to kg
+  const driveTrainLoss = 0.15;
+  const peakTorqueNm = torque * 1.35582; // lb-ft to Nm
+
+  let speed = 0; // m/s
+  let time = 0; // s
+  let currentGear = 0;
+  let rpm = 1000; // Launch RPM
+  const dt = 0.05; // Time step
+  const shiftTime = 0.15; // s (fast shift)
+  let shiftTimer = 0;
+
+  // Simulate until 60 mph (26.8224 m/s)
+  while (speed < 26.8224 && time < 15) {
+    time += dt;
+
+    if (shiftTimer > 0) {
+      shiftTimer -= dt;
+      // Coasting (drag only)
+      const dragForce = 0.5 * rho * Cd * A * speed * speed;
+      const decel = dragForce / mass;
+      speed -= decel * dt;
+      if (speed < 0) speed = 0;
+      continue;
+    }
+
+    // Calculate RPM
+    const gearRatio = gears[currentGear];
+    const effectiveRatio = gearRatio * finalDrive;
+
+    // v = w * r -> w = v / r
+    // rpm = w * 60 / 2pi
+    // rpm = (v / r) * (60 / 2pi) * ratio
+    // But engine rpm is what we want.
+    // Wheel rpm = speed / (2 * PI * tireRadius) * 60 (This is wrong, speed/circumference gives revs/sec, *60 revs/min)
+    // Wheel RPM = (speed / (2 * Math.PI * tireRadius)) * 60;
+    // Engine RPM = Wheel RPM * effectiveRatio
+
+    const wheelRpm = (speed / (2 * Math.PI * tireRadius)) * 60;
+    rpm = wheelRpm * effectiveRatio;
+    rpm = Math.max(1000, rpm); // Clutch slip / stall protection at launch
+
+    // Shift check
+    if (rpm > 8000 && currentGear < gears.length - 1) {
+      currentGear++;
+      shiftTimer = shiftTime;
+      continue;
+    }
+
+    // Calculate Force
+    const engineTorque = getTorqueAtRPM(rpm, peakTorqueNm);
+    const wheelTorque = engineTorque * effectiveRatio * (1 - driveTrainLoss);
+    const driveForce = wheelTorque / tireRadius;
+
+    // Traction Limit
+    // F_max = mu * m * g
+    // Downforce adds to m*g for traction but we don't calculate speed-dependent downforce in this simple loop yet,
+    // assuming gripMultiplier covers average aero effect or just mechanical grip.
+    // Let's add speed dependent downforce for traction
+    // Downforce = Cl * 0.5 * rho * v^2 * A_wing (Simplified: gripMultiplier handles base grip + tuning adjustments)
+    // We'll stick to simple traction model for now.
+    const maxTraction = gripMultiplier * mass * 9.81;
+
+    const limitedForce = Math.min(driveForce, maxTraction);
+    const dragForce = 0.5 * rho * Cd * A * speed * speed;
+    const netForce = limitedForce - dragForce;
+
+    const accel = netForce / mass;
+    speed += accel * dt;
+  }
+
+  return time;
+};
+
 export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
   // 1. Calculate Core Stats (HP, Torque, Weight)
   let hp = baseStats.hp;
@@ -104,51 +198,47 @@ export const calculatePerformance = (baseStats, carConfig, tuningSettings) => {
 
   // --- Calculate Derived Performance Metrics ---
 
-  // Acceleration (0-60)
-  const basePowerToWeight = 565 / 1752;
-  const currentPowerToWeight = hp / weight;
-
-  let accelTime =
-    baseStats.acceleration060 * (basePowerToWeight / currentPowerToWeight);
-
-  // Grip & Traction Limits
-  // Traction is improved by Grip Multiplier and Differential Accel Lock
   const effectiveGrip = gripMultiplier + tractionBonus;
-
-  // Penalty for low grip vs high power (Wheelspin)
-  if (hp > 600 && effectiveGrip < 1.2) {
-    accelTime += 0.4 * (1.2 - effectiveGrip);
-  }
-
-  // Final Drive tuning effect
-  const hasTunableTrans =
-    PARTS_DB["transmission"][carConfig["transmission"]]?.allows_tuning;
-
-  const baseFinalDrive = 3.5;
-  const fdRatio = hasTunableTrans
-    ? tuningSettings.final_drive / baseFinalDrive
-    : 1.0;
-  // Also consider 1st gear ratio for launch
-  const gear1Ratio = hasTunableTrans ? tuningSettings.gear_1 / 3.2 : 1.0;
-
-  // Combined gearing impact on launch
-  const launchGearing = Math.sqrt(fdRatio * gear1Ratio);
-  accelTime /= launchGearing;
-
-  // Top Speed
-  const baseDrag = 0.3; // Cd
+  const baseDrag = 0.3;
   const currentDrag = baseDrag + downforceDragPenalty + toeScrub;
 
-  // Power vs Drag limit
-  let topSpeed =
-    baseStats.topSpeed * Math.pow(hp / 565, 1 / 3) * (baseDrag / currentDrag);
+  // Acceleration (0-60)
+  const gears = [
+    tuningSettings.gear_1,
+    tuningSettings.gear_2,
+    tuningSettings.gear_3,
+    tuningSettings.gear_4,
+    tuningSettings.gear_5,
+    tuningSettings.gear_6,
+  ];
 
-  // Gearing limit
-  const gearingTopSpeedLimit = 300 / (tuningSettings.final_drive / 2.5);
-  // Also limited by top gear ratio (gear 6)
-  const topGearLimit = gearingTopSpeedLimit / (tuningSettings.gear_6 / 0.75);
+  let accelTime = simulateAcceleration(
+    hp,
+    torque,
+    weight,
+    effectiveGrip,
+    currentDrag,
+    gears,
+    tuningSettings.final_drive,
+  );
 
-  topSpeed = Math.min(topSpeed, topGearLimit);
+  // Top Speed
+  const rho = 1.225;
+  const Cd = currentDrag;
+  const A = 2.2;
+  const watts = hp * 745.7 * 0.85; // 15% drivetrain loss
+
+  const powerLimitSpeedMs = Math.pow(watts / (0.5 * rho * Cd * A), 1 / 3);
+  const powerLimitSpeedMph = powerLimitSpeedMs * 2.23694;
+
+  // Gearing limit (Redline in top gear)
+  const tireRadius = 0.33;
+  const topGearRatio = tuningSettings.gear_6 * tuningSettings.final_drive;
+  const gearLimitSpeedMs =
+    (8000 * 2 * Math.PI * tireRadius) / (60 * topGearRatio);
+  const gearLimitSpeedMph = gearLimitSpeedMs * 2.23694;
+
+  let topSpeed = Math.min(powerLimitSpeedMph, gearLimitSpeedMph);
 
   // Braking 60-0
   // Brake Pressure tuning: >100% can lock up (bad), <100% might not be enough force.

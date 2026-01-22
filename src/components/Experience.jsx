@@ -6,30 +6,21 @@ import {
   Environment,
   ContactShadows,
 } from "@react-three/drei";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import useStore from "../store/useStore";
-// Import only the Nissan model for now as it's the only one we have
-import nissanObjUrl from "../assets/models/nissangtr.obj?url";
 
 const CarModel = () => {
   const { carConfig, baseCar } = useStore();
   const meshRef = useRef();
 
-  // Determine which model to load.
-  // Since we only have the Nissan file, we'll use it as a fallback for others to prevent crashes.
-  // In a real app, we'd dynamically import or have a map of URL imports.
-  const modelUrl =
-    baseCar.id === "nissan-gtr-r35" ? nissanObjUrl : nissanObjUrl;
+  // Use the modelPath from the car data
+  const modelUrl = baseCar.modelPath;
 
-  // NOTE: If we had the other files, we could do something like:
-  // const modelUrl = useMemo(() => new URL(`../assets/models/${baseCar.modelPath.split('/').pop()}`, import.meta.url).href, [baseCar]);
-  // But Vite needs static analysis or glob imports for that to work reliably in production.
-
-  const obj = useLoader(OBJLoader, modelUrl);
-
-  // Clone the object to avoid modifying the cached original
-  const scene = React.useMemo(() => obj.clone(), [obj]);
+  const gltf = useLoader(GLTFLoader, modelUrl);
+  
+  // Clone the scene to avoid modifying the cached original if we switch back and forth
+  const scene = React.useMemo(() => gltf.scene.clone(), [gltf]);
 
   useEffect(() => {
     // Traverse the model to apply materials or handle parts
@@ -38,20 +29,9 @@ const CarModel = () => {
         child.castShadow = true;
         child.receiveShadow = true;
 
-        // Simple material enhancement
-        if (!child.material.map) {
-          child.material = new THREE.MeshStandardMaterial({
-            color: child.material.color,
-            metalness: 0.8,
-            roughness: 0.2,
-          });
-        }
-
-        // If it's not the Nissan, maybe change color to indicate it's a placeholder?
-        if (baseCar.id !== "nissan-gtr-r35") {
-          // Placeholder visual: Make it ghost-like or wireframe-ish?
-          // Or just standard grey.
-          child.material.color.setHex(0xaaaaaa);
+        // Apply envMap intensity to materials if they are standard materials
+        if (child.material.isMeshStandardMaterial) {
+          child.material.envMapIntensity = 1.0;
         }
       }
     });
@@ -66,8 +46,8 @@ const CarModel = () => {
           child.name.toLowerCase().includes("wheel") &&
           carConfig.tires === "slick_comp"
         ) {
-          child.material.color.setHex(0x111111); // Darker tires
-          child.material.roughness = 0.8;
+           // Example modification for slick tires
+           // child.material.color.setHex(0x111111); 
         }
       }
     });

@@ -3,7 +3,7 @@
     {
       "id": "nissan-gtr-r35",
       "name": "Nissan GT-R (R35)",
-      "modelPath": "./models/nissangtr.obj",
+      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/nissan_gt-r.glb?alt=media&token=1196e8ac-116d-4900-b06f-a0c3c3578df4",
       "brand": "Nissan",
       "year": 2024,
       "class": "S1",
@@ -28,7 +28,7 @@
     {
       "id": "porsche-911-gt3rs",
       "name": "Porsche 911 GT3 RS (992)",
-      "modelPath": "./assets/models/porsche_911_gt3rs.glb",
+      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/porsche_gt3_rs.glb?alt=media&token=074ca0d2-696f-49f4-ae3c-f06bf61aca81",
       "brand": "Porsche",
       "year": 2024,
       "class": "S1",
@@ -57,9 +57,88 @@
       }
     },
     {
+      "id": "ferrari-f40",
+      "name": "Ferrari F40",
+      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/lb-works_ferrari_f40_-__free.glb?alt=media&token=fe006a35-76b7-400a-8dca-6c9c6d9acb9d",
+      "brand": "Ferrari",
+      "year": 1987,
+      "class": "A",
+      "pi": 785,
+      "transmission": {
+        "gears": 5,
+        "type": "Manual",
+        "adjustable": false
+      },
+      "baseStats": {
+        "hp": 471,
+        "torque": 426,
+        "weight": 1100,
+        "topSpeed": 201,
+        "acceleration060": 3.8,
+        "handling": 7.8,
+        "braking": 7.5,
+        "driveType": "RWD",
+        "brakingDistance600": 118
+      }
+    },
+    {
+      "id": "koenigsegg-one-1",
+      "name": "Koenigsegg One:1",
+      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/koenigsegg_one1_low_poly.glb?alt=media&token=27caa605-3894-4561-89ea-9b35f98ce9db",
+      "brand": "Koenigsegg",
+      "year": 2014,
+      "class": "S2",
+      "pi": 998,
+      "transmission": {
+        "gears": 7,
+        "type": "Paddle Shift",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 1341,
+        "torque": 1011,
+        "weight": 1360,
+        "topSpeed": 273,
+        "acceleration060": 2.8,
+        "handling": 9.8,
+        "braking": 10,
+        "driveType": "RWD",
+        "brakingDistance600": 91
+      }
+    },
+    {
+      "id": "ford-mustang-1965",
+      "name": "1965 Ford Mustang GT",
+      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/ford_mustang_1965.glb?alt=media&token=d85cd4c6-34f4-4aac-9d6e-574d4840511c",
+      "brand": "Ford",
+      "year": 1965,
+      "class": "D",
+      "pi": 420,
+      "transmission": {
+        "gears": 4,
+        "type": "Manual",
+        "adjustable": false
+      },
+      "baseStats": {
+        "hp": 271,
+        "torque": 312,
+        "weight": 1400,
+        "topSpeed": 125,
+        "acceleration060": 6.2,
+        "handling": 4.2,
+        "braking": 3.8,
+        "driveType": "RWD",
+        "brakingDistance600": 165
+      },
+      "upgradePotential": {
+        "engineSwaps": ["v8_modern", "v12_racing"],
+        "conversions": ["AWD_swap"]
+      }
+    },
+    {
       "id": "porsche-911-930-turbo",
       "name": "1975 Porsche 911 (930) Turbo",
-      "modelPath": "./models/porsche_930_turbo.glb",
+      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/porsche_911_930_turbo_1975.glb?alt=media&token=93e9c27e-9c09-40eb-9d3a-bdf2bea45d53",
       "brand": "Porsche",
       "year": 1975,
       "class": "B",
@@ -84,7 +163,7 @@
     {
       "id": "bmw-m3-gtr-e46",
       "name": "BMW M3 GTR (E46) - NFS Edition",
-      "modelPath": "./models/bmw_m3_gtr.glb",
+      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/bmw_m3_gtr_-_nfs_mw.glb?alt=media&token=eced6ec0-9fe0-48f7-8df9-de015df6e668",
       "brand": "BMW",
       "year": 2001,
       "class": "S1",
@@ -109,7 +188,7 @@
     {
       "id": "mclaren-p1-mso",
       "name": "McLaren P1 MSO",
-      "modelPath": "./models/mclaren_p1_mso.glb",
+      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/free_-_mclaren_p1_mso.glb?alt=media&token=35e416d7-47dc-49f6-afed-eb626b5359da",
       "brand": "McLaren",
       "year": 2015,
       "class": "S2",
@@ -134,7 +213,7 @@
     {
       "id": "mercedes-amg-one",
       "name": "2023 Mercedes-Benz AMG ONE",
-      "modelPath": "./models/mercedes_amg_one.glb",
+      "modelPath": "https://firebasestorage.googleapis.com/v0/b/pixelbit-eight.appspot.com/o/2023_mercedes-benz_amg_one.glb?alt=media&token=693dfcc6-d870-4f51-a4a0-cc7652c3cad8",
       "brand": "Mercedes-Benz",
       "year": 2023,
       "class": "S2",

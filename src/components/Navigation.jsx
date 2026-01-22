@@ -1,6 +1,6 @@
 import React from "react";
 import useStore from "../store/useStore";
-import { FaWrench, FaCogs, FaChartLine, FaCar } from "react-icons/fa";
+import { FaWrench, FaCogs, FaChartLine, FaCar, FaEye } from "react-icons/fa";
 
 const Navigation = ({ currentView, setView }) => {
   const { performanceStats, carConfig, getPreviewStats, baseCar } = useStore();
@@ -9,6 +9,7 @@ const Navigation = ({ currentView, setView }) => {
     { id: "upgrade", label: "Upgrade Shop", icon: <FaWrench /> },
     { id: "tune", label: "Tuning", icon: <FaCogs /> },
     { id: "stats", label: "Telemetry", icon: <FaChartLine /> },
+    { id: "showcase", label: "Show Car", icon: <FaEye /> },
   ];
 
   return (
