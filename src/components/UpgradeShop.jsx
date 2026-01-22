@@ -35,11 +35,27 @@ const UpgradeShop = () => {
     useStore();
   const [selectedCategory, setSelectedCategory] = useState("engine");
   const [hoveredPart, setHoveredPart] = useState(null);
+  const [installingPart, setInstallingPart] = useState(null);
 
   const categories = Object.keys(PARTS_DB);
 
+  // Handle part installation with delay
+  const handleInstall = (category, partId) => {
+    if (carConfig[category] === partId) return; // Already installed
+
+    setInstallingPart(partId);
+    // Simulate install time (avg 1 sec)
+    setTimeout(() => {
+      setPart(category, partId);
+      setInstallingPart(null);
+    }, 1000);
+  };
+
   // Calculate preview stats if hovering, else show current
   const previewStats = useMemo(() => {
+    // If installing, show the stats of the part being installed as "preview"
+    // or just keep showing current until done.
+    // Standard behavior: show preview on hover.
     return hoveredPart
       ? getPreviewStats(selectedCategory, hoveredPart)
       : performanceStats;
@@ -63,12 +79,15 @@ const UpgradeShop = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-24">
             {Object.entries(PARTS_DB[selectedCategory]).map(([id, part]) => {
               const isInstalled = carConfig[selectedCategory] === id;
+              const isInstalling = installingPart === id;
+
               return (
                 <button
                   key={id}
-                  onClick={() => setPart(selectedCategory, id)}
+                  onClick={() => handleInstall(selectedCategory, id)}
                   onMouseEnter={() => setHoveredPart(id)}
                   onMouseLeave={() => setHoveredPart(null)}
+                  disabled={isInstalling}
                   className={`
                   relative p-6 rounded-sm text-left border transition-all group hover:scale-[1.02] active:scale-[0.98]
                   ${
@@ -76,9 +95,16 @@ const UpgradeShop = () => {
                       ? "bg-yellow-500 text-black border-yellow-500"
                       : "bg-black/80 text-white border-white/10 hover:border-white/40"
                   }
+                  ${isInstalling ? "opacity-100 cursor-wait" : ""}
                 `}
                 >
-                  {isInstalled && (
+                  {isInstalling && (
+                    <div className="absolute inset-0 z-20 bg-black/80 flex items-center justify-center backdrop-blur-sm rounded-sm">
+                      <div className="traffic-loader scale-50"></div>
+                    </div>
+                  )}
+
+                  {isInstalled && !isInstalling && (
                     <div className="absolute top-2 right-2 bg-black/20 px-2 py-0.5 text-xs font-bold uppercase rounded">
                       Installed
                     </div>
