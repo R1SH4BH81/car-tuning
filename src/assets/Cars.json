@@ -26,32 +26,7 @@
       },
       "compatibleSwaps": ["racing_v12"]
     },
-    {
-      "id": "mercedes-amg-one",
-      "name": "Mercedes-Benz AMG ONE",
-      "modelPath": "https://rishabh81.sirv.com/models/mercedes_amg_one.glb",
-      "brand": "Mercedes-Benz",
-      "year": 2023,
-      "class": "S2",
-      "pi": 998,
-      "transmission": {
-        "gears": 8,
-        "type": "Racing",
-        "adjustable": true
-      },
-      "baseStats": {
-        "hp": 1049,
-        "torque": 800,
-        "weight": 1695,
-        "topSpeed": 219,
-        "acceleration060": 2.9,
-        "handling": 10,
-        "braking": 10,
-        "driveType": "AWD",
-        "brakingDistance600": 92
-      },
-      "compatibleSwaps": ["racing_v12"]
-    },
+
     {
       "id": "mazda-787b",
       "name": "Mazda 787B",
@@ -176,6 +151,32 @@
       "compatibleSwaps": []
     },
     {
+      "id": "mercedes-amg-one",
+      "name": "Mercedes-Benz AMG ONE",
+      "modelPath": "https://rishabh81.sirv.com/models/2023_mercedes-benz_amg_one.glb",
+      "brand": "Mercedes-Benz",
+      "year": 2023,
+      "class": "S2",
+      "pi": 998,
+      "transmission": {
+        "gears": 8,
+        "type": "Racing",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 1049,
+        "torque": 800,
+        "weight": 1695,
+        "topSpeed": 219,
+        "acceleration060": 2.9,
+        "handling": 10,
+        "braking": 10,
+        "driveType": "AWD",
+        "brakingDistance600": 92
+      },
+      "compatibleSwaps": ["racing_v12"]
+    },
+    {
       "id": "lamborghini-aventador-svj",
       "name": "Lamborghini Aventador SVJ",
       "modelPath": "https://rishabh81.sirv.com/models/lamborghini_aventador.glb",
@@ -203,26 +204,30 @@
     },
 
     {
-      "id": "porsche-919-hybrid",
-      "name": "Porsche 919 Hybrid",
-      "modelPath": "https://rishabh81.sirv.com/models/2015_porsche_919_hybrid.glb",
+      "id": "porsche-918-rsr",
+      "name": "Porsche 918 RSR",
+      "modelPath": "https://rishabh81.sirv.com/models/2010_porsche_918_rsr_race_lab.glb",
       "brand": "Porsche",
-      "year": 2015,
+      "year": 2011,
       "class": "S2",
-      "pi": 935,
-      "transmission": { "gears": 7, "type": "Sequential", "adjustable": true },
-      "baseStats": {
-        "hp": 900,
-        "torque": 750,
-        "weight": 870,
-        "topSpeed": 215,
-        "acceleration060": 2.2,
-        "handling": 10,
-        "braking": 10,
-        "driveType": "AWD",
-        "brakingDistance600": 80
+      "pi": 955,
+      "transmission": {
+        "gears": 6,
+        "type": "Paddle-Shift Sequential",
+        "adjustable": true
       },
-      "compatibleSwaps": []
+      "baseStats": {
+        "hp": 767,
+        "torque": 580,
+        "weight": 1390,
+        "topSpeed": 210,
+        "acceleration060": 2.6,
+        "handling": 9.5,
+        "braking": 9.4,
+        "driveType": "AWD",
+        "brakingDistance600": 88
+      },
+      "compatibleSwaps": ["racing_v10", "racing_v12"]
     },
     {
       "id": "pagani-huayra-2012",
