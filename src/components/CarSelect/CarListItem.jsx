@@ -11,6 +11,7 @@ const CarListItem = React.memo(
         ref={ref}
         onClick={() => onSelect(car.id)}
         onPointerEnter={() => onPreload(car.modelPath)}
+        style={{ contentVisibility: "auto", containIntrinsicSize: "80px" }}
         className={`
           w-full p-4 rounded-xl text-left border transition-all duration-200 group relative overflow-hidden
           ${

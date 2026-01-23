@@ -68,8 +68,9 @@ const Experience = () => {
   return (
     <Canvas
       shadows
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
       camera={{ position: [4, 2, 5], fov: 45 }}
+      gl={{ preserveDrawingBuffer: true }}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
         gl.toneMappingExposure = 0.9;
@@ -90,10 +91,11 @@ const Experience = () => {
         ) : null}
         <ContactShadows
           position={[0, -0.01, 0]}
-          opacity={0.5}
+          opacity={0.4}
           scale={10}
           blur={2.5}
           far={1}
+          resolution={512}
         />
       </Suspense>
       <OrbitControls

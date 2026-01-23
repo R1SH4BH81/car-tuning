@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useTransition } from "react";
 import useStore from "../store/useStore";
-import { useProgress } from "@react-three/drei";
 import { preloadModel } from "../utils/modelLoader";
 import LoadingOverlay from "./CarSelect/LoadingOverlay";
 import CarStats from "./CarSelect/CarStats";
@@ -9,10 +8,8 @@ import CarListPanel from "./CarSelect/CarListPanel";
 const CarSelect = () => {
   const { allCars, baseCar, setCar } = useStore();
   const selectedRef = useRef(null);
-  const { active, progress } = useProgress();
-  // We want to show loader if active is true (loading happening)
-  // But useProgress is global for all three fiber loaders.
-  // It works well enough for this context as we switch cars.
+  const [, startTransition] = useTransition();
+  const preloadTimeoutRef = useRef(null);
 
   useEffect(() => {
     if (selectedRef.current) {
@@ -56,16 +53,25 @@ const CarSelect = () => {
 
   const handleSelect = useCallback(
     (carId) => {
-      setCar(carId);
+      startTransition(() => {
+        setCar(carId);
+      });
     },
     [setCar],
   );
 
-  const handlePreload = useCallback((modelPath) => preloadModel(modelPath), []);
+  const handlePreload = useCallback((modelPath) => {
+    if (preloadTimeoutRef.current) {
+      clearTimeout(preloadTimeoutRef.current);
+    }
+    preloadTimeoutRef.current = setTimeout(() => {
+      preloadModel(modelPath);
+    }, 150);
+  }, []);
 
   return (
     <div className="absolute inset-0 top-24 bottom-0 flex pointer-events-none z-10">
-      <LoadingOverlay active={active} progress={progress} />
+      <LoadingOverlay />
       <CarStats baseCar={baseCar} />
       <CarListPanel
         allCars={allCars}

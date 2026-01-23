@@ -1,6 +1,9 @@
 import React from "react";
+import { useProgress } from "@react-three/drei";
 
-const LoadingOverlay = React.memo(function LoadingOverlay({ active, progress }) {
+const LoadingOverlay = React.memo(function LoadingOverlay() {
+  const { active, progress } = useProgress();
+  
   if (!active) return null;
 
   return (

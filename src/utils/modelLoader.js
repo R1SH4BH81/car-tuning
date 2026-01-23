@@ -63,46 +63,56 @@ export const getCachedModelUrl = async (url) => {
   }
 };
 
-// Custom hook to use in components
-import { useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 
+// Suspense Resource Cache
+const resourceCache = new Map();
+
+function wrapPromise(promise) {
+  let status = "pending";
+  let result;
+  let suspender = promise.then(
+    (r) => {
+      status = "success";
+      result = r;
+    },
+    (e) => {
+      status = "error";
+      result = e;
+    },
+  );
+  return {
+    read() {
+      if (status === "pending") {
+        throw suspender;
+      } else if (status === "error") {
+        throw result;
+      } else if (status === "success") {
+        return result;
+      }
+    },
+  };
+}
+
 export const preloadModel = async (url) => {
-  const cachedUrl = await getCachedModelUrl(url);
+  if (!resourceCache.has(url)) {
+    const promise = getCachedModelUrl(url);
+    resourceCache.set(url, wrapPromise(promise));
+  }
+  const cachedUrl = await getCachedModelUrl(url); // Wait for it
   if (cachedUrl) useGLTF.preload(cachedUrl);
   return cachedUrl;
 };
 
 export const useCachedModelUrl = (url) => {
-  const memoryCachedUrl = peekCachedModelUrl(url);
-  const [cacheState, setCacheState] = useState(() => ({
-    sourceUrl: url ?? null,
-    cachedUrl: memoryCachedUrl,
-  }));
-
-  useEffect(() => {
-    let active = true;
-
-    if (!url) return;
-
-    const load = async () => {
-      try {
-        const result = await getCachedModelUrl(url);
-        if (active) setCacheState({ sourceUrl: url, cachedUrl: result });
-      } catch (e) {
-        console.error(e);
-        if (active) setCacheState({ sourceUrl: url, cachedUrl: url });
-      }
-    };
-
-    load();
-
-    return () => {
-      active = false;
-    };
-  }, [url]);
-
   if (!url) return null;
-  if (cacheState.sourceUrl !== url) return memoryCachedUrl;
-  return cacheState.cachedUrl ?? memoryCachedUrl;
+
+  let resource = resourceCache.get(url);
+  if (!resource) {
+    const promise = getCachedModelUrl(url);
+    resource = wrapPromise(promise);
+    resourceCache.set(url, resource);
+  }
+
+  return resource.read();
 };

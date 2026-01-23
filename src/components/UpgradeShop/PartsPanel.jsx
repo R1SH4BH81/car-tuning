@@ -180,7 +180,6 @@ const PartsPanel = ({
                   displayBaseStats = {
                     hp: baseCar.baseStats.hp,
                     torque: baseCar.baseStats.torque,
-                    weight: baseCar.baseStats.weight,
                   };
                 }
 
@@ -216,11 +215,25 @@ const PartsPanel = ({
                     {part.description && (
                       <div className="text-xs opacity-70 mb-2 uppercase tracking-wide">
                         {part.description}
+                        {/* {part.specs && (
+                          <div className="flex gap-2 mt-1">
+                            {part.specs.aspiration && (
+                              <span className="bg-white/10 px-1.5 py-0.5 rounded">
+                                {part.specs.aspiration}
+                              </span>
+                            )}
+                            {part.specs.weight && (
+                              <span className="bg-white/10 px-1.5 py-0.5 rounded">
+                                {part.specs.weight}
+                              </span>
+                            )}
+                          </div>
+                        )} */}
                       </div>
                     )}
 
                     <div className="mt-4 text-xs space-y-1 opacity-60 group-hover:opacity-100">
-                      {displayBaseStats ? (
+                      {displayBaseStats &&
                         Object.entries(displayBaseStats).map(([stat, val]) => (
                           <div
                             key={stat}
@@ -234,41 +247,49 @@ const PartsPanel = ({
                               {getRelativeStat(stat, val, id)}
                             </span>
                           </div>
-                        ))
-                      ) : (
-                        <>
-                          {part.multiplier !== undefined &&
-                            part.multiplier > 0 && (
-                              <div className="flex justify-between uppercase text-yellow-500 font-bold">
-                                <span>Power Gain</span>
-                                <span>
-                                  +{(part.multiplier * 100).toFixed(0)}%
-                                  {getRelativeStat(
-                                    "multiplier",
-                                    part.multiplier,
-                                    id,
-                                  )}
-                                </span>
-                              </div>
-                            )}
-                          {part.stats &&
-                            Object.entries(part.stats).map(([stat, val]) => (
-                              <div
-                                key={stat}
-                                className="flex justify-between uppercase"
-                              >
-                                <span>{stat}</span>
-                                <span>
-                                  {val > 0 ? "+" : ""}
-                                  {typeof val === "number"
-                                    ? parseFloat(val.toFixed(2))
-                                    : val}
-                                  {getRelativeStat(stat, val, id)}
-                                </span>
-                              </div>
-                            ))}
-                        </>
+                        ))}
+
+                      {part.multiplier !== undefined && part.multiplier > 0 && (
+                        <div className="flex justify-between uppercase text-yellow-500 font-bold">
+                          <span>Power Gain</span>
+                          <span>
+                            +{(part.multiplier * 100).toFixed(0)}%
+                            {getRelativeStat("multiplier", part.multiplier, id)}
+                          </span>
+                        </div>
                       )}
+                      {part.stats &&
+                        Object.entries(part.stats).map(([stat, val]) => {
+                          // Don't show stat if it's already displayed in baseStats (e.g. stock engine)
+                          if (
+                            displayBaseStats &&
+                            displayBaseStats[stat] !== undefined
+                          )
+                            return null;
+
+                          // Don't show weight stat for engine swaps (handled by specs)
+                          if (
+                            activeSubCategory === "engine_swap" &&
+                            stat === "weight"
+                          )
+                            return null;
+
+                          return (
+                            <div
+                              key={stat}
+                              className="flex justify-between uppercase"
+                            >
+                              <span>{stat}</span>
+                              <span>
+                                {val > 0 ? "+" : ""}
+                                {typeof val === "number"
+                                  ? parseFloat(val.toFixed(2))
+                                  : val}
+                                {getRelativeStat(stat, val, id)}
+                              </span>
+                            </div>
+                          );
+                        })}
                     </div>
                   </button>
                 );
