@@ -59,19 +59,21 @@ const Navigation = ({ currentView, setView }) => {
         </div>
       </div>
 
-      <div className="flex gap-1 bg-black/50 p-1 rounded-full backdrop-blur-md border border-white/10">
+      <div className="flex gap-1 bg-black/50   backdrop-blur-md border border-white/10">
         {navItems.map((item) => (
           <button
             key={item.id}
             onClick={() => setView(item.id)}
             className={`
-              flex items-center gap-2 px-6 py-2 rounded-full transition-all duration-300
-              ${
-                currentView === item.id
-                  ? "bg-white text-black font-bold shadow-lg shadow-white/20"
-                  : "text-gray-400 hover:text-white hover:bg-white/10"
-              }
-            `}
+    px-6 py-3 flex items-center gap-2 
+    uppercase font-bold tracking-wider whitespace-nowrap
+    transition-all duration-300 border-b-4
+    ${
+      currentView === item.id
+        ? "border-yellow-500 text-white bg-white/10 shadow-lg shadow-yellow-500/10"
+        : "border-transparent text-gray-400 hover:text-white hover:bg-white/5"
+    }
+  `}
           >
             {item.icon}
             <span className="uppercase text-sm tracking-wider">
