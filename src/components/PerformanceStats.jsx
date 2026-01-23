@@ -13,7 +13,7 @@ const PerformanceStats = () => {
   const { performanceStats, dynoData } = useStore();
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/90 to-transparent z-10 flex justify-between items-end pointer-events-none">
+    <div className="absolute bottom-0 left-0 right-0 p-0 bg-gradient-to-t from-black via-black/90 to-transparent z-10 flex justify-between items-end pointer-events-none">
       {/* Left: Core Stats */}
       <div className="flex gap-4 pointer-events-auto flex-wrap max-w-[60%]">
         <StatBox
