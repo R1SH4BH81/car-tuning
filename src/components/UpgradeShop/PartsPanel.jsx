@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { PARTS_DB } from "../../data/parts";
+import PartLoader from "../common/PartLoader";
 
 const PartsPanel = ({
   categoryGroups,
@@ -200,11 +201,7 @@ const PartsPanel = ({
                       ${isInstalling ? "opacity-100 cursor-wait" : ""}
                     `}
                   >
-                    {isInstalling && (
-                      <div className="absolute inset-0 z-20 bg-black/80 flex items-center justify-center backdrop-blur-sm rounded-sm">
-                        <div className="traffic-loader scale-50"></div>
-                      </div>
-                    )}
+                    {isInstalling && <PartLoader />}
 
                     {isInstalled && !isInstalling && (
                       <div className="absolute top-2 right-2 bg-black/20 px-2 py-0.5 text-xs font-bold uppercase rounded">

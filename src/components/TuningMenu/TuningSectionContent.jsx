@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import PartLoader from "../common/PartLoader";
 
 const TiresSection = React.lazy(() => import("./sections/TiresSection"));
 const GearingSection = React.lazy(() => import("./sections/GearingSection"));
@@ -37,16 +38,16 @@ const TuningSectionContent = ({
   if (!SectionComponent) return null;
 
   return (
-    <Suspense
-      fallback={<div className="text-gray-500 text-sm">Loading...</div>}
-    >
-      <SectionComponent
-        tuningSettings={tuningSettings}
-        setTuning={setTuning}
-        baseCar={baseCar}
-        performanceStats={performanceStats}
-      />
-    </Suspense>
+    <div className="relative min-h-[200px] h-full">
+      <Suspense fallback={<PartLoader />}>
+        <SectionComponent
+          tuningSettings={tuningSettings}
+          setTuning={setTuning}
+          baseCar={baseCar}
+          performanceStats={performanceStats}
+        />
+      </Suspense>
+    </div>
   );
 };
 
