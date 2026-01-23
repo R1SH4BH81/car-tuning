@@ -77,8 +77,7 @@ const UpgradeShop = () => {
 
   return (
     <div className="absolute inset-0 top-24 bottom-0 flex flex-col pointer-events-none z-10">
-      <div className="flex flex-1 overflow-hidden">
-        {/* Parts List */}
+      <div className="flex flex-1 flex-col lg:flex-row overflow-hidden">
         <PartsPanel
           categoryGroups={CATEGORY_GROUPS}
           activeGroup={activeGroup}

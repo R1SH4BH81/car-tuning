@@ -13,17 +13,15 @@ const Navigation = ({ currentView, setView }) => {
   ];
 
   return (
-    <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-6 bg-gradient-to-b from-black/80 to-transparent z-10 pointer-events-auto">
+    <div className="absolute top-0 left-0 right-0 flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-4 md:p-6 bg-gradient-to-b from-black/80 to-transparent z-20 pointer-events-auto">
       <div className="flex flex-col gap-4">
-        {/* PERSISTENT CAR DETAILS - Always Visible */}
-        <div className="flex flex-col gap-1 border-l-4 border-yellow-500 pl-4">
+        <div className="flex flex-col gap-1 border-l-4 border-yellow-500 pl-4 mt-4">
           <div className="text-2xl font-black italic tracking-tighter text-white uppercase">
             <span className="text-yellow-500 mr-2">{baseCar?.year}</span>
             {baseCar?.name}
           </div>
 
-          <div className="flex gap-8 text-white font-mono text-sm">
-            {/* Power Stat */}
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-white font-mono text-xs sm:text-sm">
             <div className="flex items-center gap-2">
               <span className="text-gray-400 uppercase tracking-widest text-[10px]">
                 Power
@@ -59,14 +57,14 @@ const Navigation = ({ currentView, setView }) => {
         </div>
       </div>
 
-      <div className="flex gap-1 bg-black/50   backdrop-blur-md border border-white/10">
+      <div className="flex gap-1 bg-black/60 backdrop-blur-md border border-white/10  px-1 py-1 overflow-x-auto max-w-full md:max-w-none">
         {navItems.map((item) => (
           <button
             key={item.id}
             onClick={() => setView(item.id)}
             className={`
-    px-6 py-3 flex items-center gap-2 
-    uppercase font-bold tracking-wider whitespace-nowrap
+    px-4 md:px-6 py-2 md:py-3 flex items-center gap-2 
+    uppercase font-bold tracking-wider whitespace-nowrap text-xs sm:text-sm
     transition-all duration-300 border-b-4
     ${
       currentView === item.id

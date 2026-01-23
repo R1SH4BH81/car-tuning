@@ -43,17 +43,17 @@ body {
   overflow: hidden; /* prevent scrollbars for the full screen app */
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* Hide scrollbars globally but keep scroll behavior */
+* {
+  scrollbar-width: none; /* Firefox */
 }
-::-webkit-scrollbar-track {
-  background: #1a1a1a;
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
-::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 4px;
+*::-webkit-scrollbar-track {
+  background: transparent;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+*::-webkit-scrollbar-thumb {
+  background: transparent;
 }

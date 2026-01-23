@@ -1,7 +1,10 @@
 import React, { useState, useMemo } from "react";
 import useStore from "../store/useStore";
 import { INITIAL_TUNING } from "../data/parts";
-import { calculatePerformance, generateGearingGraphData } from "../utils/physicsEngine";
+import {
+  calculatePerformance,
+  generateGearingGraphData,
+} from "../utils/physicsEngine";
 import TuningRightPanel from "./TuningMenu/TuningRightPanel";
 import TuningSectionContent from "./TuningMenu/TuningSectionContent";
 import TuningStatsPanel from "./TuningMenu/TuningStatsPanel";
@@ -45,13 +48,12 @@ const TuningMenu = () => {
   }, [tuningSettings, activeSection, performanceStats?.rpmLimit, baseCar]);
 
   return (
-    <div className="absolute inset-0 top-24 bottom-0 flex z-10">
-      {/* Top Bar (simulated by Flex layout) */}
-      <div className="absolute top-0 left-0 right-0 h-12 bg-black/90 flex items-center justify-between px-8 border-b border-white/10 z-20">
+    <div className="absolute left-0 right-0 top-[14vh] md:top-24 bottom-0 flex flex-col lg:flex-row z-10">
+      <div className="absolute top-0 left-0 right-0 h-auto md:h-12 bg-black/90 flex flex-col md:flex-row md:items-center md:justify-between px-4 md:px-8 py-2 md:py-0 border-b border-white/10 z-20">
         <div className="text-xl font-bold italic tracking-tighter">
           TUNE SETUP
         </div>
-        <div className="flex gap-1">
+        <div className="flex flex-wrap gap-2 md:gap-1 mt-2 md:mt-0">
           {TUNING_SECTIONS.map((section) => (
             <button
               key={section.id}
@@ -67,16 +69,13 @@ const TuningMenu = () => {
         </div>
       </div>
 
-      {/* Main Content Area */}
-      <div className="w-full h-full pt-12 flex">
-        {/* Left: Stats (Acceleration, Braking, etc) */}
+      <div className="w-full h-full pt-16 md:pt-12 flex flex-col lg:flex-row gap-4 lg:gap-0">
         <TuningStatsPanel
           performanceStats={performanceStats}
           baselineStats={baselineStats}
         />
 
-        {/* Middle: Sliders */}
-        <div className="flex-1 bg-black/60 backdrop-blur-md p-8 pt-12 overflow-y-auto">
+        <div className="flex-1 bg-black/60 backdrop-blur-md p-4 md:p-8 pt-16 md:pt-12 overflow-y-auto">
           <TuningSectionContent
             activeSection={activeSection}
             tuningSettings={tuningSettings}
@@ -86,7 +85,6 @@ const TuningMenu = () => {
           />
         </div>
 
-        {/* Right: Helper Info/Image */}
         <TuningRightPanel
           activeSection={activeSection}
           gearingData={gearingData}

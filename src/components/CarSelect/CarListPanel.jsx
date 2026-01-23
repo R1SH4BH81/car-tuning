@@ -9,13 +9,13 @@ const CarListPanel = React.memo(function CarListPanel({
   onPreload,
 }) {
   return (
-    <div className="w-96 h-full pointer-events-auto flex flex-col pr-8 py-4">
-      <div className="bg-black/80 backdrop-blur-md rounded-2xl border border-white/10 h-full overflow-hidden flex flex-col shadow-2xl">
-        <div className="p-6 border-b border-white/10 bg-black/40">
-          <h2 className="text-2xl font-black italic uppercase text-white tracking-wider">
+    <div className="w-full lg:w-96 h-[25vh] lg:h-full pointer-events-auto flex flex-col lg:pr-8 px-0 lg:px-0 py-0">
+      <div className="bg-black/80 backdrop-blur-md rounded-none lg:rounded-2xl border-t border-white/10 h-full overflow-hidden flex flex-col shadow-2xl">
+        <div className="px-3 py-0 sm:px-4 sm:py-3 lg:p-6 border-b border-white/10 bg-black/40">
+          <h2 className="text-sm sm:text-base lg:text-2xl font-black italic uppercase text-white tracking-wider">
             {allCars.length} CARS AVAILABLE
           </h2>
-          <div className="text-sm text-white/40 mt-1 font-medium"></div>
+          <div className="text-[11px] sm:text-xs text-white/40 mt-0.5 font-medium"></div>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
@@ -39,4 +39,3 @@ const CarListPanel = React.memo(function CarListPanel({
 });
 
 export default CarListPanel;
-

@@ -14,7 +14,7 @@ const getStatColor = (current, baseline, inverse = false) => {
 
 const TuningStatsPanel = ({ performanceStats, baselineStats }) => {
   return (
-    <div className="w-1/4 bg-black/80 backdrop-blur-md border-r border-white/10 p-8 pt-12">
+    <div className="w-full lg:w-1/4 bg-black/80 backdrop-blur-md border-b lg:border-b-0 lg:border-r border-white/10 p-4 md:p-6 lg:p-8 pt-12">
       <div className="space-y-6">
         <div>
           <h3 className="text-gray-400 text-xs uppercase tracking-widest mb-2">

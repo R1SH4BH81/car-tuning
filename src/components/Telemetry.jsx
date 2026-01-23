@@ -36,9 +36,9 @@ const Telemetry = () => {
   ];
 
   return (
-    <div className="absolute inset-0 top-34 bottom-24 flex items-center justify-center pointer-events-none z-10">
-      <div className="w-full max-w-5xl grid grid-cols-2 gap-8 p-8 pointer-events-auto">
-        <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-6 flex flex-col items-center">
+    <div className="absolute inset-0 top-24 bottom-0 flex items-start justify-center px-4 sm:px-6 py-4 pointer-events-none z-10">
+      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 p-4 sm:p-6 md:p-8 pointer-events-auto max-h-full overflow-y-auto">
+        <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-4 sm:p-6 flex flex-col items-center">
           <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-widest self-start">
             Vehicle Balance
           </h3>
@@ -49,7 +49,7 @@ const Telemetry = () => {
           </div>
         </div>
 
-        <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-6">
+        <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-4 sm:p-6">
           <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-widest">
             Power Curve
           </h3>
@@ -60,7 +60,7 @@ const Telemetry = () => {
           </div>
         </div>
 
-        <div className="col-span-2 bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-6 grid grid-cols-4 gap-4 text-center">
+        <div className="col-span-1 md:col-span-2 bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-4 sm:p-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
           <div>
             <div className="text-gray-400 text-xs uppercase">Lateral G</div>
             <div className="text-2xl font-mono text-white">

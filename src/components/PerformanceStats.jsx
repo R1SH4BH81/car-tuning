@@ -13,83 +13,100 @@ const PerformanceStats = () => {
   const { performanceStats, dynoData } = useStore();
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 p-0 bg-gradient-to-t from-black via-black/90 to-transparent z-10 flex justify-between items-end pointer-events-none">
-      {/* Left: Core Stats */}
-      <div className="flex gap-4 pointer-events-auto flex-wrap max-w-[60%]">
-        <StatBox
-          label="Power"
-          value={performanceStats.hp}
-          unit="HP"
-          color="yellow"
-        />
-        <StatBox
-          label="Torque"
-          value={performanceStats.torque}
-          unit="FT-LB"
-          color="yellow"
-        />
-        <StatBox label="Weight" value={performanceStats.weight} unit="LBS" />
-        <StatBox
-          label="0-60 MPH"
-          value={performanceStats.acceleration060}
-          unit="s"
-        />
-        <StatBox
-          label="Top Speed"
-          value={performanceStats.topSpeed}
-          unit="MPH"
-        />
-        <StatBox label="Lat G" value={performanceStats.lateralG} unit="G" />
-        <StatBox
-          label="60-0"
-          value={performanceStats.brakingDistance600}
-          unit="FT"
-        />
-      </div>
-
-      {/* Middle: Dyno Graph */}
-      <div className="w-64 h-32 pointer-events-auto opacity-80 hidden md:block">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={dynoData}>
-            <XAxis dataKey="name" hide />
-            <YAxis hide domain={[0, "auto"]} />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "#000",
-                border: "1px solid #333",
-              }}
-              itemStyle={{ fontSize: "12px" }}
-              labelStyle={{ display: "none" }}
-            />
-            <Line
-              type="monotone"
-              dataKey="hp"
-              stroke="#eab308"
-              strokeWidth={2}
-              dot={false}
-            />
-            <Line
-              type="monotone"
-              dataKey="torque"
-              stroke="#ef4444"
-              strokeWidth={2}
-              dot={false}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* Right: Class & PI */}
-      <div className="flex items-center gap-4 pointer-events-auto">
-        <div
-          className={`text-4xl font-black italic tracking-tighter ${getPIColor(
-            performanceStats.piClass,
-          )}`}
-        >
-          {performanceStats.piClass}
+    <div className="absolute bottom-0 left-0 right-0 p-0 bg-gradient-to-t from-black via-black/90 to-transparent z-10 pointer-events-none">
+      <div className="flex items-center justify-between px-3 py-2 pointer-events-auto md:hidden">
+        <div className="flex items-center gap-2 text-[11px] font-mono text-white overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-1 px-2 py-1 bg-black/60 rounded border border-white/10 whitespace-nowrap">
+            <span className="uppercase text-white/60 tracking-wider">HP</span>
+            <span>{performanceStats.hp}</span>
+          </div>
+          <div className="flex items-center gap-1 px-2 py-1 bg-black/60 rounded border border-white/10 whitespace-nowrap">
+            <span className="uppercase text-white/60 tracking-wider">
+              Torque
+            </span>
+            <span>{performanceStats.torque}</span>
+          </div>
+          <div className="flex items-center gap-1 px-2 py-1 bg-black/60 rounded border border-white/10 whitespace-nowrap">
+            <span className="uppercase text-white/60 tracking-wider">
+              Weight
+            </span>
+            <span>{performanceStats.weight}</span>
+          </div>
+          <div className="flex items-center gap-1 px-2 py-1 bg-black/60 rounded border border-white/10 whitespace-nowrap">
+            <span className="uppercase text-white/60 tracking-wider">0-60</span>
+            <span>{performanceStats.acceleration060}s</span>
+          </div>
+          <div className="flex items-center gap-1 px-2 py-1 bg-black/60 rounded border border-white/10 whitespace-nowrap">
+            <span className="uppercase text-white/60 tracking-wider">Top</span>
+            <span>{performanceStats.topSpeed} MPH</span>
+          </div>
+          <div className="flex items-center gap-1 px-2 py-1 bg-black/60 rounded border border-white/10 whitespace-nowrap">
+            <span className="uppercase text-white/60 tracking-wider">LatG</span>
+            <span>{performanceStats.lateralG}</span>
+          </div>
+          <div className="flex items-center gap-1 px-2 py-1 bg-black/60 rounded border border-white/10 whitespace-nowrap">
+            <span className="uppercase text-white/60 tracking-wider">60-0</span>
+            <span>{performanceStats.brakingDistance600} FT</span>
+          </div>
         </div>
-        <div className="bg-white text-black font-bold text-xl px-3 py-1 rounded">
-          {performanceStats.pi}
+        <div className="flex items-center gap-2">
+          <div
+            className={`text-lg font-black italic tracking-tighter ${getPIColor(
+              performanceStats.piClass,
+            )}`}
+          >
+            {performanceStats.piClass}
+          </div>
+          <div className="bg-white text-black font-bold text-sm px-2 py-0.5 rounded">
+            {performanceStats.pi}
+          </div>
+        </div>
+      </div>
+
+      <div className="hidden md:flex justify-between items-end px-6 pb-4 pointer-events-none">
+        <div className="flex gap-4 pointer-events-auto flex-wrap max-w-[60%]">
+          <StatBox
+            label="Power"
+            value={performanceStats.hp}
+            unit="HP"
+            color="yellow"
+          />
+          <StatBox
+            label="Torque"
+            value={performanceStats.torque}
+            unit="FT-LB"
+            color="yellow"
+          />
+          <StatBox label="Weight" value={performanceStats.weight} unit="LBS" />
+          <StatBox
+            label="0-60 MPH"
+            value={performanceStats.acceleration060}
+            unit="s"
+          />
+          <StatBox
+            label="Top Speed"
+            value={performanceStats.topSpeed}
+            unit="MPH"
+          />
+          <StatBox label="Lat G" value={performanceStats.lateralG} unit="G" />
+          <StatBox
+            label="60-0"
+            value={performanceStats.brakingDistance600}
+            unit="FT"
+          />
+        </div>
+
+        <div className="flex items-center gap-4 pointer-events-auto">
+          <div
+            className={`text-4xl font-black italic tracking-tighter ${getPIColor(
+              performanceStats.piClass,
+            )}`}
+          >
+            {performanceStats.piClass}
+          </div>
+          <div className="bg-white text-black font-bold text-xl px-3 py-1 rounded">
+            {performanceStats.pi}
+          </div>
         </div>
       </div>
     </div>
