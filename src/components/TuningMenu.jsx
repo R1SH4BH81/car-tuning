@@ -49,7 +49,7 @@ const TuningMenu = () => {
   }, [tuningSettings, activeSection, performanceStats?.rpmLimit, baseCar]);
 
   return (
-    <div className="absolute left-0 right-0 top-[17vh] md:top-24 bottom-0 flex flex-col lg:flex-row z-10">
+    <div className="absolute left-0 right-0 top-[20vh] md:top-24 bottom-0 flex flex-col lg:flex-row z-10">
       <div className="absolute top-0 left-0 right-0 h-auto md:h-12 bg-black/90 flex flex-col md:flex-row md:items-center md:justify-between px-4 md:px-8 py-2 md:py-0 border-b border-white/10 z-20">
         <div className="text-xl font-bold italic tracking-tighter">
           TUNE SETUP
@@ -60,8 +60,12 @@ const TuningMenu = () => {
               key={section.id}
               onClick={() => setActiveSection(section.id)}
               className={`
-                        px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors
-                        ${activeSection === section.id ? "bg-yellow-500 text-black" : "text-gray-400 hover:text-white"}
+                        px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors cursor-pointer 
+                        ${
+                          activeSection === section.id
+                            ? "bg-yellow-500 text-black"
+                            : "text-gray-400 hover:text-white hover:bg-white/10"
+                        }
                     `}
             >
               {section.label}
@@ -85,8 +89,28 @@ const TuningMenu = () => {
               className="w-full flex items-center justify-between bg-black/80 border border-white/10 px-4 py-2 rounded-sm text-xs uppercase tracking-widest text-gray-300"
             >
               <span>Performance Stats</span>
-              <span className="text-yellow-500">
-                {showStatsMobile ? "▲" : "▼"}
+              <span className="text-yellow-500 flex items-center">
+                {showStatsMobile ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="yellow"
+                  >
+                    <path d="M440-440v240h-80v-160H200v-80h240Zm160-320v160h160v80H520v-240h80Z" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="yellow"
+                  >
+                    <path d="M200-200v-240h80v160h160v80H200Zm480-320v-160H520v-80h240v240h-80Z" />
+                  </svg>
+                )}
               </span>
             </button>
             {showStatsMobile && (

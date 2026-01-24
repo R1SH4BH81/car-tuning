@@ -13,7 +13,7 @@ const ComparisonPanel = ({
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="w-full lg:w-80 bg-black/80 backdrop-blur-xl border-t lg:border-t-0 lg:border-l border-white/10 p-4 sm:p-1 pointer-events-auto max-h-[50vh] md:max-h-none overflow-y-auto">
+    <div className="w-full lg:w-80 bg-black/80 backdrop-blur-xl border-t lg:border-t-0 lg:border-l border-white/10 p-4 sm:p-5 pointer-events-auto max-h-[50vh] md:max-h-none overflow-y-auto">
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}

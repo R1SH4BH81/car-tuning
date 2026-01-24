@@ -38,7 +38,7 @@ const Telemetry = () => {
   ];
 
   return (
-    <div className="absolute inset-0 top-[17vh] bottom-0 flex items-start justify-center px-4 sm:px-6 py-4 pointer-events-none z-10">
+    <div className="absolute inset-0 top-[20vh] bottom-0 flex items-start justify-center px-4 sm:px-6 py-4 pointer-events-none z-10">
       <div className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 p-4 sm:p-6 md:p-8 pointer-events-auto max-h-full overflow-y-auto">
         <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-4 sm:p-6 flex flex-col items-center">
           <h3 className="text-lg font-bold text-white mb-4 uppercase tracking-widest self-start">

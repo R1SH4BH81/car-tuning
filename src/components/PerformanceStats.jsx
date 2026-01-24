@@ -10,7 +10,7 @@ import {
 } from "recharts";
 
 const PerformanceStats = () => {
-  const { performanceStats, dynoData } = useStore();
+  const { performanceStats } = useStore();
 
   return (
     <div className="absolute bottom-0 left-0 right-0 p-0 bg-gradient-to-t from-black via-black/90 to-transparent z-10 pointer-events-none">

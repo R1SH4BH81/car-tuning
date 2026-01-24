@@ -106,6 +106,8 @@ const Experience = () => {
         enablePan={false}
         autoRotate={true}
         autoRotateSpeed={0.5}
+        minDistance={2}
+        maxDistance={10}
       />
     </Canvas>
   );

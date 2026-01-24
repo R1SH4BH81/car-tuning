@@ -8,7 +8,7 @@ const ShowCar = ({ setView }) => {
   const { dynoData } = useStore();
 
   return (
-    <div className="absolute inset-0 pointer-events-none flex flex-col justify-between pt-12 px-0.5">
+    <div className="absolute mt-[5vh] inset-0 pointer-events-none flex flex-col justify-between pt-12 px-0.5">
       <div className="flex justify-between items-start pointer-events-auto px-3">
         <button
           onClick={() => setView("upgrade")}

@@ -130,14 +130,14 @@ const PartsPanel = ({
             </svg>
           </button>
         )}
-        <h2 className="text-4xl font-black italic uppercase text-white drop-shadow-lg">
+        <h3 className="text-2xl font-black italic uppercase text-white drop-shadow-lg">
           {activeSubCategory
             ? activeSubCategory.replace("_", " ")
             : activeGroup}
-        </h2>
+        </h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-2">
         {!activeSubCategory
           ? categoryGroups[activeGroup].map((subCat) => {
               const installedPartId = carConfig[subCat];

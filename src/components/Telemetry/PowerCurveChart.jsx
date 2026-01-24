@@ -12,11 +12,14 @@ import {
 const PowerCurveChart = ({ dynoData }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={dynoData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+      <LineChart
+        data={dynoData}
+        margin={{ top: 1, right: 3, left: 2, bottom: 1 }}
+      >
         <XAxis
           dataKey="name"
           stroke="#666"
-          tick={{ fill: "#9ca3af", fontSize: 10 }}
+          tick={{ fill: "#9ca3af", fontSize: 9 }}
           label={{
             value: "RPM",
             position: "insideBottomRight",
@@ -26,11 +29,12 @@ const PowerCurveChart = ({ dynoData }) => {
         />
         <YAxis
           stroke="#666"
-          tick={{ fill: "#9ca3af", fontSize: 10 }}
+          tick={{ fill: "#9ca3af", fontSize: 9 }}
           label={{
-            value: "Power / Torque",
+            value: "Power/Torque",
             angle: -90,
-            position: "insideLeft",
+            position: "center",
+            offset: -5,
             fill: "#9ca3af",
           }}
         />
@@ -41,7 +45,9 @@ const PowerCurveChart = ({ dynoData }) => {
           }}
           itemStyle={{ color: "#fff" }}
         />
-        <Legend wrapperStyle={{ paddingTop: "6px", color: "#fff", fontSize: 10 }} />
+        <Legend
+          wrapperStyle={{ paddingTop: "6px", color: "#fff", fontSize: 9 }}
+        />
         <Line
           type="monotone"
           dataKey="hp"
