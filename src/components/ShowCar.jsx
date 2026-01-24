@@ -12,9 +12,9 @@ const ShowCar = ({ setView }) => {
       <div className="flex justify-between items-start pointer-events-auto px-3">
         <button
           onClick={() => setView("upgrade")}
-          className="bg-black/50 hover:bg-white text-white hover:text-black ml-5 p-3 rounded-full backdrop-blur-md border border-white/10 transition-all"
+          className="bg-black/50 hover:bg-white text-white hover:text-black ml-1 p-2 rounded-full backdrop-blur-md border border-white/10 transition-all"
         >
-          <FaArrowLeft size={20} />
+          <FaArrowLeft size={11} />
         </button>
         <div className="w-40 h-24 sm:w-56 sm:h-32">
           <DynoChart

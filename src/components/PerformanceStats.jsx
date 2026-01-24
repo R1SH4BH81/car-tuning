@@ -63,7 +63,7 @@ const PerformanceStats = () => {
         </div>
       </div>
 
-      <div className="hidden md:flex justify-between items-end px-6 pb-4 pointer-events-none">
+      <div className="hidden md:flex justify-between items-end px-6 pb-4 pointer-events-none gap-3">
         <div className="flex gap-4 pointer-events-auto flex-wrap max-w-[60%]">
           <StatBox
             label="Power"
