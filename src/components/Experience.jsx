@@ -24,9 +24,13 @@ const InnerCarModel = ({ url }) => {
     const size = new THREE.Vector3();
     box.getSize(size);
 
-    // 2. Scale to a fixed "Target Size" (4 units)
-    // This ensures a tiny car and a huge truck look the same size in the UI
-    const targetSize = 5;
+    const getTargetSize = () => {
+      if (typeof window === "undefined") return 3;
+      if (window.matchMedia("(min-width: 1024px)").matches) return 5;
+      if (window.matchMedia("(min-width: 768px)").matches) return 4;
+      return 3;
+    };
+    const targetSize = getTargetSize();
     const maxDim = Math.max(size.x, size.y, size.z);
     const scaleFactor = targetSize / maxDim;
     clonedScene.scale.setScalar(scaleFactor);
