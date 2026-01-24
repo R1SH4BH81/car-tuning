@@ -11,11 +11,17 @@ import {
 const RadarBalanceChart = ({ radarData }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
+      <RadarChart
+        cx="50%"
+        cy="50%"
+        outerRadius="75%"
+        data={radarData}
+        margin={{ top: 10, right: 24, bottom: 10, left: 24 }}
+      >
         <PolarGrid stroke="#444" />
         <PolarAngleAxis
           dataKey="subject"
-          tick={{ fill: "white", fontSize: 11 }}
+          tick={{ fill: "white", fontSize: 10 }}
         />
         <PolarRadiusAxis
           angle={30}
