@@ -16,6 +16,7 @@ const PowerCurveChart = ({ dynoData }) => {
         <XAxis
           dataKey="name"
           stroke="#666"
+          tick={{ fill: "#9ca3af", fontSize: 10 }}
           label={{
             value: "RPM",
             position: "insideBottomRight",
@@ -25,6 +26,7 @@ const PowerCurveChart = ({ dynoData }) => {
         />
         <YAxis
           stroke="#666"
+          tick={{ fill: "#9ca3af", fontSize: 10 }}
           label={{
             value: "Power / Torque",
             angle: -90,
@@ -39,12 +41,12 @@ const PowerCurveChart = ({ dynoData }) => {
           }}
           itemStyle={{ color: "#fff" }}
         />
-        <Legend wrapperStyle={{ paddingTop: "10px", color: "#fff" }} />
+        <Legend wrapperStyle={{ paddingTop: "6px", color: "#fff", fontSize: 10 }} />
         <Line
           type="monotone"
           dataKey="hp"
           stroke="#fbbf24"
-          strokeWidth={3}
+          strokeWidth={2}
           dot={false}
           name="HP"
         />
@@ -52,7 +54,7 @@ const PowerCurveChart = ({ dynoData }) => {
           type="monotone"
           dataKey="torque"
           stroke="#ef4444"
-          strokeWidth={3}
+          strokeWidth={2}
           dot={false}
           name="Torque"
         />

@@ -13,11 +13,11 @@ const ComparisonPanel = ({
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="w-full lg:w-80 bg-black/80 backdrop-blur-xl border-t lg:border-t-0 lg:border-l border-white/10 p-4 sm:p-2 pointer-events-auto max-h-[50vh] md:max-h-none overflow-y-auto">
+    <div className="w-full lg:w-80 bg-black/80 backdrop-blur-xl border-t lg:border-t-0 lg:border-l border-white/10 p-4 sm:p-1 pointer-events-auto max-h-[50vh] md:max-h-none overflow-y-auto">
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full flex items-center justify-between gap-2 text-left text-yellow-500 border-b border-white/10 pb-2 mb-4"
+        className="w-full flex items-center justify-between gap-2 text-left text-yellow-500 border-b border-white/10 pb-2 mb-2"
       >
         <span className="text-sm md:text-base lg:text-xl font-bold uppercase">
           Projected Stats
@@ -27,12 +27,20 @@ const ComparisonPanel = ({
             isOpen ? "rotate-90" : ""
           }`}
         >
-          ▶
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#fff500"
+          >
+            <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z" />
+          </svg>
         </span>
       </button>
       <div
         className={`${
-          isOpen ? "space-y-4 font-mono" : "hidden lg:block"
+          isOpen ? "space-y-2 font-mono" : "hidden lg:block"
         } lg:space-y-4 lg:font-mono`}
       >
         <StatDiff

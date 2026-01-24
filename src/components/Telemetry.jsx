@@ -1,7 +1,9 @@
 import React, { Suspense } from "react";
 import useStore from "../store/useStore";
 
-const RadarBalanceChart = React.lazy(() => import("./Telemetry/RadarBalanceChart"));
+const RadarBalanceChart = React.lazy(
+  () => import("./Telemetry/RadarBalanceChart"),
+);
 const PowerCurveChart = React.lazy(() => import("./Telemetry/PowerCurveChart"));
 
 const Telemetry = () => {
@@ -36,25 +38,29 @@ const Telemetry = () => {
   ];
 
   return (
-    <div className="absolute inset-0 top-24 bottom-0 flex items-start justify-center px-4 sm:px-6 py-4 pointer-events-none z-10">
-      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 p-4 sm:p-6 md:p-8 pointer-events-auto max-h-full overflow-y-auto">
+    <div className="absolute inset-0 top-[17vh] bottom-0 flex items-start justify-center px-4 sm:px-6 py-4 pointer-events-none z-10">
+      <div className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 p-4 sm:p-6 md:p-8 pointer-events-auto max-h-full overflow-y-auto">
         <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-4 sm:p-6 flex flex-col items-center">
-          <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-widest self-start">
+          <h3 className="text-lg font-bold text-white mb-4 uppercase tracking-widest self-start">
             Vehicle Balance
           </h3>
           <div className="w-full h-80">
-            <Suspense fallback={<div className="text-gray-500 text-sm">Loading...</div>}>
+            <Suspense
+              fallback={<div className="text-gray-500 text-sm">Loading...</div>}
+            >
               <RadarBalanceChart radarData={radarData} />
             </Suspense>
           </div>
         </div>
 
         <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-4 sm:p-6">
-          <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-widest">
+          <h3 className="text-lg font-bold text-white mb-4 uppercase tracking-widest">
             Power Curve
           </h3>
-          <div className="w-full h-80">
-            <Suspense fallback={<div className="text-gray-500 text-sm">Loading...</div>}>
+          <div className="w-full h-64">
+            <Suspense
+              fallback={<div className="text-gray-500 text-sm">Loading...</div>}
+            >
               <PowerCurveChart dynoData={dynoData} />
             </Suspense>
           </div>
@@ -63,7 +69,7 @@ const Telemetry = () => {
         <div className="col-span-1 md:col-span-2 bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-4 sm:p-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
           <div>
             <div className="text-gray-400 text-xs uppercase">Lateral G</div>
-            <div className="text-2xl font-mono text-white">
+            <div className="text-xl font-mono text-white">
               {performanceStats.lateralG} G
             </div>
           </div>
@@ -71,13 +77,13 @@ const Telemetry = () => {
             <div className="text-gray-400 text-xs uppercase">
               Braking (60-0)
             </div>
-            <div className="text-2xl font-mono text-white">
+            <div className="text-xl font-mono text-white">
               {performanceStats.brakingDistance600} ft
             </div>
           </div>
           <div>
             <div className="text-gray-400 text-xs uppercase">Power/Weight</div>
-            <div className="text-2xl font-mono text-white">
+            <div className="text-xl font-mono text-white">
               {(performanceStats.hp / (performanceStats.weight / 2200)).toFixed(
                 2,
               )}{" "}
@@ -86,7 +92,7 @@ const Telemetry = () => {
           </div>
           <div>
             <div className="text-gray-400 text-xs uppercase">Top Speed</div>
-            <div className="text-2xl font-mono text-white">
+            <div className="text-xl font-mono text-white">
               {performanceStats.topSpeed} mph
             </div>
           </div>
