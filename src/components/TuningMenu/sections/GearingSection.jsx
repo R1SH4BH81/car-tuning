@@ -1,12 +1,21 @@
 import React from "react";
 import TuningSlider from "../TuningSlider";
+import { PARTS_DB } from "../../../data/parts";
 
-const isUnlocked = () => {
-  return true;
+const isUnlocked = (carConfig) => {
+  const transId = carConfig?.transmission || "stock";
+  const part = PARTS_DB.transmission?.[transId];
+  return !!(part && part.allows_tuning);
 };
 
-const GearingSection = ({ tuningSettings, setTuning, baseCar, performanceStats }) => {
-  const unlocked = isUnlocked("transmission");
+const GearingSection = ({
+  tuningSettings,
+  setTuning,
+  baseCar,
+  performanceStats,
+  carConfig,
+}) => {
+  const unlocked = isUnlocked(carConfig);
   const numGears = baseCar?.transmission?.gears || 6;
   const gearsArray = Array.from({ length: numGears }, (_, i) => i + 1);
 
@@ -41,7 +50,8 @@ const GearingSection = ({ tuningSettings, setTuning, baseCar, performanceStats }
       />
       {gearsArray.map((gear) => {
         const prevGearVal = gear > 1 ? tuningSettings[`gear_${gear - 1}`] : 6.0;
-        const nextGearVal = gear < numGears ? tuningSettings[`gear_${gear + 1}`] : 0.4;
+        const nextGearVal =
+          gear < numGears ? tuningSettings[`gear_${gear + 1}`] : 0.4;
 
         const maxLimit = prevGearVal ? prevGearVal - 0.01 : 6.0;
         const minLimit = nextGearVal ? nextGearVal + 0.01 : 0.4;

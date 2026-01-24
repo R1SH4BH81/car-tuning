@@ -33,6 +33,7 @@ const TuningSectionContent = ({
   setTuning,
   baseCar,
   performanceStats,
+  carConfig,
 }) => {
   const SectionComponent = sectionComponents[activeSection];
   if (!SectionComponent) return null;
@@ -45,6 +46,7 @@ const TuningSectionContent = ({
           setTuning={setTuning}
           baseCar={baseCar}
           performanceStats={performanceStats}
+          carConfig={carConfig}
         />
       </Suspense>
     </div>

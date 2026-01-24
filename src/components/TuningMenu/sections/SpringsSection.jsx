@@ -1,12 +1,15 @@
 import React from "react";
 import TuningSlider from "../TuningSlider";
+import { PARTS_DB } from "../../../data/parts";
 
-const isUnlocked = () => {
-  return true;
+const isUnlocked = (carConfig) => {
+  const suspId = carConfig?.suspension || "stock";
+  const part = PARTS_DB.suspension?.[suspId];
+  return !!(part && part.allows_tuning);
 };
 
-const SpringsSection = ({ tuningSettings, setTuning }) => {
-  const springsUnlocked = isUnlocked("springs");
+const SpringsSection = ({ tuningSettings, setTuning, carConfig }) => {
+  const springsUnlocked = isUnlocked(carConfig);
 
   return (
     <>

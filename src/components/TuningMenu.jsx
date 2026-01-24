@@ -49,7 +49,7 @@ const TuningMenu = () => {
   }, [tuningSettings, activeSection, performanceStats?.rpmLimit, baseCar]);
 
   return (
-    <div className="absolute left-0 right-0 top-[20vh] md:top-24 bottom-0 flex flex-col lg:flex-row z-10">
+    <div className="absolute left-0 right-0 top-36 md:top-36 lg:top-26 bottom-0 flex flex-col lg:flex-row z-10">
       <div className="absolute top-0 left-0 right-0 h-auto md:h-12 bg-black/90 flex flex-col md:flex-row md:items-center md:justify-between px-4 md:px-8 py-2 md:py-0 border-b border-white/10 z-20">
         <div className="text-xl font-bold italic tracking-tighter">
           TUNE SETUP
@@ -129,6 +129,7 @@ const TuningMenu = () => {
             setTuning={setTuning}
             baseCar={baseCar}
             performanceStats={performanceStats}
+            carConfig={carConfig}
           />
         </div>
 

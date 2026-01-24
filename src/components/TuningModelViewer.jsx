@@ -1,6 +1,13 @@
-import React, { Suspense, Component } from "react";
+import React, { Suspense, Component, memo } from "react";
 import { Canvas } from "@react-three/fiber";
-import { useGLTF, OrbitControls, Stage, Html } from "@react-three/drei";
+import {
+  useGLTF,
+  OrbitControls,
+  Stage,
+  Html,
+  useProgress,
+} from "@react-three/drei";
+import { useCachedModelUrl } from "../utils/modelLoader";
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -25,16 +32,18 @@ class ErrorBoundary extends Component {
   }
 }
 
-function Model({ path }) {
-  // Key the hook with the path to ensure it reloads when path changes
+const errorFallback = (
+  <Html center>
+    <div className="text-white/50 text-xs">Model not found</div>
+  </Html>
+);
+
+const Model = memo(function Model({ path }) {
   const { scene } = useGLTF(path);
   return <primitive object={scene} />;
-}
+});
 
-import { useProgress } from "@react-three/drei";
-import { useCachedModelUrl } from "../utils/modelLoader";
-
-function Loader() {
+const Loader = memo(function Loader() {
   const { progress } = useProgress();
   return (
     <Html center>
@@ -47,15 +56,15 @@ function Loader() {
       </div>
     </Html>
   );
-}
+});
 
-function CachedModel({ path }) {
+const CachedModel = memo(function CachedModel({ path }) {
   const cachedUrl = useCachedModelUrl(path);
 
   if (!cachedUrl) return <Loader />;
 
   return <Model path={cachedUrl} />;
-}
+});
 
 export default function TuningModelViewer({ modelPath }) {
   return (
@@ -66,13 +75,7 @@ export default function TuningModelViewer({ modelPath }) {
         camera={{ fov: 15 }}
         style={{ background: "transparent" }}
       >
-        <ErrorBoundary
-          fallback={
-            <Html center>
-              <div className="text-white/50 text-xs">Model not found</div>
-            </Html>
-          }
-        >
+        <ErrorBoundary fallback={errorFallback}>
           <Suspense fallback={<Loader />}>
             <Stage environment="city" intensity={0.5} adjustCamera={1.2}>
               {modelPath ? <CachedModel path={modelPath} /> : null}

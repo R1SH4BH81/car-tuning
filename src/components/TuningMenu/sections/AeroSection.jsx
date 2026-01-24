@@ -1,12 +1,15 @@
 import React from "react";
 import TuningSlider from "../TuningSlider";
+import { PARTS_DB } from "../../../data/parts";
 
-const isUnlocked = () => {
-  return true;
+const isUnlocked = (carConfig) => {
+  const aeroId = carConfig?.aero || "stock";
+  const part = PARTS_DB.aero?.[aeroId];
+  return !!(part && part.allows_tuning);
 };
 
-const AeroSection = ({ tuningSettings, setTuning }) => {
-  const aeroUnlocked = isUnlocked("aero");
+const AeroSection = ({ tuningSettings, setTuning, carConfig }) => {
+  const aeroUnlocked = isUnlocked(carConfig);
 
   return (
     <>

@@ -1,12 +1,15 @@
 import React from "react";
 import TuningSlider from "../TuningSlider";
+import { PARTS_DB } from "../../../data/parts";
 
-const isUnlocked = () => {
-  return true;
+const isUnlocked = (carConfig) => {
+  const diffId = carConfig?.differential || "stock";
+  const part = PARTS_DB.differential?.[diffId];
+  return !!(part && part.allows_tuning);
 };
 
-const DifferentialSection = ({ tuningSettings, setTuning }) => {
-  const diffUnlocked = isUnlocked("differential");
+const DifferentialSection = ({ tuningSettings, setTuning, carConfig }) => {
+  const diffUnlocked = isUnlocked(carConfig);
 
   return (
     <>
