@@ -32,7 +32,7 @@ function App() {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen  overflow-hidden font-sans select-none text-white">
+    <div className="relative w-screen h-dvh  overflow-hidden font-sans select-none text-white">
       {/* Cache Notification Toast */}
       {cacheNotification && (
         <div className="absolute bottom-4 right-4 z-50 flex items-center gap-3   px-4 py-3 rounded-lg shadow-xl animate-bounce-in">

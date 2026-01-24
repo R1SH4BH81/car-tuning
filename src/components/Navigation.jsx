@@ -13,9 +13,9 @@ const Navigation = ({ currentView, setView }) => {
   ];
 
   return (
-    <div className="absolute top-0 left-0 right-0 flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-2 md:p-6 bg-gradient-to-b from-black/80 to-transparent z-20 pointer-events-auto">
+    <div className="absolute top-0 left-0 right-0 flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-1 md:p-6 bg-gradient-to-b from-black/80 to-transparent z-20 pointer-events-auto">
       <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-1 border-l-4 border-yellow-500 pl-4 mt-4">
+        <div className="flex flex-col gap-1 border-l-4 border-yellow-500 pl-4 mt-0">
           <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-black italic tracking-tighter text-white uppercase">
             <span className="text-yellow-500 mr-2">{baseCar?.year}</span>
             {baseCar?.name}

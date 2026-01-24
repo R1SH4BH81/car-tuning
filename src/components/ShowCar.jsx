@@ -8,11 +8,11 @@ const ShowCar = ({ setView }) => {
   const { dynoData } = useStore();
 
   return (
-    <div className="absolute mt-[5vh] inset-0 pointer-events-none flex flex-col justify-between pt-12 px-0.5">
+    <div className="absolute  inset-0 pointer-events-none flex flex-col justify-between pt-6 px-0.5">
       <div className="flex justify-between items-start pointer-events-auto px-3">
         <button
           onClick={() => setView("upgrade")}
-          className="bg-black/50 hover:bg-white text-white hover:text-black ml-1 p-2 rounded-full backdrop-blur-md border border-white/10 transition-all"
+          className="bg-black/50 hover:bg-white text-white hover:text-black ml-1 p-3 rounded-full backdrop-blur-md border border-white/10 transition-all"
         >
           <FaArrowLeft size={11} />
         </button>
