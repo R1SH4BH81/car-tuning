@@ -104,7 +104,7 @@ const PartsPanel = ({
   );
 
   return (
-    <div className="flex-1 p-8 pointer-events-auto overflow-y-auto">
+    <div className="flex-1 px-8 py-2 pointer-events-auto overflow-y-auto">
       <div className="flex items-center gap-4 mb-8">
         {activeSubCategory && (
           <button

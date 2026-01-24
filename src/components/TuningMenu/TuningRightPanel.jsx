@@ -8,7 +8,7 @@ const TuningRightPanel = ({ activeSection, gearingData, rpmLimit }) => {
   const sectionData = tuningData[activeSection];
 
   return (
-    <div className="hidden lg:flex lg:w-1/4 h-full bg-black/80 backdrop-blur-md border-t lg:border-t-0 lg:border-l border-white/10 p-4 md:p-6 lg:p-8 pt-8 lg:pt-12 flex-col">
+    <div className="hidden xl:flex xl:w-1/4 h-full bg-black/80 backdrop-blur-md border-t xl:border-t-0 xl:border-l border-white/10 p-4 md:p-6 xl:p-8 pt-8 xl:pt-12 flex-col">
       <div className="flex-1 bg-white/5 rounded-lg mb-4 flex items-center justify-center border border-white/10 overflow-hidden relative">
         <Suspense
           fallback={
