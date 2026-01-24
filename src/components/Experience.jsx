@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef } from "react";
+import React, { Suspense, useEffect, useRef, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
@@ -8,18 +8,44 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import useStore from "../store/useStore";
-
 import { useCachedModelUrl } from "../utils/modelLoader";
 
 const InnerCarModel = ({ url }) => {
   const { carConfig, baseCar } = useStore();
   const meshRef = useRef();
-
   const gltf = useGLTF(url);
 
-  // Clone the scene to avoid modifying the cached original if we switch back and forth
-  const scene = React.useMemo(() => gltf.scene.clone(true), [gltf]);
+  // Normalize Scale and Position
+  const scene = useMemo(() => {
+    const clonedScene = gltf.scene.clone(true);
 
+    // 1. Calculate Bounding Box
+    const box = new THREE.Box3().setFromObject(clonedScene);
+    const size = new THREE.Vector3();
+    box.getSize(size);
+
+    // 2. Scale to a fixed "Target Size" (4 units)
+    // This ensures a tiny car and a huge truck look the same size in the UI
+    const targetSize = 5;
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scaleFactor = targetSize / maxDim;
+    clonedScene.scale.setScalar(scaleFactor);
+
+    // 3. Center the model
+    // We re-calculate the box after scaling to get accurate centering
+    const centeredBox = new THREE.Box3().setFromObject(clonedScene);
+    const center = new THREE.Vector3();
+    centeredBox.getCenter(center);
+
+    // Move model so center is at 0,0,0 but the bottom (min.y) is at exactly 0
+    clonedScene.position.x = -center.x;
+    clonedScene.position.y = -centeredBox.min.y;
+    clonedScene.position.z = -center.z;
+
+    return clonedScene;
+  }, [gltf]);
+
+  // Apply Material Tweaks
   useEffect(() => {
     const applyMaterialTweaks = (material) => {
       if (material?.isMeshStandardMaterial) {
@@ -27,7 +53,6 @@ const InnerCarModel = ({ url }) => {
       }
     };
 
-    // Traverse the model to apply materials or handle parts
     scene.traverse((child) => {
       if (child.isMesh) {
         child.castShadow = true;
@@ -42,16 +67,11 @@ const InnerCarModel = ({ url }) => {
     });
   }, [scene, baseCar.id]);
 
-  // Dynamic updates based on config (Simulated)
+  // Dynamic Updates (e.g. Wheels)
   useEffect(() => {
     scene.traverse((child) => {
-      if (child.isMesh) {
-        // Hacky way to find wheels if named correctly, otherwise just general logic
-        if (
-          child.name.toLowerCase().includes("wheel") &&
-          carConfig.tires === "slick_comp"
-        ) {
-          // Example modification for slick tires
+      if (child.isMesh && child.name.toLowerCase().includes("wheel")) {
+        if (carConfig.tires === "slick_comp") {
           // child.material.color.setHex(0x111111);
         }
       }
@@ -69,7 +89,7 @@ const Experience = () => {
     <Canvas
       shadows
       dpr={[1, 1.5]}
-      camera={{ position: [4, 2, 5], fov: 45 }}
+      camera={{ position: [5, 2, 5], fov: 40 }}
       gl={{ preserveDrawingBuffer: true }}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
@@ -78,6 +98,7 @@ const Experience = () => {
       }}
     >
       <color attach="background" args={["#101010"]} />
+
       <Suspense fallback={null}>
         {cachedUrl ? (
           <Stage
@@ -85,29 +106,34 @@ const Experience = () => {
             environment="city"
             intensity={0.55}
             contactShadow={false}
+            // CRITICAL: Disable Stage auto-scaling/centering to prevent fluctuation
+            adjustCamera={false}
+            center={false}
           >
             <InnerCarModel url={cachedUrl} />
           </Stage>
         ) : null}
+
         <ContactShadows
-          position={[0, -0.01, 0]}
-          opacity={0.4}
-          scale={10}
-          blur={2.5}
-          far={1}
+          position={[0, 0, 0]}
+          opacity={0.5}
+          scale={12}
+          blur={2}
+          far={1.5}
           resolution={512}
         />
       </Suspense>
+
       <OrbitControls
         key={baseCar.id}
         minPolarAngle={0}
-        maxPolarAngle={Math.PI / 2}
+        maxPolarAngle={Math.PI / 2.1}
         enableZoom={true}
         enablePan={false}
         autoRotate={true}
         autoRotateSpeed={0.5}
-        minDistance={2}
-        maxDistance={10}
+        minDistance={3}
+        maxDistance={12}
       />
     </Canvas>
   );

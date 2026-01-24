@@ -1,0 +1,570 @@
+{
+  "cars": [
+    {
+      "id": "koenigsegg-one-1",
+      "name": "Koenigsegg One:1",
+      "modelPath": "https://rishabh81.sirv.com/models/koenigsegg_one1_low_poly.glb",
+      "brand": "Koenigsegg",
+      "year": 2014,
+      "class": "S2",
+      "pi": 998,
+      "transmission": {
+        "gears": 7,
+        "type": "Paddle Shift",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 1341,
+        "torque": 1011,
+        "weight": 1360,
+        "topSpeed": 273,
+        "acceleration060": 2.8,
+        "handling": 9.8,
+        "braking": 10,
+        "driveType": "RWD",
+        "brakingDistance600": 91
+      },
+      "compatibleSwaps": ["racing_v12"]
+    },
+
+    {
+      "id": "mazda-787b",
+      "name": "Mazda 787B",
+      "modelPath": "https://rishabh81.sirv.com/models/mazda-787b__www.vecarz.com.glb",
+      "brand": "Mazda",
+      "year": 1991,
+      "class": "S2",
+      "pi": 990,
+      "transmission": {
+        "gears": 5,
+        "type": "Racing Manual",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 700,
+        "torque": 448,
+        "weight": 830,
+        "topSpeed": 210,
+        "acceleration060": 2.4,
+        "handling": 10,
+        "braking": 10,
+        "driveType": "RWD",
+        "brakingDistance600": 85
+      },
+      "compatibleSwaps": ["racing_v12"]
+    },
+    {
+      "id": "mclaren-p1-mso",
+      "name": "McLaren P1 MSO",
+      "modelPath": "https://rishabh81.sirv.com/models/free_-_mclaren_p1_mso.glb",
+      "brand": "McLaren",
+      "year": 2015,
+      "class": "S2",
+      "pi": 960,
+      "transmission": {
+        "gears": 7,
+        "type": "DCT",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 903,
+        "torque": 664,
+        "weight": 1490,
+        "topSpeed": 217,
+        "acceleration060": 2.8,
+        "handling": 9.5,
+        "braking": 9.8,
+        "driveType": "RWD",
+        "brakingDistance600": 98
+      },
+      "compatibleSwaps": ["racing_v12"]
+    },
+    {
+      "id": "lamborghini-revuelto",
+      "name": "Lamborghini Revuelto",
+      "modelPath": "https://rishabh81.sirv.com/models/lamborghini_revuelto.glb",
+      "brand": "Lamborghini",
+      "year": 2024,
+      "class": "S2",
+      "pi": 940,
+      "transmission": {
+        "gears": 8,
+        "type": "DCT",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 1001,
+        "torque": 535,
+        "weight": 1772,
+        "topSpeed": 217,
+        "acceleration060": 2.5,
+        "handling": 9.2,
+        "braking": 9.5,
+        "driveType": "AWD",
+        "brakingDistance600": 95
+      },
+      "compatibleSwaps": []
+    },
+
+    {
+      "id": "pagani-huayra-r-gt2",
+      "name": "Pagani Huayra R GT2",
+      "modelPath": "https://rishabh81.sirv.com/models/pagani_huayra_r_gt2_2022__www.vecarz.com.glb",
+      "brand": "Pagani",
+      "year": 2022,
+      "class": "S2",
+      "pi": 978,
+      "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+      "baseStats": {
+        "hp": 850,
+        "torque": 553,
+        "weight": 1050,
+        "topSpeed": 218,
+        "acceleration060": 2.6,
+        "handling": 9.9,
+        "braking": 10,
+        "driveType": "RWD",
+        "brakingDistance600": 88
+      },
+      "compatibleSwaps": []
+    },
+
+    {
+      "id": "lamborghini-aventador-svj",
+      "name": "Lamborghini Aventador SVJ",
+      "modelPath": "https://rishabh81.sirv.com/models/lamborghini_aventador.glb",
+      "brand": "Lamborghini",
+      "year": 2018,
+      "class": "S2",
+      "pi": 980,
+      "transmission": {
+        "gears": 7,
+        "type": "ISR",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 759,
+        "torque": 531,
+        "weight": 1525,
+        "topSpeed": 219,
+        "acceleration060": 2.8,
+        "handling": 9.6,
+        "braking": 9.8,
+        "driveType": "AWD",
+        "brakingDistance600": 98
+      },
+      "compatibleSwaps": ["racing_v12"]
+    },
+
+    {
+      "id": "pagani-huayra-2012",
+      "name": "Pagani Huayra",
+      "modelPath": "https://rishabh81.sirv.com/models/pagani_huayra_free.glb",
+      "brand": "Pagani",
+      "year": 2012,
+      "class": "S2",
+      "pi": 935,
+      "transmission": {
+        "gears": 7,
+        "type": "Sequential",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 720,
+        "torque": 738,
+        "weight": 1350,
+        "topSpeed": 231,
+        "acceleration060": 3.2,
+        "handling": 8.9,
+        "braking": 9.2,
+        "driveType": "RWD",
+        "brakingDistance600": 100
+      },
+      "compatibleSwaps": ["racing_v12"]
+    },
+    {
+      "id": "ferrari-488-pista",
+      "name": "Ferrari 488 Pista",
+      "modelPath": "https://rishabh81.sirv.com/models/ferrari_488_pista_widebody.glb",
+      "brand": "Ferrari",
+      "year": 2019,
+      "class": "S1",
+      "pi": 895,
+      "transmission": {
+        "gears": 7,
+        "type": "Dual-Clutch",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 710,
+        "torque": 568,
+        "weight": 1385,
+        "topSpeed": 211,
+        "acceleration060": 2.85,
+        "handling": 9.5,
+        "braking": 9.7,
+        "driveType": "RWD",
+        "brakingDistance600": 92
+      },
+      "compatibleSwaps": ["racing_v8", "racing_v12"]
+    },
+    {
+      "id": "porsche-911-gt2rs",
+      "name": "Porsche 911 GT2 RS",
+      "modelPath": "https://rishabh81.sirv.com/models/2018_porsche_911_gt2_rs.glb",
+      "brand": "Porsche",
+      "year": 2018,
+      "class": "S1",
+      "pi": 898,
+      "transmission": { "gears": 7, "type": "PDK", "adjustable": true },
+      "baseStats": {
+        "hp": 700,
+        "torque": 553,
+        "weight": 1470,
+        "topSpeed": 211,
+        "acceleration060": 2.7,
+        "handling": 9.7,
+        "braking": 9.8,
+        "driveType": "RWD",
+        "brakingDistance600": 90
+      },
+      "compatibleSwaps": ["flat6_tt", "racing_v10"]
+    },
+    {
+      "id": "aston-martin-db11-amr",
+      "name": "Aston Martin DB11 AMR",
+      "modelPath": "https://rishabh81.sirv.com/models/2019_aston_martin_db11_amr.glb",
+      "brand": "Aston Martin",
+      "year": 2019,
+      "class": "S1",
+      "pi": 882,
+      "transmission": { "gears": 8, "type": "Automatic", "adjustable": true },
+      "baseStats": {
+        "hp": 630,
+        "torque": 516,
+        "weight": 1770,
+        "topSpeed": 208,
+        "acceleration060": 3.7,
+        "handling": 8.1,
+        "braking": 8.3,
+        "driveType": "RWD",
+        "brakingDistance600": 105
+      },
+      "compatibleSwaps": ["racing_v12"]
+    },
+    {
+      "id": "maserati-mc20",
+      "name": "Maserati MC20",
+      "modelPath": "https://rishabh81.sirv.com/models/maserati_mc20.glb",
+      "brand": "Maserati",
+      "year": 2022,
+      "class": "S1",
+      "pi": 870,
+      "transmission": { "gears": 8, "type": "Dual-Clutch", "adjustable": true },
+      "baseStats": {
+        "hp": 621,
+        "torque": 538,
+        "weight": 1500,
+        "topSpeed": 202,
+        "acceleration060": 2.8,
+        "handling": 8.8,
+        "braking": 9.0,
+        "driveType": "RWD",
+        "brakingDistance600": 100
+      },
+      "compatibleSwaps": ["racing_v8", "racing_v12"]
+    },
+
+    {
+      "id": "porsche-911-gt3rs",
+      "name": "Porsche 911 GT3 RS (992)",
+      "modelPath": "https://rishabh81.sirv.com/models/porsche_gt3_rs.glb",
+      "brand": "Porsche",
+      "year": 2024,
+      "class": "S1",
+      "pi": 898,
+      "transmission": {
+        "gears": 7,
+        "type": "PDK Sport Dual-Clutch",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 518,
+        "torque": 342,
+        "weight": 1450,
+        "topSpeed": 184,
+        "acceleration060": 3.0,
+        "handling": 9.7,
+        "braking": 9.8,
+        "driveType": "RWD",
+        "brakingDistance600": 90
+      },
+      "tuningLimits": {
+        "aero": {
+          "frontDownforce": { "min": 100, "max": 400 },
+          "rearDownforce": { "min": 250, "max": 900 }
+        }
+      },
+      "compatibleSwaps": ["flat6_tt", "racing_v10"]
+    },
+
+    {
+      "id": "nissan-gtr-r35",
+      "name": "Nissan GT-R (R35)",
+      "modelPath": "https://rishabh81.sirv.com/models/nissan_skyline_gtr_r35.glb",
+      "brand": "Nissan",
+      "year": 2024,
+      "class": "S1",
+      "pi": 865,
+      "transmission": {
+        "gears": 6,
+        "type": "Dual-Clutch (DCT)",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 565,
+        "torque": 467,
+        "weight": 1752,
+        "topSpeed": 196,
+        "acceleration060": 2.9,
+        "handling": 8.2,
+        "braking": 8.5,
+        "driveType": "AWD",
+        "brakingDistance600": 105
+      },
+      "compatibleSwaps": ["racing_v6_tt", "v10_n_a", "racing_v12"]
+    },
+    {
+      "id": "mclaren-mp4-12c-ultimate",
+      "name": "McLaren MP4-12C Ultimate",
+      "modelPath": "https://rishabh81.sirv.com/models/mclaren_mp4-12c_ultimate.glb",
+      "brand": "McLaren",
+      "year": 2011,
+      "class": "S1",
+      "pi": 860,
+      "transmission": {
+        "gears": 7,
+        "type": "SSG DCT",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 592,
+        "torque": 443,
+        "weight": 1434,
+        "topSpeed": 205,
+        "acceleration060": 3.1,
+        "handling": 8.7,
+        "braking": 9.0,
+        "driveType": "RWD",
+        "brakingDistance600": 100
+      },
+      "compatibleSwaps": ["racing_v8", "racing_v12"]
+    },
+
+    {
+      "id": "bmw-m3-gtr-e46",
+      "name": "BMW M3 GTR (E46) - NFS Edition",
+      "modelPath": "https://rishabh81.sirv.com/models/bmw_m3_gtr_-_nfs_mw.glb",
+      "brand": "BMW",
+      "year": 2001,
+      "class": "S1",
+      "pi": 840,
+      "transmission": {
+        "gears": 6,
+        "type": "Sequential",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 444,
+        "torque": 354,
+        "weight": 1350,
+        "topSpeed": 174,
+        "acceleration060": 3.4,
+        "handling": 8.5,
+        "braking": 8.2,
+        "driveType": "RWD",
+        "brakingDistance600": 110
+      },
+      "compatibleSwaps": ["racing_v10", "racing_v12", "racing_v8"]
+    },
+
+    {
+      "id": "ferrari-f40",
+      "name": "Ferrari F40 LB-Works",
+      "modelPath": "https://rishabh81.sirv.com/models/lb-works_ferrari_f40_-__free.glb",
+      "brand": "Ferrari",
+      "year": 1987,
+      "class": "A",
+      "pi": 785,
+      "transmission": {
+        "gears": 5,
+        "type": "Manual",
+        "adjustable": false
+      },
+      "baseStats": {
+        "hp": 471,
+        "torque": 426,
+        "weight": 1100,
+        "topSpeed": 201,
+        "acceleration060": 3.8,
+        "handling": 7.8,
+        "braking": 7.5,
+        "driveType": "RWD",
+        "brakingDistance600": 118
+      },
+      "compatibleSwaps": ["racing_v8", "racing_v12", "v10_n_a"]
+    },
+
+    {
+      "id": "ford-f150-raptor-2020",
+      "name": "Ford F-150 Raptor",
+      "modelPath": "https://rishabh81.sirv.com/models/ford_f150_raptor.glb",
+      "brand": "Ford",
+      "year": 2020,
+      "class": "B",
+      "pi": 620,
+      "transmission": {
+        "gears": 10,
+        "type": "Automatic",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 450,
+        "torque": 510,
+        "weight": 2584,
+        "topSpeed": 107,
+        "acceleration060": 5.1,
+        "handling": 5.8,
+        "braking": 6.2,
+        "driveType": "AWD",
+        "brakingDistance600": 155
+      },
+      "compatibleSwaps": ["v8_modern", "racing_v8"]
+    },
+
+    {
+      "id": "porsche-911-930-turbo",
+      "name": "Porsche 911 (930) Turbo",
+      "modelPath": "https://rishabh81.sirv.com/models/porsche_911_930_turbo_1975.glb",
+      "brand": "Porsche",
+      "year": 1975,
+      "class": "B",
+      "pi": 680,
+      "transmission": {
+        "gears": 4,
+        "type": "Manual",
+        "adjustable": false
+      },
+      "baseStats": {
+        "hp": 260,
+        "torque": 253,
+        "weight": 1140,
+        "topSpeed": 155,
+        "acceleration060": 5.2,
+        "handling": 6.0,
+        "braking": 5.5,
+        "driveType": "RWD",
+        "brakingDistance600": 135
+      },
+      "compatibleSwaps": ["flat6_modern", "flat6_tt", "racing_v8"]
+    },
+
+    {
+      "id": "ferrari-250-gto",
+      "name": "Ferrari 250 GTO",
+      "modelPath": "https://rishabh81.sirv.com/models/1962_ferrari_250_gto.glb",
+      "brand": "Ferrari",
+      "year": 1962,
+      "class": "C",
+      "pi": 505,
+      "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+      "baseStats": {
+        "hp": 300,
+        "torque": 217,
+        "weight": 950,
+        "topSpeed": 174,
+        "acceleration060": 4.5,
+        "handling": 6.2,
+        "braking": 6.0,
+        "driveType": "RWD",
+        "brakingDistance600": 138
+      },
+      "compatibleSwaps": ["racing_v12"]
+    },
+    {
+      "id": "bmw-m3-e30",
+      "name": "BMW M3 (E30)",
+      "modelPath": "https://rishabh81.sirv.com/models/free_bmw_m3_e30.glb",
+      "brand": "BMW",
+      "year": 1991,
+      "class": "C",
+      "pi": 520,
+      "transmission": {
+        "gears": 5,
+        "type": "Manual",
+        "adjustable": false
+      },
+      "baseStats": {
+        "hp": 215,
+        "torque": 170,
+        "weight": 1200,
+        "topSpeed": 146,
+        "acceleration060": 6.1,
+        "handling": 6.2,
+        "braking": 5.8,
+        "driveType": "RWD",
+        "brakingDistance600": 145
+      },
+      "compatibleSwaps": ["turbo_rally_i4", "racing_v8", "flat6_modern"]
+    },
+
+    {
+      "id": "nissan-fairlady-z-1978",
+      "name": "Nissan Fairlady Z",
+      "modelPath": "https://rishabh81.sirv.com/models/nissan_fairlady_z_s30240z_1978.glb",
+      "brand": "Nissan",
+      "year": 1978,
+      "class": "D",
+      "pi": 405,
+      "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+      "baseStats": {
+        "hp": 151,
+        "torque": 146,
+        "weight": 1040,
+        "topSpeed": 125,
+        "acceleration060": 8.0,
+        "handling": 5.2,
+        "braking": 5.0,
+        "driveType": "RWD",
+        "brakingDistance600": 170
+      },
+      "compatibleSwaps": ["turbo_rally_i4", "racing_v6_tt"]
+    },
+    {
+      "id": "ford-mustang-1965",
+      "name": " Ford Mustang GT",
+      "modelPath": "https://rishabh81.sirv.com/models/ford_mustang_1965.glb",
+      "brand": "Ford",
+      "year": 1965,
+      "class": "D",
+      "pi": 420,
+      "transmission": {
+        "gears": 4,
+        "type": "Manual",
+        "adjustable": false
+      },
+      "baseStats": {
+        "hp": 271,
+        "torque": 312,
+        "weight": 1400,
+        "topSpeed": 125,
+        "acceleration060": 6.2,
+        "handling": 4.2,
+        "braking": 3.8,
+        "driveType": "RWD",
+        "brakingDistance600": 165
+      },
+      "compatibleSwaps": ["v8_modern", "racing_v8", "turbo_rally_i4"]
+    }
+  ]
+}
