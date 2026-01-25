@@ -26,7 +26,7 @@ const InnerCarModel = ({ url }) => {
 
     const getTargetSize = () => {
       if (typeof window === "undefined") return 3;
-      if (window.matchMedia("(min-width: 1024px)").matches) return 5;
+      if (window.matchMedia("(min-width: 1024px)").matches) return 6;
       if (window.matchMedia("(min-width: 768px)").matches) return 4;
       return 3;
     };
@@ -135,7 +135,7 @@ const Experience = () => {
         enableZoom={true}
         enablePan={false}
         autoRotate={true}
-        autoRotateSpeed={0.5}
+        autoRotateSpeed={2}
         minDistance={3}
         maxDistance={12}
       />

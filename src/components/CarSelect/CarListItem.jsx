@@ -2,29 +2,25 @@ import React from "react";
 import getClassColor from "./classColor";
 
 const CarListItem = React.memo(
-  React.forwardRef(function CarListItem(
-    { car, isSelected, onSelect, onPreload },
-    ref,
-  ) {
+  React.forwardRef(function CarListItem({ car, isSelected, onSelect }, ref) {
     return (
       <button
         ref={ref}
         onClick={() => onSelect(car.id)}
-        onPointerEnter={() => onPreload(car.modelPath)}
         style={{ contentVisibility: "auto", containIntrinsicSize: "80px" }}
         className={`
-          w-full p-4 rounded-xl text-left border transition-all duration-200 group relative overflow-hidden
+          w-full p-4 rounded-sm text-left transition-all duration-200 group relative overflow-hidden
           ${
             isSelected
-              ? "bg-yellow-500 text-black border-yellow-500 shadow-lg shadow-yellow-500/20 scale-[1.02] z-10"
-              : "bg-white/5 text-white border-white/5 hover:bg-white/10 hover:border-white/20 hover:scale-[1.01]"
+              ? "bg-white/5 text-white border-l-4 border-yellow-500"
+              : "bg-white/5 text-white border-b border-white/5 hover:bg-white/10 hover:border-white/20 hover:scale-[1.01]"
           }
           `}
       >
         <div className="flex items-center justify-between relative z-10">
           <div className="min-w-0 flex-1 pr-4">
             <div
-              className={`text-[12px] font-bold uppercase tracking-wider mb-0.5 ${isSelected ? "text-black/90" : "text-white/90"}`}
+              className={`text-[12px] font-bold uppercase tracking-wider mb-0.5 ${isSelected ? "text-white/90" : "text-white/90"}`}
             >
               {car.brand}
             </div>
@@ -51,4 +47,3 @@ const CarListItem = React.memo(
 );
 
 export default CarListItem;
-

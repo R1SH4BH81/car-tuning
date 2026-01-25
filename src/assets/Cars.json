@@ -1,6 +1,97 @@
 {
   "cars": [
     {
+      "id": "koenigsegg-agera-r-2011",
+      "name": "Koenigsegg Agera R",
+      "modelPath": "https://rishabh81.sirv.com/models/2011_koenigsegg_agera.glb",
+      "brand": "Koenigsegg",
+      "year": 2011,
+      "class": "S2",
+      "pi": 995,
+      "transmission": { "gears": 7, "type": "Dual-Clutch", "adjustable": true },
+      "baseStats": {
+        "hp": 1140,
+        "torque": 885,
+        "weight": 1435,
+        "topSpeed": 261,
+        "acceleration060": 2.7,
+        "handling": 9.7,
+        "braking": 9.9,
+        "driveType": "RWD",
+        "brakingDistance600": 90
+      },
+      "compatibleSwaps": ["racing_v12", "w16_quad_turbo"]
+    },
+
+    {
+      "id": "bugatti-bolide-2020",
+      "name": "Bugatti Bolide",
+      "modelPath": "https://rishabh81.sirv.com/models/2020_bugatti_bolide_concept.glb",
+      "brand": "Bugatti",
+      "year": 2020,
+      "class": "S2",
+      "pi": 998,
+      "transmission": { "gears": 7, "type": "DSG", "adjustable": true },
+      "baseStats": {
+        "hp": 1825,
+        "torque": 1364,
+        "weight": 1240,
+        "topSpeed": 311,
+        "acceleration060": 2.17,
+        "handling": 10,
+        "braking": 10,
+        "driveType": "AWD",
+        "brakingDistance600": 85
+      },
+      "compatibleSwaps": []
+    },
+
+    {
+      "id": "koenigsegg-jesko-2020",
+      "name": "Koenigsegg Jesko Absolut",
+      "modelPath": "https://rishabh81.sirv.com/models/2020_koenigsegg_jesko.glb",
+      "brand": "Koenigsegg",
+      "year": 2020,
+      "class": "S2",
+      "pi": 998,
+      "transmission": { "gears": 9, "type": "LST", "adjustable": true },
+      "baseStats": {
+        "hp": 1600,
+        "torque": 1106,
+        "weight": 1420,
+        "topSpeed": 300,
+        "acceleration060": 2.5,
+        "handling": 9.9,
+        "braking": 10,
+        "driveType": "RWD",
+        "brakingDistance600": 90
+      },
+      "compatibleSwaps": ["w16_quad_turbo"]
+    },
+
+    {
+      "id": "porsche-911-gt2-rs-clubsport-2019",
+      "name": "Porsche 911 GT2 RS Clubsport",
+      "modelPath": "https://rishabh81.sirv.com/models/2019_porsche_911_gt2_rs_clubsport_991.2.glb",
+      "brand": "Porsche",
+      "year": 2019,
+      "class": "S2",
+      "pi": 945,
+      "transmission": { "gears": 7, "type": "PDK", "adjustable": true },
+      "baseStats": {
+        "hp": 700,
+        "torque": 553,
+        "weight": 1390,
+        "topSpeed": 211,
+        "acceleration060": 2.7,
+        "handling": 10,
+        "braking": 10,
+        "driveType": "RWD",
+        "brakingDistance600": 88
+      },
+      "compatibleSwaps": ["racing_v10"]
+    },
+    {
       "id": "koenigsegg-one-1",
       "name": "Koenigsegg One:1",
       "modelPath": "https://rishabh81.sirv.com/models/koenigsegg_one1_low_poly.glb",
@@ -282,27 +373,77 @@
       "compatibleSwaps": ["racing_v8", "racing_v12"]
     },
     {
-      "id": "porsche-911-gt2rs",
-      "name": "Porsche 911 GT2 RS",
-      "modelPath": "https://rishabh81.sirv.com/models/2018_porsche_911_gt2_rs.glb",
-      "brand": "Porsche",
+      "id": "audi-r8-green-hell-2021",
+      "name": "Audi R8 Green Hell Edition",
+      "modelPath": "https://rishabh81.sirv.com/models/2021_audi_r8_green_hell_edition.glb",
+      "brand": "Audi",
+      "year": 2021,
+      "class": "S1",
+      "pi": 890,
+      "transmission": {
+        "gears": 7,
+        "type": "S-Tronic DCT",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 612,
+        "torque": 428,
+        "weight": 1650,
+        "topSpeed": 205,
+        "acceleration060": 3.1,
+        "handling": 9.1,
+        "braking": 9.4,
+        "driveType": "AWD",
+        "brakingDistance600": 98
+      },
+      "compatibleSwaps": ["v10_performance", "v10_f1_spec"]
+    },
+    {
+      "id": "abt-audi-rs7-r-2022",
+      "name": "ABT Audi RS7-R",
+      "modelPath": "https://rishabh81.sirv.com/models/2022_abt_audi_rs7-r.glb",
+      "brand": "Audi",
+      "year": 2022,
+      "class": "S1",
+      "pi": 870,
+      "transmission": { "gears": 8, "type": "Tiptronic", "adjustable": true },
+      "baseStats": {
+        "hp": 740,
+        "torque": 678,
+        "weight": 2140,
+        "topSpeed": 200,
+        "acceleration060": 3.2,
+        "handling": 8.0,
+        "braking": 8.5,
+        "driveType": "AWD",
+        "brakingDistance600": 105
+      },
+      "compatibleSwaps": ["v10_performance", "racing_v12"]
+    },
+
+    {
+      "id": "infiniti-q60-project-black-s",
+      "name": "Infiniti Q60 Project Black S",
+      "modelPath": "https://rishabh81.sirv.com/models/infiniti_q60_project_black_s.glb",
+      "brand": "Infiniti",
       "year": 2018,
       "class": "S1",
-      "pi": 898,
-      "transmission": { "gears": 7, "type": "PDK", "adjustable": true },
+      "pi": 845,
+      "transmission": { "gears": 7, "type": "Automatic", "adjustable": true },
       "baseStats": {
-        "hp": 700,
-        "torque": 553,
-        "weight": 1470,
-        "topSpeed": 211,
-        "acceleration060": 2.7,
-        "handling": 9.7,
-        "braking": 9.8,
+        "hp": 563,
+        "torque": 350,
+        "weight": 1769,
+        "topSpeed": 153,
+        "acceleration060": 4.0,
+        "handling": 8.4,
+        "braking": 8.2,
         "driveType": "RWD",
-        "brakingDistance600": 90
+        "brakingDistance600": 110
       },
-      "compatibleSwaps": ["flat6_tt", "racing_v10"]
+      "compatibleSwaps": ["racing_v6_tt", "v8_modern"]
     },
+
     {
       "id": "aston-martin-db11-amr",
       "name": "Aston Martin DB11 AMR",
@@ -374,8 +515,8 @@
       "compatibleSwaps": ["racing_v8", "racing_v12"]
     },
     {
-      "id": "porsche-911-gt3rs",
-      "name": "Porsche 911 GT3 RS (992)",
+      "id": "porsche-911-gt2rs",
+      "name": "Porsche 911 GT2 RS (992)",
       "modelPath": "https://rishabh81.sirv.com/models/porsche_gt3_rs.glb",
       "brand": "Porsche",
       "year": 2024,
@@ -429,7 +570,7 @@
         "driveType": "RWD",
         "brakingDistance600": 112
       },
-      "compatibleSwaps": ["v8_modern", "racing_v8"]
+      "compatibleSwaps": ["v8_modern", "racing_v8", "v8_supercharged"]
     },
 
     {
@@ -562,7 +703,13 @@
         "driveType": "RWD",
         "brakingDistance600": 118
       },
-      "compatibleSwaps": ["racing_v8", "racing_v12", "v10_n_a"]
+      "compatibleSwaps": [
+        "racing_v8",
+        "racing_v12",
+        "v10_n_a",
+        "v8_supercharged",
+        "racing_v12"
+      ]
     },
 
     {
@@ -588,6 +735,51 @@
       "compatibleSwaps": ["v8_modern", "racing_v8"]
     },
     {
+      "id": "volvo-polestar-1-ks-2020",
+      "name": "Volvo Polestar 1 K.S. Edition",
+      "modelPath": "https://rishabh81.sirv.com/models/volvo_polestar_k.s_2020__www.vecarz.com.glb",
+      "brand": "Volvo",
+      "year": 2020,
+      "class": "A",
+      "pi": 780,
+      "transmission": { "gears": 8, "type": "Automatic", "adjustable": true },
+      "baseStats": {
+        "hp": 600,
+        "torque": 738,
+        "weight": 2350,
+        "topSpeed": 155,
+        "acceleration060": 4.1,
+        "handling": 7.8,
+        "braking": 8.0,
+        "driveType": "AWD",
+        "brakingDistance600": 115
+      },
+      "compatibleSwaps": ["ev_dual_motor", "v8_modern"]
+    },
+    {
+      "id": "bmw-m4-dtm-2017",
+      "name": "BMW M4 DTM Champion Edition",
+      "modelPath": "https://rishabh81.sirv.com/models/2017_bmw_m4_dtm.glb",
+      "brand": "BMW",
+      "year": 2017,
+      "class": "A",
+      "pi": 790,
+      "transmission": { "gears": 7, "type": "M-DCT", "adjustable": true },
+      "baseStats": {
+        "hp": 500,
+        "torque": 443,
+        "weight": 1510,
+        "topSpeed": 190,
+        "acceleration060": 3.8,
+        "handling": 8.7,
+        "braking": 8.5,
+        "driveType": "RWD",
+        "brakingDistance600": 108
+      },
+      "compatibleSwaps": ["i6_tt_performance", "v6_dtm_spec"]
+    },
+
+    {
       "id": "mercedes-benz-g63-amg-2020",
       "name": "Mercedes-Benz G 63 AMG",
       "modelPath": "https://rishabh81.sirv.com/models/2020_mercedes-benz_g-class_amg_g63.glb",
@@ -611,7 +803,57 @@
         "driveType": "AWD",
         "brakingDistance600": 135
       },
-      "compatibleSwaps": ["v8_modern", "racing_v12"]
+      "compatibleSwaps": [
+        "v8_modern",
+        "racing_v12",
+        "v10_performance",
+        "v8_supercharged"
+      ]
+    },
+
+    {
+      "id": "bmw-m4-gts-2016",
+      "name": "BMW M4 GTS",
+      "modelPath": "https://rishabh81.sirv.com/models/2016_bmw_m4_gts.glb",
+      "brand": "BMW",
+      "year": 2016,
+      "class": "A",
+      "pi": 795,
+      "transmission": { "gears": 7, "type": "M-DCT", "adjustable": true },
+      "baseStats": {
+        "hp": 493,
+        "torque": 443,
+        "weight": 1510,
+        "topSpeed": 190,
+        "acceleration060": 3.7,
+        "handling": 8.4,
+        "braking": 8.2,
+        "driveType": "RWD",
+        "brakingDistance600": 110
+      },
+      "compatibleSwaps": ["i6_tt_performance", "racing_v8"]
+    },
+    {
+      "id": "alfa-romeo-155-v6-ti",
+      "name": "Alfa Romeo 155 V6 TI DTM",
+      "modelPath": "https://rishabh81.sirv.com/models/ac_-_alfa_romeo_155_v6_ti_free.glb",
+      "brand": "Alfa Romeo",
+      "year": 1993,
+      "class": "A",
+      "pi": 785,
+      "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+      "baseStats": {
+        "hp": 420,
+        "torque": 214,
+        "weight": 1010,
+        "topSpeed": 186,
+        "acceleration060": 3.5,
+        "handling": 9.5,
+        "braking": 9.2,
+        "driveType": "AWD",
+        "brakingDistance600": 98
+      },
+      "compatibleSwaps": ["v6_dtm_spec", "racing_v8"]
     },
 
     {
@@ -634,7 +876,29 @@
         "driveType": "RWD",
         "brakingDistance600": 105
       },
-      "compatibleSwaps": ["v10_n_a"]
+      "compatibleSwaps": ["v10_n_a", "v10_performance"]
+    },
+    {
+      "id": "acura-nsx-1991",
+      "name": "1991 Acura NSX",
+      "modelPath": "https://rishabh81.sirv.com/models/acura_nsx_twin_turbo_91.glb",
+      "brand": "Acura",
+      "year": 1991,
+      "class": "B",
+      "pi": 640,
+      "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+      "baseStats": {
+        "hp": 270,
+        "torque": 210,
+        "weight": 1370,
+        "topSpeed": 168,
+        "acceleration060": 5.2,
+        "handling": 7.5,
+        "braking": 7.0,
+        "driveType": "RWD",
+        "brakingDistance600": 124
+      },
+      "compatibleSwaps": ["racing_v6_tt", "v10_f1_spec", "rotary_20b"]
     },
     {
       "id": "ford-f150-raptor-2020",
@@ -660,7 +924,56 @@
         "driveType": "AWD",
         "brakingDistance600": 155
       },
-      "compatibleSwaps": ["v8_modern", "racing_v8"]
+      "compatibleSwaps": [
+        "v8_modern",
+        "racing_v8",
+        "v8_supercharged",
+        "v8_modern"
+      ]
+    },
+    {
+      "id": "bmw-m1-ahg-1980",
+      "name": "BMW M1 AHG Studie",
+      "modelPath": "https://rishabh81.sirv.com/models/1980_bmw_m1_ahg_studie.glb",
+      "brand": "BMW",
+      "year": 1980,
+      "class": "B",
+      "pi": 660,
+      "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+      "baseStats": {
+        "hp": 350,
+        "torque": 243,
+        "weight": 1300,
+        "topSpeed": 165,
+        "acceleration060": 5.4,
+        "handling": 7.2,
+        "braking": 6.8,
+        "driveType": "RWD",
+        "brakingDistance600": 128
+      },
+      "compatibleSwaps": ["racing_i6_n_a", "v6_dtm_spec"]
+    },
+    {
+      "id": "alfa-romeo-156-super-turismo",
+      "name": "Alfa Romeo 156 Super Turismo",
+      "modelPath": "https://rishabh81.sirv.com/models/alfa_romeo_156_super_turismo__www.vecarz.com.glb",
+      "brand": "Alfa Romeo",
+      "year": 2000,
+      "class": "B",
+      "pi": 685,
+      "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+      "baseStats": {
+        "hp": 300,
+        "torque": 190,
+        "weight": 1050,
+        "topSpeed": 155,
+        "acceleration060": 4.5,
+        "handling": 8.8,
+        "braking": 8.5,
+        "driveType": "FWD",
+        "brakingDistance600": 115
+      },
+      "compatibleSwaps": ["v6_dtm_spec", "turbo_rally_i4"]
     },
 
     {
@@ -712,6 +1025,7 @@
       },
       "compatibleSwaps": ["racing_v12"]
     },
+
     {
       "id": "bmw-m3-e30",
       "name": "BMW M3 (E30)",
@@ -736,7 +1050,35 @@
         "driveType": "RWD",
         "brakingDistance600": 145
       },
-      "compatibleSwaps": ["turbo_rally_i4", "racing_v8", "flat6_modern"]
+      "compatibleSwaps": [
+        "turbo_rally_i4",
+        "racing_v8",
+        "flat6_modern",
+        "racing_i6_n_a",
+        "v6_dtm_spec"
+      ]
+    },
+    {
+      "id": "1970-plymouth-hemi-cuda",
+      "name": "1970 Plymouth Hemi Cuda",
+      "modelPath": "https://rishabh81.sirv.com/models/1970_plymouth_hemi_cuda_j-blax.glb",
+      "brand": "Plymouth",
+      "year": 1970,
+      "class": "D",
+      "pi": 450,
+      "transmission": { "gears": 4, "type": "Manual", "adjustable": false },
+      "baseStats": {
+        "hp": 425,
+        "torque": 490,
+        "weight": 1760,
+        "topSpeed": 150,
+        "acceleration060": 5.8,
+        "handling": 4.0,
+        "braking": 3.5,
+        "driveType": "RWD",
+        "brakingDistance600": 168
+      },
+      "compatibleSwaps": ["v8_modern", "racing_v8"]
     },
     {
       "id": "pontiac-trans-am-1970",
@@ -811,6 +1153,50 @@
         "brakingDistance600": 165
       },
       "compatibleSwaps": ["v8_modern", "racing_v8", "turbo_rally_i4"]
+    },
+    {
+      "id": "bmw-30-csl-1975",
+      "name": "BMW 3.0 CSL E9",
+      "modelPath": "https://rishabh81.sirv.com/models/1975_bmw_3.0_csl_e9.glb",
+      "brand": "BMW",
+      "year": 1975,
+      "class": "D",
+      "pi": 440,
+      "transmission": { "gears": 4, "type": "Manual", "adjustable": false },
+      "baseStats": {
+        "hp": 206,
+        "torque": 215,
+        "weight": 1270,
+        "topSpeed": 137,
+        "acceleration060": 7.5,
+        "handling": 5.8,
+        "braking": 5.2,
+        "driveType": "RWD",
+        "brakingDistance600": 158
+      },
+      "compatibleSwaps": ["racing_i6_n_a", "v8_modern"]
+    },
+    {
+      "id": "dodge-challenger-rt-1970",
+      "name": "Dodge Challenger R/T",
+      "modelPath": "https://rishabh81.sirv.com/models/dodge_challenger_rt__www.vecarz.com.glb",
+      "brand": "Dodge",
+      "year": 1970,
+      "class": "D",
+      "pi": 435,
+      "transmission": { "gears": 4, "type": "Manual", "adjustable": false },
+      "baseStats": {
+        "hp": 375,
+        "torque": 410,
+        "weight": 1724,
+        "topSpeed": 143,
+        "acceleration060": 5.8,
+        "handling": 4.1,
+        "braking": 3.8,
+        "driveType": "RWD",
+        "brakingDistance600": 165
+      },
+      "compatibleSwaps": ["v8_modern", "v8_supercharged"]
     }
   ]
 }

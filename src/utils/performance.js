@@ -65,8 +65,15 @@ const simulateAcceleration = (
 };
 
 const calculatePartGain = (baseHp, category, partMultiplier) => {
-  const diminishingReturn = baseHp > 600 ? 0.7 : 1.0;
-  return baseHp * partMultiplier * diminishingReturn;
+  let diminishingReturn = 1.0;
+  if (baseHp > 900) diminishingReturn = 0.4;
+  else if (baseHp > 700) diminishingReturn = 0.55;
+  else if (baseHp > 500) diminishingReturn = 0.7;
+  const categoryScale = category === "ignition" ? 0.4 : 1.0;
+  const globalScale = 0.4;
+  return (
+    baseHp * partMultiplier * diminishingReturn * categoryScale * globalScale
+  );
 };
 
 export const calculatePerformance = (
@@ -210,7 +217,8 @@ export const calculatePerformance = (
   const powerLimitSpeedMph = powerLimitSpeedMs * 2.23694;
 
   const tireRadius = 0.33;
-  const topGearRatioValue = gearRatios.length > 0 ? gearRatios[gearRatios.length - 1] : 0.75;
+  const topGearRatioValue =
+    gearRatios.length > 0 ? gearRatios[gearRatios.length - 1] : 0.75;
   const topGearRatio = topGearRatioValue * tuningSettings.final_drive;
 
   const gearLimitSpeedMs =
@@ -236,8 +244,13 @@ export const calculatePerformance = (
   const weightChange = baseStats.weight / weight;
   const gripChange = gripMultiplier;
   const basePI = baseStats.pi || 500;
-  const piMultiplier = hpChange * 0.4 + weightChange * 0.3 + gripChange * 0.3;
-  const pi = Math.min(999, Math.max(100, Math.floor(basePI * piMultiplier)));
+  const rawPiMultiplier =
+    hpChange * 0.35 + weightChange * 0.3 + gripChange * 0.35;
+  const adjustedPiMultiplier = 1 + (rawPiMultiplier - 1) * 0.7;
+  const pi = Math.min(
+    999,
+    Math.max(100, Math.floor(basePI * adjustedPiMultiplier)),
+  );
   const piClass =
     pi > 998
       ? "X"

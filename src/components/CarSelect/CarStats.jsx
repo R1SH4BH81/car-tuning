@@ -53,7 +53,7 @@ const CarStats = React.memo(function CarStats({ baseCar }) {
         </div>
 
         {/* Desktop View (lg) */}
-        <div className="hidden lg:block p-1 rounded-2xl">
+        {/* <div className="hidden lg:block p-1 rounded-2xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 pt-6">
             <div>
               <div className="text-sm font-bold opacity-50 uppercase tracking-wider text-white mb-1">
@@ -93,7 +93,7 @@ const CarStats = React.memo(function CarStats({ baseCar }) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
