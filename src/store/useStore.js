@@ -3,8 +3,9 @@ import { calculatePerformance, generateDynoData } from "../utils/physicsEngine";
 import { PARTS_DB, INITIAL_TUNING } from "../data/parts";
 import carsData from "../assets/Cars.json";
 
-// Use the first car as default for now
-const defaultCar = carsData.cars[0];
+const defaultCar =
+  carsData.cars.find((c) => c.id === "koenigsegg-agera-r-2011") ||
+  carsData.cars[0];
 
 const INITIAL_CONFIG = {
   engine_swap: "stock",
@@ -36,6 +37,8 @@ const useStore = create((set, get) => ({
   // State
   carConfig: { ...INITIAL_CONFIG },
   tuningSettings: { ...INITIAL_TUNING },
+  compilingActive: false,
+  compilingProgress: 0,
 
   // Computed Performance Stats
   performanceStats: calculatePerformance(
@@ -123,6 +126,8 @@ const useStore = create((set, get) => ({
       baseCar.transmission.gears || 6,
     );
   },
+  setCompilingActive: (active) => set({ compilingActive: active }),
+  setCompilingProgress: (progress) => set({ compilingProgress: progress }),
 }));
 
 export default useStore;

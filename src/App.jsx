@@ -8,10 +8,13 @@ import ShowCar from "./components/ShowCar";
 import Telemetry from "./components/Telemetry";
 import CarSelect from "./components/CarSelect";
 import { FaDatabase, FaGlobe } from "react-icons/fa";
+import useStore from "./store/useStore";
+import { preloadModel } from "./utils/modelLoader";
 
 function App() {
   const [currentView, setView] = useState("garage");
   const [cacheNotification, setCacheNotification] = useState(null);
+  const { baseCar } = useStore();
 
   useEffect(() => {
     const handleModelLoaded = (event) => {
@@ -30,6 +33,11 @@ function App() {
     window.addEventListener("model-loaded", handleModelLoaded);
     return () => window.removeEventListener("model-loaded", handleModelLoaded);
   }, []);
+
+  useEffect(() => {
+    if (!baseCar?.modelPath) return;
+    preloadModel(baseCar.modelPath);
+  }, [baseCar?.modelPath]);
 
   return (
     <div className="relative w-screen h-dvh  overflow-hidden font-sans select-none text-white">

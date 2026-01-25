@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useRef, useMemo, useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
   OrbitControls,
   Stage,
@@ -85,10 +85,45 @@ const InnerCarModel = ({ url }) => {
   return <primitive object={scene} ref={meshRef} />;
 };
 
+const CompileWatcher = ({ onDone }) => {
+  const frames = useRef(0);
+  useFrame(() => {
+    frames.current += 1;
+    if (frames.current >= 2) {
+      onDone();
+    }
+  });
+  return null;
+};
+
 const Experience = () => {
-  const { baseCar } = useStore();
+  const { baseCar, setCompilingActive, setCompilingProgress, compilingActive } =
+    useStore();
   const cachedUrl = useCachedModelUrl(baseCar.modelPath);
   const [isInteracting, setIsInteracting] = useState(false);
+  const compileTimer = useRef(null);
+  const progressRef = useRef(0);
+
+  useEffect(() => {
+    if (!cachedUrl) return;
+    setCompilingActive(true);
+    setCompilingProgress(0);
+    progressRef.current = 0;
+    if (compileTimer.current) {
+      clearInterval(compileTimer.current);
+      compileTimer.current = null;
+    }
+    compileTimer.current = setInterval(() => {
+      progressRef.current = Math.min(progressRef.current + 5, 95);
+      setCompilingProgress(progressRef.current);
+    }, 80);
+    return () => {
+      if (compileTimer.current) {
+        clearInterval(compileTimer.current);
+        compileTimer.current = null;
+      }
+    };
+  }, [cachedUrl, setCompilingActive, setCompilingProgress]);
 
   return (
     <Canvas
@@ -122,10 +157,22 @@ const Experience = () => {
           position={[0, 0, 0]}
           opacity={0.5}
           scale={12}
-          blur={2}
+          blur={1}
           far={1.5}
           resolution={256}
         />
+        {compilingActive && cachedUrl ? (
+          <CompileWatcher
+            onDone={() => {
+              if (compileTimer.current) {
+                clearInterval(compileTimer.current);
+                compileTimer.current = null;
+              }
+              setCompilingProgress(100);
+              setCompilingActive(false);
+            }}
+          />
+        ) : null}
       </Suspense>
 
       <OrbitControls
@@ -135,7 +182,7 @@ const Experience = () => {
         enableZoom={true}
         enablePan={false}
         enableDamping={true}
-        dampingFactor={0.06}
+        dampingFactor={0.08}
         autoRotate={!isInteracting}
         autoRotateSpeed={0.5}
         minDistance={3}
