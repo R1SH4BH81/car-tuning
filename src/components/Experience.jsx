@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useMemo } from "react";
+import React, { Suspense, useEffect, useRef, useMemo, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
@@ -88,13 +88,13 @@ const InnerCarModel = ({ url }) => {
 const Experience = () => {
   const { baseCar } = useStore();
   const cachedUrl = useCachedModelUrl(baseCar.modelPath);
+  const [isInteracting, setIsInteracting] = useState(false);
 
   return (
     <Canvas
       shadows
       dpr={[1, 1.5]}
       camera={{ position: [5, 2, 5], fov: 40 }}
-      gl={{ preserveDrawingBuffer: true }}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
         gl.toneMappingExposure = 0.9;
@@ -124,7 +124,7 @@ const Experience = () => {
           scale={12}
           blur={2}
           far={1.5}
-          resolution={512}
+          resolution={256}
         />
       </Suspense>
 
@@ -134,10 +134,14 @@ const Experience = () => {
         maxPolarAngle={Math.PI / 2.1}
         enableZoom={true}
         enablePan={false}
-        autoRotate={true}
+        enableDamping={true}
+        dampingFactor={0.06}
+        autoRotate={!isInteracting}
         autoRotateSpeed={0.5}
         minDistance={3}
         maxDistance={12}
+        onStart={() => setIsInteracting(true)}
+        onEnd={() => setIsInteracting(false)}
       />
     </Canvas>
   );
