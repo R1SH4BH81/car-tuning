@@ -135,7 +135,7 @@ const Experience = () => {
         enableZoom={true}
         enablePan={false}
         autoRotate={true}
-        autoRotateSpeed={2}
+        autoRotateSpeed={0.5}
         minDistance={3}
         maxDistance={12}
       />
