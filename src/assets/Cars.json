@@ -373,6 +373,28 @@
       "compatibleSwaps": ["racing_v8", "racing_v12"]
     },
     {
+      "id": "bentley-continental-gt3-2020",
+      "name": "Bentley Continental GT3",
+      "modelPath": "https://rishabh81.sirv.com/models/2020_bentley_continental_gt3.glb",
+      "brand": "Bentley",
+      "year": 2020,
+      "class": "S1",
+      "pi": 855,
+      "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+      "baseStats": {
+        "hp": 550,
+        "torque": 479,
+        "weight": 1300,
+        "topSpeed": 185,
+        "acceleration060": 3.2,
+        "handling": 9.4,
+        "braking": 9.1,
+        "driveType": "RWD",
+        "brakingDistance600": 105
+      },
+      "compatibleSwaps": ["racing_v8", "racing_v12"]
+    },
+    {
       "id": "audi-r8-green-hell-2021",
       "name": "Audi R8 Green Hell Edition",
       "modelPath": "https://rishabh81.sirv.com/models/2021_audi_r8_green_hell_edition.glb",
@@ -651,6 +673,50 @@
       },
       "compatibleSwaps": ["racing_v8", "racing_v12"]
     },
+    {
+      "id": "dodge-viper-srt-2013",
+      "name": "Dodge Viper SRT",
+      "modelPath": "https://rishabh81.sirv.com/models/dodge_viper_srt.glb",
+      "brand": "Dodge",
+      "year": 2013,
+      "class": "S1",
+      "pi": 865,
+      "transmission": { "gears": 6, "type": "Manual", "adjustable": true },
+      "baseStats": {
+        "hp": 640,
+        "torque": 600,
+        "weight": 1520,
+        "topSpeed": 206,
+        "acceleration060": 3.4,
+        "handling": 8.5,
+        "braking": 8.8,
+        "driveType": "RWD",
+        "brakingDistance600": 102
+      },
+      "compatibleSwaps": ["v10_performance", "racing_v12"]
+    },
+    {
+      "id": "bmw-m8-gte-2018",
+      "name": "BMW M8 GTE",
+      "modelPath": "https://rishabh81.sirv.com/models/2018_bmw_m8_gte.glb",
+      "brand": "BMW",
+      "year": 2018,
+      "class": "S1",
+      "pi": 890,
+      "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+      "baseStats": {
+        "hp": 591,
+        "torque": 553,
+        "weight": 1220,
+        "topSpeed": 190,
+        "acceleration060": 2.8,
+        "handling": 9.8,
+        "braking": 9.9,
+        "driveType": "RWD",
+        "brakingDistance600": 90
+      },
+      "compatibleSwaps": ["racing_v8", "v10_f1_spec"]
+    },
 
     {
       "id": "bmw-m3-gtr-e46",
@@ -710,6 +776,28 @@
         "v8_supercharged",
         "racing_v12"
       ]
+    },
+    {
+      "id": "alpine-a110-gt4-2024",
+      "name": "Alpine A110 GT4",
+      "modelPath": "https://rishabh81.sirv.com/models/a110_gt4_alpine_team_2024__www.vecarz.com.glb",
+      "brand": "Alpine",
+      "year": 2024,
+      "class": "A",
+      "pi": 780,
+      "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+      "baseStats": {
+        "hp": 360,
+        "torque": 300,
+        "weight": 1080,
+        "topSpeed": 165,
+        "acceleration060": 3.9,
+        "handling": 9.5,
+        "braking": 9.2,
+        "driveType": "RWD",
+        "brakingDistance600": 98
+      },
+      "compatibleSwaps": ["turbo_rally_i4", "v6_dtm_spec"]
     },
 
     {
@@ -952,6 +1040,37 @@
         "brakingDistance600": 128
       },
       "compatibleSwaps": ["racing_i6_n_a", "v6_dtm_spec"]
+    },
+    {
+      "id": "ford-capri-group-b",
+      "name": "Ford Capri Group B",
+      "modelPath": "https://rishabh81.sirv.com/models/ford_capri_group_b.glb",
+      "brand": "Ford",
+      "year": 1982,
+      "class": "B",
+      "pi": 695,
+      "transmission": {
+        "gears": 5,
+        "type": "Dog-Box Manual",
+        "adjustable": true
+      },
+      "baseStats": {
+        "hp": 400,
+        "torque": 340,
+        "weight": 1050,
+        "topSpeed": 160,
+        "acceleration060": 4.2,
+        "handling": 7.4,
+        "braking": 7.1,
+        "driveType": "RWD",
+        "brakingDistance600": 125
+      },
+      "compatibleSwaps": [
+        "turbo_rally_i4",
+        "racing_v6_tt",
+        "racing_i6_n_a",
+        "v6_dtm_spec"
+      ]
     },
     {
       "id": "alfa-romeo-156-super-turismo",
