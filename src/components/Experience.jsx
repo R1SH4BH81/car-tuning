@@ -159,7 +159,7 @@ const Experience = () => {
           scale={12}
           blur={1}
           far={1.5}
-          resolution={256}
+          resolution={512}
         />
         {compilingActive && cachedUrl ? (
           <CompileWatcher
