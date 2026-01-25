@@ -30,9 +30,9 @@ const CarListPanel = React.memo(function CarListPanel({
   }, [allCars, selectedClass]);
 
   return (
-    <div className="w-full lg:w-96 h-[25vh] lg:h-full pointer-events-auto flex flex-col lg:pr-8 px-0 lg:px-0 py-0">
+    <div className="w-full lg:w-96 h-[23vh] lg:h-full pointer-events-auto flex flex-col lg:pr-8 px-0 lg:px-0 py-0">
       <div className="bg-black/80 backdrop-blur-md rounded-none  border-t border-white/10 h-full overflow-hidden flex flex-col shadow-2xl">
-        <div className="px-3 py-0 sm:px-4 sm:py-3 lg:p-6 border-b border-white/10 bg-black/40 flex justify-between items-center min-h-[70px]">
+        <div className="px-4 py-0 sm:px-2 sm:py-1 lg:p-6 border-b border-white/10 bg-black/40 flex justify-between items-center min-h-[70px]">
           <div>
             <h2 className="text-sm sm:text-base lg:text-2xl font-black italic uppercase text-white tracking-wider">
               {selectedClass ? `${selectedClass} CLASS` : "SELECT CLASS"}
