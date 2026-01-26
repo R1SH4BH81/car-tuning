@@ -9,6 +9,7 @@ const CarListPanel = React.memo(function CarListPanel({
   onSelect,
 }) {
   const [selectedClass, setSelectedClass] = useState(null);
+  const [mobileExpanded, setMobileExpanded] = useState(false);
 
   // Get unique classes
   const classes = useMemo(() => {
@@ -30,9 +31,11 @@ const CarListPanel = React.memo(function CarListPanel({
   }, [allCars, selectedClass]);
 
   return (
-    <div className="w-full lg:w-96 h-[23vh] lg:h-full pointer-events-auto flex flex-col lg:pr-8 px-0 lg:px-0 py-0">
+    <div
+      className={`w-full lg:w-96 ${mobileExpanded ? "h-[55vh]" : "h-[23vh]"} lg:h-full pointer-events-auto flex flex-col lg:pr-8 px-0 lg:px-0 py-0 transition-all`}
+    >
       <div className="bg-black/80 backdrop-blur-md rounded-none  border-t border-white/10 h-full overflow-hidden flex flex-col shadow-2xl">
-        <div className="px-4 py-0 sm:px-2 sm:py-1 lg:p-6 border-b border-white/10 bg-black/40 flex justify-between items-center min-h-[70px]">
+        <div className="px-4 py-0 sm:px-2 sm:py-0.5 lg:px-6 lg:py-3 border-b border-white/10 bg-black/40 flex justify-between items-center min-h-[50px]">
           <div>
             <h2 className="text-sm sm:text-base lg:text-2xl font-black italic uppercase text-white tracking-wider">
               {selectedClass ? `${selectedClass} CLASS` : "SELECT CLASS"}
@@ -43,14 +46,44 @@ const CarListPanel = React.memo(function CarListPanel({
                 : `${allCars.length} CARS TOTAL`}
             </div>
           </div>
-          {selectedClass && (
+          <div className="flex items-center gap-2">
+            {selectedClass && (
+              <button
+                onClick={() => setSelectedClass(null)}
+                className="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors"
+              >
+                Back
+              </button>
+            )}
             <button
-              onClick={() => setSelectedClass(null)}
-              className="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors"
+              onClick={() => setMobileExpanded((prev) => !prev)}
+              className=" rounded text-white transition-colors lg:hidden"
             >
-              Back
+              <span className="text-yellow-500 flex items-center">
+                {mobileExpanded ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="18px"
+                    viewBox="0 -960 960 960"
+                    width="18px"
+                    fill="yellow"
+                  >
+                    <path d="M440-440v240h-80v-160H200v-80h240Zm160-320v160h160v80H520v-240h80Z" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="18px"
+                    viewBox="0 -960 960 960"
+                    width="18px"
+                    fill="yellow"
+                  >
+                    <path d="M200-200v-240h80v160h160v80H200Zm480-320v-160H520v-80h240v240h-80Z" />
+                  </svg>
+                )}
+              </span>
             </button>
-          )}
+          </div>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
