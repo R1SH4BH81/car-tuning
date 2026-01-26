@@ -136,7 +136,7 @@ const Experience = () => {
         gl.outputColorSpace = THREE.SRGBColorSpace;
       }}
     >
-      <color attach="background" args={["#101010"]} />
+      <color attach="background" args={["#1a1a1a"]} />
 
       <Suspense fallback={null}>
         {cachedUrl ? (
