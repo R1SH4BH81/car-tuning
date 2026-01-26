@@ -136,13 +136,13 @@ const Experience = () => {
         gl.outputColorSpace = THREE.SRGBColorSpace;
       }}
     >
-      <color attach="background" args={["#1a1a1a"]} />
+      <color attach="background" args={["#181818"]} />
 
       <Suspense fallback={null}>
         {cachedUrl ? (
           <Stage
             key={cachedUrl}
-            environment="city"
+            environment="sunset"
             intensity={0.55}
             contactShadow={false}
             // CRITICAL: Disable Stage auto-scaling/centering to prevent fluctuation
