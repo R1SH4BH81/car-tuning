@@ -1,0 +1,484 @@
+[
+  {
+    "id": "ferrari-488-pista",
+    "name": "Ferrari 488 Pista",
+    "modelPath": "https://rishabh81.sirv.com/models/ferrari_488_pista_widebody.glb",
+    "brand": "Ferrari",
+    "year": 2019,
+    "class": "S1",
+    "pi": 895,
+    "transmission": {
+      "gears": 7,
+      "type": "Dual-Clutch",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 710,
+      "torque": 568,
+      "weight": 1385,
+      "topSpeed": 211,
+      "acceleration060": 2.85,
+      "handling": 9.5,
+      "braking": 9.7,
+      "driveType": "RWD",
+      "brakingDistance600": 92
+    },
+    "compatibleSwaps": ["racing_v8", "racing_v12"]
+  },
+  {
+    "id": "bentley-continental-gt3-2020",
+    "name": "Bentley Continental GT3",
+    "modelPath": "https://rishabh81.sirv.com/models/2020_bentley_continental_gt3.glb",
+    "brand": "Bentley",
+    "year": 2020,
+    "class": "S1",
+    "pi": 855,
+    "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+    "baseStats": {
+      "hp": 550,
+      "torque": 479,
+      "weight": 1300,
+      "topSpeed": 185,
+      "acceleration060": 3.2,
+      "handling": 9.4,
+      "braking": 9.1,
+      "driveType": "RWD",
+      "brakingDistance600": 105
+    },
+    "compatibleSwaps": ["racing_v8", "racing_v12"]
+  },
+  {
+    "id": "audi-r8-green-hell-2021",
+    "name": "Audi R8 Green Hell Edition",
+    "modelPath": "https://rishabh81.sirv.com/models/2021_audi_r8_green_hell_edition.glb",
+    "brand": "Audi",
+    "year": 2021,
+    "class": "S1",
+    "pi": 890,
+    "transmission": {
+      "gears": 7,
+      "type": "S-Tronic DCT",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 612,
+      "torque": 428,
+      "weight": 1650,
+      "topSpeed": 205,
+      "acceleration060": 3.1,
+      "handling": 9.1,
+      "braking": 9.4,
+      "driveType": "AWD",
+      "brakingDistance600": 98
+    },
+    "compatibleSwaps": ["v10_performance", "v10_f1_spec"]
+  },
+  {
+    "id": "abt-audi-rs7-r-2022",
+    "name": "ABT Audi RS7-R",
+    "modelPath": "https://rishabh81.sirv.com/models/2022_abt_audi_rs7-r.glb",
+    "brand": "Audi",
+    "year": 2022,
+    "class": "S1",
+    "pi": 870,
+    "transmission": { "gears": 8, "type": "Tiptronic", "adjustable": true },
+    "baseStats": {
+      "hp": 740,
+      "torque": 678,
+      "weight": 2140,
+      "topSpeed": 200,
+      "acceleration060": 3.2,
+      "handling": 8.0,
+      "braking": 8.5,
+      "driveType": "AWD",
+      "brakingDistance600": 105
+    },
+    "compatibleSwaps": ["v10_performance", "racing_v12"]
+  },
+  {
+    "id": "nissan-skyline-gt500",
+    "name": "Nissan Skyline GT500",
+    "modelPath": "https://rishabh81.sirv.com/models/nissan_skyline_gt500__www.vecarz.com.glb",
+    "brand": "Nissan",
+    "year": 2002,
+    "class": "S1",
+    "pi": 895,
+    "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+    "baseStats": {
+      "hp": 500,
+      "torque": 450,
+      "weight": 1100,
+      "topSpeed": 195,
+      "acceleration060": 3.0,
+      "handling": 9.8,
+      "braking": 9.9,
+      "driveType": "RWD",
+      "brakingDistance600": 88
+    },
+    "compatibleSwaps": ["racing_v6_tt", "v10_f1_spec"]
+  },
+  {
+    "id": "ktm-xbow-gtx",
+    "name": "KTM X-Bow GTX",
+    "modelPath": "https://rishabh81.sirv.com/models/2020_ktm_x-bow_gtx.glb",
+    "brand": "KTM",
+    "year": 2020,
+    "class": "S1",
+    "pi": 885,
+    "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+    "baseStats": {
+      "hp": 530,
+      "torque": 453,
+      "weight": 1048,
+      "topSpeed": 171,
+      "acceleration060": 3.3,
+      "handling": 9.6,
+      "braking": 9.8,
+      "driveType": "RWD",
+      "brakingDistance600": 90
+    },
+    "compatibleSwaps": ["v6_dtm_spec", "racing_v8"]
+  },
+  {
+    "id": "mclaren-artura-gt4-2023",
+    "name": "McLaren Artura GT4",
+    "modelPath": "https://rishabh81.sirv.com/models/2023_mclaren_artura_gt4.glb",
+    "brand": "McLaren",
+    "year": 2023,
+    "class": "S1",
+    "pi": 860,
+    "transmission": { "gears": 7, "type": "SSG", "adjustable": true },
+    "baseStats": {
+      "hp": 470,
+      "torque": 430,
+      "weight": 1250,
+      "topSpeed": 185,
+      "acceleration060": 3.5,
+      "handling": 9.5,
+      "braking": 9.6,
+      "driveType": "RWD",
+      "brakingDistance600": 92
+    },
+    "compatibleSwaps": ["racing_v6_tt"]
+  },
+  {
+    "id": "jaguar-xj13-1966",
+    "name": "Jaguar XJ13",
+    "modelPath": "https://rishabh81.sirv.com/models/jaguar_xj13_1959__www.vecarz.com.glb",
+    "brand": "Jaguar",
+    "year": 1966,
+    "class": "S1",
+    "pi": 830,
+    "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 502,
+      "torque": 386,
+      "weight": 998,
+      "topSpeed": 177,
+      "acceleration060": 3.4,
+      "handling": 8.4,
+      "braking": 8.0,
+      "driveType": "RWD",
+      "brakingDistance600": 105
+    },
+    "compatibleSwaps": ["racing_v12"]
+  },
+  {
+    "id": "infiniti-q60-project-black-s",
+    "name": "Infiniti Q60 Project Black S",
+    "modelPath": "https://rishabh81.sirv.com/models/infiniti_q60_project_black_s.glb",
+    "brand": "Infiniti",
+    "year": 2018,
+    "class": "S1",
+    "pi": 845,
+    "transmission": { "gears": 7, "type": "Automatic", "adjustable": true },
+    "baseStats": {
+      "hp": 563,
+      "torque": 350,
+      "weight": 1769,
+      "topSpeed": 153,
+      "acceleration060": 4.0,
+      "handling": 8.4,
+      "braking": 8.2,
+      "driveType": "RWD",
+      "brakingDistance600": 110
+    },
+    "compatibleSwaps": ["racing_v6_tt", "v8_modern"]
+  },
+  {
+    "id": "aston-martin-db11-amr",
+    "name": "Aston Martin DB11 AMR",
+    "modelPath": "https://rishabh81.sirv.com/models/2019_aston_martin_db11_amr.glb",
+    "brand": "Aston Martin",
+    "year": 2019,
+    "class": "S1",
+    "pi": 882,
+    "transmission": { "gears": 8, "type": "Automatic", "adjustable": true },
+    "baseStats": {
+      "hp": 630,
+      "torque": 516,
+      "weight": 1770,
+      "topSpeed": 208,
+      "acceleration060": 3.7,
+      "handling": 8.1,
+      "braking": 8.3,
+      "driveType": "RWD",
+      "brakingDistance600": 105
+    },
+    "compatibleSwaps": ["racing_v12"]
+  },
+  {
+    "id": "maserati-mc20",
+    "name": "Maserati MC20",
+    "modelPath": "https://rishabh81.sirv.com/models/maserati_mc20.glb",
+    "brand": "Maserati",
+    "year": 2022,
+    "class": "S1",
+    "pi": 870,
+    "transmission": { "gears": 8, "type": "Dual-Clutch", "adjustable": true },
+    "baseStats": {
+      "hp": 621,
+      "torque": 538,
+      "weight": 1500,
+      "topSpeed": 202,
+      "acceleration060": 2.8,
+      "handling": 8.8,
+      "braking": 9.0,
+      "driveType": "RWD",
+      "brakingDistance600": 100
+    },
+    "compatibleSwaps": ["racing_v8", "racing_v12"]
+  },
+  {
+    "id": "mclaren-600lt",
+    "name": "McLaren 600LT",
+    "modelPath": "https://rishabh81.sirv.com/models/mclaren_600lt.glb",
+    "brand": "McLaren",
+    "year": 2019,
+    "class": "S1",
+    "pi": 862,
+    "transmission": {
+      "gears": 7,
+      "type": "Seamless-Shift",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 592,
+      "torque": 457,
+      "weight": 1356,
+      "topSpeed": 204,
+      "acceleration060": 2.8,
+      "handling": 8.9,
+      "braking": 9.1,
+      "driveType": "RWD",
+      "brakingDistance600": 100
+    },
+    "compatibleSwaps": ["racing_v8", "racing_v12"]
+  },
+  {
+    "id": "porsche-911-gt2rs",
+    "name": "Porsche 911 GT2 RS (992)",
+    "modelPath": "https://rishabh81.sirv.com/models/porsche_gt3_rs.glb",
+    "brand": "Porsche",
+    "year": 2024,
+    "class": "S1",
+    "pi": 898,
+    "transmission": {
+      "gears": 7,
+      "type": "PDK Sport Dual-Clutch",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 518,
+      "torque": 342,
+      "weight": 1450,
+      "topSpeed": 184,
+      "acceleration060": 3.0,
+      "handling": 9.7,
+      "braking": 9.8,
+      "driveType": "RWD",
+      "brakingDistance600": 90
+    },
+    "tuningLimits": {
+      "aero": {
+        "frontDownforce": { "min": 100, "max": 400 },
+        "rearDownforce": { "min": 250, "max": 900 }
+      }
+    },
+    "compatibleSwaps": ["flat6_tt", "racing_v10"]
+  },
+  {
+    "id": "dodge-challenger-srt-super-stock-2020",
+    "name": "Dodge Challenger SRT Super Stock",
+    "modelPath": "https://rishabh81.sirv.com/models/2020_dodge_challenger_srt_super_stock.glb",
+    "brand": "Dodge",
+    "year": 2020,
+    "class": "S1",
+    "pi": 895,
+    "transmission": {
+      "gears": 8,
+      "type": "Automatic",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 807,
+      "torque": 707,
+      "weight": 2018,
+      "topSpeed": 168,
+      "acceleration060": 3.25,
+      "handling": 7.4,
+      "braking": 7.8,
+      "driveType": "RWD",
+      "brakingDistance600": 112
+    },
+    "compatibleSwaps": ["v8_modern", "racing_v8", "v8_supercharged"]
+  },
+  {
+    "id": "honda-nsx-lb-works",
+    "name": "Honda NSX LB-Works",
+    "modelPath": "https://rishabh81.sirv.com/models/2020_honda_nsx_na1_lbworks.glb",
+    "brand": "Honda",
+    "year": 2017,
+    "class": "S1",
+    "pi": 875,
+    "transmission": {
+      "gears": 9,
+      "type": "DCT",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 573,
+      "torque": 476,
+      "weight": 1725,
+      "topSpeed": 191,
+      "acceleration060": 2.9,
+      "handling": 8.8,
+      "braking": 8.9,
+      "driveType": "AWD",
+      "brakingDistance600": 101
+    },
+    "compatibleSwaps": ["racing_v6_tt", "racing_v8"]
+  },
+  {
+    "id": "nissan-gtr-r35",
+    "name": "Nissan GT-R (R35)",
+    "modelPath": "https://rishabh81.sirv.com/models/nissan_skyline_gtr_r35.glb",
+    "brand": "Nissan",
+    "year": 2024,
+    "class": "S1",
+    "pi": 865,
+    "transmission": {
+      "gears": 6,
+      "type": "Dual-Clutch (DCT)",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 565,
+      "torque": 467,
+      "weight": 1752,
+      "topSpeed": 196,
+      "acceleration060": 2.9,
+      "handling": 8.2,
+      "braking": 8.5,
+      "driveType": "AWD",
+      "brakingDistance600": 105
+    },
+    "compatibleSwaps": ["racing_v6_tt", "v10_n_a", "racing_v12"]
+  },
+  {
+    "id": "mclaren-mp4-12c-ultimate",
+    "name": "McLaren MP4-12C Ultimate",
+    "modelPath": "https://rishabh81.sirv.com/models/mclaren_mp4-12c_ultimate.glb",
+    "brand": "McLaren",
+    "year": 2011,
+    "class": "S1",
+    "pi": 860,
+    "transmission": {
+      "gears": 7,
+      "type": "SSG DCT",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 592,
+      "torque": 443,
+      "weight": 1434,
+      "topSpeed": 205,
+      "acceleration060": 3.1,
+      "handling": 8.7,
+      "braking": 9.0,
+      "driveType": "RWD",
+      "brakingDistance600": 100
+    },
+    "compatibleSwaps": ["racing_v8", "racing_v12"]
+  },
+  {
+    "id": "dodge-viper-srt-2013",
+    "name": "Dodge Viper SRT",
+    "modelPath": "https://rishabh81.sirv.com/models/dodge_viper_srt.glb",
+    "brand": "Dodge",
+    "year": 2013,
+    "class": "S1",
+    "pi": 865,
+    "transmission": { "gears": 6, "type": "Manual", "adjustable": true },
+    "baseStats": {
+      "hp": 640,
+      "torque": 600,
+      "weight": 1520,
+      "topSpeed": 206,
+      "acceleration060": 3.4,
+      "handling": 8.5,
+      "braking": 8.8,
+      "driveType": "RWD",
+      "brakingDistance600": 102
+    },
+    "compatibleSwaps": ["v10_performance", "racing_v12"]
+  },
+  {
+    "id": "bmw-m8-gte-2018",
+    "name": "BMW M8 GTE",
+    "modelPath": "https://rishabh81.sirv.com/models/2018_bmw_m8_gte.glb",
+    "brand": "BMW",
+    "year": 2018,
+    "class": "S1",
+    "pi": 890,
+    "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+    "baseStats": {
+      "hp": 591,
+      "torque": 553,
+      "weight": 1220,
+      "topSpeed": 190,
+      "acceleration060": 2.8,
+      "handling": 9.8,
+      "braking": 9.9,
+      "driveType": "RWD",
+      "brakingDistance600": 90
+    },
+    "compatibleSwaps": ["racing_v8", "v10_f1_spec"]
+  },
+  {
+    "id": "bmw-m3-gtr-e46",
+    "name": "BMW M3 GTR (E46) - NFS Edition",
+    "modelPath": "https://rishabh81.sirv.com/models/bmw_m3_gtr_-_nfs_mw.glb",
+    "brand": "BMW",
+    "year": 2001,
+    "class": "S1",
+    "pi": 840,
+    "transmission": {
+      "gears": 6,
+      "type": "Sequential",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 444,
+      "torque": 354,
+      "weight": 1350,
+      "topSpeed": 174,
+      "acceleration060": 3.4,
+      "handling": 8.5,
+      "braking": 8.2,
+      "driveType": "RWD",
+      "brakingDistance600": 110
+    },
+    "compatibleSwaps": ["racing_v10", "racing_v12", "racing_v8"]
+  }
+]

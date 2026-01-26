@@ -1,0 +1,342 @@
+[
+  {
+    "id": "koenigsegg-agera-r-2011",
+    "name": "Koenigsegg Agera R",
+    "modelPath": "https://rishabh81.sirv.com/models/2011_koenigsegg_agera.glb",
+    "brand": "Koenigsegg",
+    "year": 2011,
+    "class": "S2",
+    "pi": 995,
+    "transmission": { "gears": 7, "type": "Dual-Clutch", "adjustable": true },
+    "baseStats": {
+      "hp": 1140,
+      "torque": 885,
+      "weight": 1435,
+      "topSpeed": 261,
+      "acceleration060": 2.7,
+      "handling": 9.7,
+      "braking": 9.9,
+      "driveType": "RWD",
+      "brakingDistance600": 90
+    },
+    "compatibleSwaps": ["racing_v12", "w16_quad_turbo"]
+  },
+  {
+    "id": "bugatti-bolide-2020",
+    "name": "Bugatti Bolide",
+    "modelPath": "https://rishabh81.sirv.com/models/2020_bugatti_bolide_concept.glb",
+    "brand": "Bugatti",
+    "year": 2020,
+    "class": "S2",
+    "pi": 998,
+    "transmission": { "gears": 7, "type": "DSG", "adjustable": true },
+    "baseStats": {
+      "hp": 1825,
+      "torque": 1364,
+      "weight": 1240,
+      "topSpeed": 311,
+      "acceleration060": 2.17,
+      "handling": 10,
+      "braking": 10,
+      "driveType": "AWD",
+      "brakingDistance600": 85
+    },
+    "compatibleSwaps": []
+  },
+  {
+    "id": "koenigsegg-jesko-2020",
+    "name": "Koenigsegg Jesko Absolut",
+    "modelPath": "https://rishabh81.sirv.com/models/2020_koenigsegg_jesko.glb",
+    "brand": "Koenigsegg",
+    "year": 2020,
+    "class": "S2",
+    "pi": 998,
+    "transmission": { "gears": 9, "type": "LST", "adjustable": true },
+    "baseStats": {
+      "hp": 1600,
+      "torque": 1106,
+      "weight": 1420,
+      "topSpeed": 300,
+      "acceleration060": 2.5,
+      "handling": 9.9,
+      "braking": 10,
+      "driveType": "RWD",
+      "brakingDistance600": 90
+    },
+    "compatibleSwaps": ["w16_quad_turbo"]
+  },
+  {
+    "id": "porsche-911-gt2-rs-clubsport-2019",
+    "name": "Porsche 911 GT2 RS Clubsport",
+    "modelPath": "https://rishabh81.sirv.com/models/2019_porsche_911_gt2_rs_clubsport_991.2.glb",
+    "brand": "Porsche",
+    "year": 2019,
+    "class": "S2",
+    "pi": 945,
+    "transmission": { "gears": 7, "type": "PDK", "adjustable": true },
+    "baseStats": {
+      "hp": 700,
+      "torque": 553,
+      "weight": 1390,
+      "topSpeed": 211,
+      "acceleration060": 2.7,
+      "handling": 10,
+      "braking": 10,
+      "driveType": "RWD",
+      "brakingDistance600": 88
+    },
+    "compatibleSwaps": ["racing_v10"]
+  },
+  {
+    "id": "koenigsegg-one-1",
+    "name": "Koenigsegg One:1",
+    "modelPath": "https://rishabh81.sirv.com/models/koenigsegg_one1_low_poly.glb",
+    "brand": "Koenigsegg",
+    "year": 2014,
+    "class": "S2",
+    "pi": 998,
+    "transmission": {
+      "gears": 7,
+      "type": "Paddle Shift",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 1341,
+      "torque": 1011,
+      "weight": 1360,
+      "topSpeed": 273,
+      "acceleration060": 2.8,
+      "handling": 9.8,
+      "braking": 10,
+      "driveType": "RWD",
+      "brakingDistance600": 91
+    },
+    "compatibleSwaps": ["racing_v12"]
+  },
+  {
+    "id": "mazda-787b",
+    "name": "Mazda 787B",
+    "modelPath": "https://rishabh81.sirv.com/models/mazda-787b__www.vecarz.com.glb",
+    "brand": "Mazda",
+    "year": 1991,
+    "class": "S2",
+    "pi": 990,
+    "transmission": {
+      "gears": 5,
+      "type": "Racing Manual",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 700,
+      "torque": 448,
+      "weight": 830,
+      "topSpeed": 210,
+      "acceleration060": 2.4,
+      "handling": 10,
+      "braking": 10,
+      "driveType": "RWD",
+      "brakingDistance600": 85
+    },
+    "compatibleSwaps": ["racing_v12"]
+  },
+  {
+    "id": "mclaren-p1-mso",
+    "name": "McLaren P1 MSO",
+    "modelPath": "https://rishabh81.sirv.com/models/free_-_mclaren_p1_mso.glb",
+    "brand": "McLaren",
+    "year": 2015,
+    "class": "S2",
+    "pi": 960,
+    "transmission": {
+      "gears": 7,
+      "type": "DCT",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 903,
+      "torque": 664,
+      "weight": 1490,
+      "topSpeed": 217,
+      "acceleration060": 2.8,
+      "handling": 9.5,
+      "braking": 9.8,
+      "driveType": "RWD",
+      "brakingDistance600": 98
+    },
+    "compatibleSwaps": ["racing_v12"]
+  },
+  {
+    "id": "lamborghini-revuelto",
+    "name": "Lamborghini Revuelto",
+    "modelPath": "https://rishabh81.sirv.com/models/lamborghini_revuelto.glb",
+    "brand": "Lamborghini",
+    "year": 2024,
+    "class": "S2",
+    "pi": 940,
+    "transmission": {
+      "gears": 8,
+      "type": "DCT",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 1001,
+      "torque": 535,
+      "weight": 1772,
+      "topSpeed": 217,
+      "acceleration060": 2.5,
+      "handling": 9.2,
+      "braking": 9.5,
+      "driveType": "AWD",
+      "brakingDistance600": 95
+    },
+    "compatibleSwaps": []
+  },
+  {
+    "id": "hoonicorn-v2",
+    "name": "Ford Hoonicorn V2",
+    "modelPath": "https://rishabh81.sirv.com/models/hoonicorn-_a_tribute_to_ken_block_updated.glb",
+    "brand": "Ford",
+    "year": 2021,
+    "class": "S2",
+    "pi": 998,
+    "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+    "baseStats": {
+      "hp": 1400,
+      "torque": 1250,
+      "weight": 1360,
+      "topSpeed": 255,
+      "acceleration060": 1.9,
+      "handling": 9.1,
+      "braking": 9.5,
+      "driveType": "AWD",
+      "brakingDistance600": 94
+    },
+    "compatibleSwaps": []
+  },
+  {
+    "id": "pagani-huayra-r-gt2",
+    "name": "Pagani Huayra R GT2",
+    "modelPath": "https://rishabh81.sirv.com/models/pagani_huayra_r_gt2_2022__www.vecarz.com.glb",
+    "brand": "Pagani",
+    "year": 2022,
+    "class": "S2",
+    "pi": 978,
+    "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+    "baseStats": {
+      "hp": 850,
+      "torque": 553,
+      "weight": 1050,
+      "topSpeed": 218,
+      "acceleration060": 2.6,
+      "handling": 9.9,
+      "braking": 10,
+      "driveType": "RWD",
+      "brakingDistance600": 88
+    },
+    "compatibleSwaps": []
+  },
+  {
+    "id": "mercedes-amg-one",
+    "name": "Mercedes-Benz AMG ONE",
+    "modelPath": "https://rishabh81.sirv.com/models/2023_mercedes-benz_amg_one.glb",
+    "brand": "Mercedes-Benz",
+    "year": 2023,
+    "class": "S2",
+    "pi": 998,
+    "transmission": {
+      "gears": 8,
+      "type": "Racing",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 1049,
+      "torque": 800,
+      "weight": 1695,
+      "topSpeed": 219,
+      "acceleration060": 2.9,
+      "handling": 10,
+      "braking": 10,
+      "driveType": "AWD",
+      "brakingDistance600": 92
+    },
+    "compatibleSwaps": ["racing_v12"]
+  },
+  {
+    "id": "lamborghini-aventador-svj",
+    "name": "Lamborghini Aventador SVJ",
+    "modelPath": "https://rishabh81.sirv.com/models/lamborghini_aventador.glb",
+    "brand": "Lamborghini",
+    "year": 2018,
+    "class": "S2",
+    "pi": 980,
+    "transmission": {
+      "gears": 7,
+      "type": "ISR",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 759,
+      "torque": 531,
+      "weight": 1525,
+      "topSpeed": 219,
+      "acceleration060": 2.8,
+      "handling": 9.6,
+      "braking": 9.8,
+      "driveType": "AWD",
+      "brakingDistance600": 98
+    },
+    "compatibleSwaps": ["racing_v12"]
+  },
+  {
+    "id": "porsche-918-rsr",
+    "name": "Porsche 918 RSR",
+    "modelPath": "https://rishabh81.sirv.com/models/2010_porsche_918_rsr_race_lab.glb",
+    "brand": "Porsche",
+    "year": 2011,
+    "class": "S2",
+    "pi": 955,
+    "transmission": {
+      "gears": 6,
+      "type": "Paddle-Shift Sequential",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 767,
+      "torque": 580,
+      "weight": 1390,
+      "topSpeed": 210,
+      "acceleration060": 2.6,
+      "handling": 9.5,
+      "braking": 9.4,
+      "driveType": "AWD",
+      "brakingDistance600": 88
+    },
+    "compatibleSwaps": ["racing_v10", "racing_v12"]
+  },
+  {
+    "id": "pagani-huayra-2012",
+    "name": "Pagani Huayra",
+    "modelPath": "https://rishabh81.sirv.com/models/pagani_huayra_free.glb",
+    "brand": "Pagani",
+    "year": 2012,
+    "class": "S2",
+    "pi": 935,
+    "transmission": {
+      "gears": 7,
+      "type": "Sequential",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 720,
+      "torque": 738,
+      "weight": 1350,
+      "topSpeed": 231,
+      "acceleration060": 3.2,
+      "handling": 8.9,
+      "braking": 9.2,
+      "driveType": "RWD",
+      "brakingDistance600": 100
+    },
+    "compatibleSwaps": ["racing_v12"]
+  }
+]

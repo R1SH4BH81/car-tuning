@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ferrari-250-gto",
+    "name": "Ferrari 250 GTO",
+    "modelPath": "https://rishabh81.sirv.com/models/1962_ferrari_250_gto.glb",
+    "brand": "Ferrari",
+    "year": 1962,
+    "class": "C",
+    "pi": 505,
+    "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 300,
+      "torque": 217,
+      "weight": 950,
+      "topSpeed": 174,
+      "acceleration060": 4.5,
+      "handling": 6.2,
+      "braking": 6.0,
+      "driveType": "RWD",
+      "brakingDistance600": 138
+    },
+    "compatibleSwaps": ["racing_v12"]
+  },
+  {
+    "id": "bmw-m3-e30",
+    "name": "BMW M3 (E30)",
+    "modelPath": "https://rishabh81.sirv.com/models/free_bmw_m3_e30.glb",
+    "brand": "BMW",
+    "year": 1991,
+    "class": "C",
+    "pi": 520,
+    "transmission": {
+      "gears": 5,
+      "type": "Manual",
+      "adjustable": false
+    },
+    "baseStats": {
+      "hp": 215,
+      "torque": 170,
+      "weight": 1200,
+      "topSpeed": 146,
+      "acceleration060": 6.1,
+      "handling": 6.2,
+      "braking": 5.8,
+      "driveType": "RWD",
+      "brakingDistance600": 145
+    },
+    "compatibleSwaps": [
+      "turbo_rally_i4",
+      "racing_v8",
+      "flat6_modern",
+      "racing_i6_n_a",
+      "v6_dtm_spec"
+    ]
+  }
+]

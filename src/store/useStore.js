@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { calculatePerformance, generateDynoData } from "../utils/physicsEngine";
 import { PARTS_DB, INITIAL_TUNING } from "../data/parts";
-import carsData from "../assets/Cars.json";
+import carsData from "../assets/Cars.js";
 
 const defaultCar =
   carsData.cars.find((c) => c.id === "koenigsegg-agera-r-2011") ||

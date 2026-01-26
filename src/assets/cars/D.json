@@ -1,0 +1,169 @@
+[
+  {
+    "id": "1970-plymouth-hemi-cuda",
+    "name": "1970 Plymouth Hemi Cuda",
+    "modelPath": "https://rishabh81.sirv.com/models/1970_plymouth_hemi_cuda_j-blax.glb",
+    "brand": "Plymouth",
+    "year": 1970,
+    "class": "D",
+    "pi": 450,
+    "transmission": { "gears": 4, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 425,
+      "torque": 490,
+      "weight": 1760,
+      "topSpeed": 150,
+      "acceleration060": 5.8,
+      "handling": 4.0,
+      "braking": 3.5,
+      "driveType": "RWD",
+      "brakingDistance600": 168
+    },
+    "compatibleSwaps": ["v8_modern", "racing_v8"]
+  },
+  {
+    "id": "pontiac-trans-am-1970",
+    "name": " Pontiac Firebird Trans Am",
+    "modelPath": "https://rishabh81.sirv.com/models/1970_pontiac_firebird_trans_am.glb",
+    "brand": "Pontiac",
+    "year": 1970,
+    "class": "D",
+    "pi": 480,
+    "transmission": {
+      "gears": 4,
+      "type": "Manual",
+      "adjustable": false
+    },
+    "baseStats": {
+      "hp": 345,
+      "torque": 430,
+      "weight": 1700,
+      "topSpeed": 130,
+      "acceleration060": 6.0,
+      "handling": 4.5,
+      "braking": 4.0,
+      "driveType": "RWD",
+      "brakingDistance600": 160
+    },
+    "compatibleSwaps": ["v8_modern", "racing_v8"]
+  },
+  {
+    "id": "datsun-240z-s30",
+    "name": "Datsun 240Z (S30)",
+    "modelPath": "https://rishabh81.sirv.com/models/1971_datsun_240z_s30.glb",
+    "brand": "Datsun",
+    "year": 1970,
+    "class": "D",
+    "pi": 410,
+    "transmission": { "gears": 4, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 151,
+      "torque": 146,
+      "weight": 1044,
+      "topSpeed": 125,
+      "acceleration060": 8.0,
+      "handling": 5.8,
+      "braking": 5.5,
+      "driveType": "RWD",
+      "brakingDistance600": 165
+    },
+    "compatibleSwaps": [
+      "rotary_20b",
+      "racing_v8",
+      "turbo_rally_i4",
+      "racing_i6_n_a"
+    ]
+  },
+  {
+    "id": "nissan-fairlady-z-1978",
+    "name": "Nissan Fairlady Z",
+    "modelPath": "https://rishabh81.sirv.com/models/nissan_fairlady_z_s30240z_1978.glb",
+    "brand": "Nissan",
+    "year": 1978,
+    "class": "D",
+    "pi": 405,
+    "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 151,
+      "torque": 146,
+      "weight": 1040,
+      "topSpeed": 125,
+      "acceleration060": 8.0,
+      "handling": 5.2,
+      "braking": 5.0,
+      "driveType": "RWD",
+      "brakingDistance600": 170
+    },
+    "compatibleSwaps": ["turbo_rally_i4", "racing_v6_tt"]
+  },
+  {
+    "id": "ford-mustang-1965",
+    "name": " Ford Mustang GT",
+    "modelPath": "https://rishabh81.sirv.com/models/ford_mustang_1965.glb",
+    "brand": "Ford",
+    "year": 1965,
+    "class": "D",
+    "pi": 420,
+    "transmission": {
+      "gears": 4,
+      "type": "Manual",
+      "adjustable": false
+    },
+    "baseStats": {
+      "hp": 271,
+      "torque": 312,
+      "weight": 1400,
+      "topSpeed": 125,
+      "acceleration060": 6.2,
+      "handling": 4.2,
+      "braking": 3.8,
+      "driveType": "RWD",
+      "brakingDistance600": 165
+    },
+    "compatibleSwaps": ["v8_modern", "racing_v8", "turbo_rally_i4"]
+  },
+  {
+    "id": "bmw-30-csl-1975",
+    "name": "BMW 3.0 CSL E9",
+    "modelPath": "https://rishabh81.sirv.com/models/1975_bmw_3.0_csl_e9.glb",
+    "brand": "BMW",
+    "year": 1975,
+    "class": "D",
+    "pi": 440,
+    "transmission": { "gears": 4, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 206,
+      "torque": 215,
+      "weight": 1270,
+      "topSpeed": 137,
+      "acceleration060": 7.5,
+      "handling": 5.8,
+      "braking": 5.2,
+      "driveType": "RWD",
+      "brakingDistance600": 158
+    },
+    "compatibleSwaps": ["racing_i6_n_a", "v8_modern"]
+  },
+  {
+    "id": "dodge-challenger-rt-1970",
+    "name": "Dodge Challenger R/T",
+    "modelPath": "https://rishabh81.sirv.com/models/dodge_challenger_rt__www.vecarz.com.glb",
+    "brand": "Dodge",
+    "year": 1970,
+    "class": "D",
+    "pi": 435,
+    "transmission": { "gears": 4, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 375,
+      "torque": 410,
+      "weight": 1724,
+      "topSpeed": 143,
+      "acceleration060": 5.8,
+      "handling": 4.1,
+      "braking": 3.8,
+      "driveType": "RWD",
+      "brakingDistance600": 165
+    },
+    "compatibleSwaps": ["v8_modern", "v8_supercharged"]
+  }
+]

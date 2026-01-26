@@ -1,0 +1,200 @@
+[
+  {
+    "id": "acura-nsx-1991",
+    "name": "1991 Acura NSX",
+    "modelPath": "https://rishabh81.sirv.com/models/acura_nsx_twin_turbo_91.glb",
+    "brand": "Acura",
+    "year": 1991,
+    "class": "B",
+    "pi": 640,
+    "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 270,
+      "torque": 210,
+      "weight": 1370,
+      "topSpeed": 168,
+      "acceleration060": 5.2,
+      "handling": 7.5,
+      "braking": 7.0,
+      "driveType": "RWD",
+      "brakingDistance600": 124
+    },
+    "compatibleSwaps": ["racing_v6_tt", "v10_f1_spec", "rotary_20b"]
+  },
+  {
+    "id": "ford-f150-raptor-2020",
+    "name": "Ford F-150 Raptor",
+    "modelPath": "https://rishabh81.sirv.com/models/ford_f150_raptor.glb",
+    "brand": "Ford",
+    "year": 2020,
+    "class": "B",
+    "pi": 620,
+    "transmission": {
+      "gears": 10,
+      "type": "Automatic",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 450,
+      "torque": 510,
+      "weight": 2584,
+      "topSpeed": 107,
+      "acceleration060": 5.1,
+      "handling": 5.8,
+      "braking": 6.2,
+      "driveType": "AWD",
+      "brakingDistance600": 155
+    },
+    "compatibleSwaps": [
+      "v8_modern",
+      "racing_v8",
+      "v8_supercharged",
+      "v8_modern"
+    ]
+  },
+  {
+    "id": "bmw-m1-ahg-1980",
+    "name": "BMW M1 AHG Studie",
+    "modelPath": "https://rishabh81.sirv.com/models/1980_bmw_m1_ahg_studie.glb",
+    "brand": "BMW",
+    "year": 1980,
+    "class": "B",
+    "pi": 660,
+    "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 350,
+      "torque": 243,
+      "weight": 1300,
+      "topSpeed": 165,
+      "acceleration060": 5.4,
+      "handling": 7.2,
+      "braking": 6.8,
+      "driveType": "RWD",
+      "brakingDistance600": 128
+    },
+    "compatibleSwaps": ["racing_i6_n_a", "v6_dtm_spec"]
+  },
+  {
+    "id": "ford-capri-group-b",
+    "name": "Ford Capri Group B",
+    "modelPath": "https://rishabh81.sirv.com/models/ford_capri_group_b.glb",
+    "brand": "Ford",
+    "year": 1982,
+    "class": "B",
+    "pi": 695,
+    "transmission": {
+      "gears": 5,
+      "type": "Dog-Box Manual",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 400,
+      "torque": 340,
+      "weight": 1050,
+      "topSpeed": 160,
+      "acceleration060": 4.2,
+      "handling": 7.4,
+      "braking": 7.1,
+      "driveType": "RWD",
+      "brakingDistance600": 125
+    },
+    "compatibleSwaps": [
+      "turbo_rally_i4",
+      "racing_v6_tt",
+      "racing_i6_n_a",
+      "v6_dtm_spec"
+    ]
+  },
+  {
+    "id": "lamborghini-countach-lp5000",
+    "name": "Lamborghini Countach LP5000 QV",
+    "modelPath": "https://rishabh81.sirv.com/models/lamborghini_countach_5000qv__www.vecarz.com.glb",
+    "brand": "Lamborghini",
+    "year": 1985,
+    "class": "B",
+    "pi": 670,
+    "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 449,
+      "torque": 368,
+      "weight": 1490,
+      "topSpeed": 185,
+      "acceleration060": 4.8,
+      "handling": 6.8,
+      "braking": 6.5,
+      "driveType": "RWD",
+      "brakingDistance600": 135
+    },
+    "compatibleSwaps": ["racing_v12"]
+  },
+  {
+    "id": "lancia-037-stradale-1982",
+    "name": "Lancia 037 Stradale",
+    "modelPath": "https://rishabh81.sirv.com/models/lancia_037_stradale_1978.glb",
+    "brand": "Lancia",
+    "year": 1982,
+    "class": "B",
+    "pi": 630,
+    "transmission": { "gears": 5, "type": "Manual", "adjustable": false },
+    "baseStats": {
+      "hp": 202,
+      "torque": 166,
+      "weight": 1170,
+      "topSpeed": 137,
+      "acceleration060": 6.6,
+      "handling": 7.5,
+      "braking": 7.0,
+      "driveType": "RWD",
+      "brakingDistance600": 130
+    },
+    "compatibleSwaps": ["turbo_rally_i4", "v6_dtm_spec"]
+  },
+  {
+    "id": "alfa-romeo-156-super-turismo",
+    "name": "Alfa Romeo 156 Super Turismo",
+    "modelPath": "https://rishabh81.sirv.com/models/alfa_romeo_156_super_turismo__www.vecarz.com.glb",
+    "brand": "Alfa Romeo",
+    "year": 2000,
+    "class": "B",
+    "pi": 685,
+    "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+    "baseStats": {
+      "hp": 300,
+      "torque": 190,
+      "weight": 1050,
+      "topSpeed": 155,
+      "acceleration060": 4.5,
+      "handling": 8.8,
+      "braking": 8.5,
+      "driveType": "FWD",
+      "brakingDistance600": 115
+    },
+    "compatibleSwaps": ["v6_dtm_spec", "turbo_rally_i4"]
+  },
+  {
+    "id": "porsche-911-930-turbo",
+    "name": "Porsche 911 (930) Turbo",
+    "modelPath": "https://rishabh81.sirv.com/models/porsche_911_930_turbo_1975.glb",
+    "brand": "Porsche",
+    "year": 1975,
+    "class": "B",
+    "pi": 680,
+    "transmission": {
+      "gears": 4,
+      "type": "Manual",
+      "adjustable": false
+    },
+    "baseStats": {
+      "hp": 260,
+      "torque": 253,
+      "weight": 1140,
+      "topSpeed": 155,
+      "acceleration060": 5.2,
+      "handling": 6.0,
+      "braking": 5.5,
+      "driveType": "RWD",
+      "brakingDistance600": 135
+    },
+    "compatibleSwaps": ["flat6_modern", "flat6_tt", "racing_v8"]
+  }
+]

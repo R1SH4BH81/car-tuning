@@ -1,0 +1,263 @@
+[
+  {
+    "id": "ferrari-f40",
+    "name": "Ferrari F40 LB-Works",
+    "modelPath": "https://rishabh81.sirv.com/models/lb-works_ferrari_f40_-__free.glb",
+    "brand": "Ferrari",
+    "year": 1987,
+    "class": "A",
+    "pi": 785,
+    "transmission": {
+      "gears": 5,
+      "type": "Manual",
+      "adjustable": false
+    },
+    "baseStats": {
+      "hp": 471,
+      "torque": 426,
+      "weight": 1100,
+      "topSpeed": 201,
+      "acceleration060": 3.8,
+      "handling": 7.8,
+      "braking": 7.5,
+      "driveType": "RWD",
+      "brakingDistance600": 118
+    },
+    "compatibleSwaps": [
+      "racing_v8",
+      "racing_v12",
+      "v10_n_a",
+      "v8_supercharged",
+      "racing_v12"
+    ]
+  },
+  {
+    "id": "lexus-lc-500-2018",
+    "name": "Lexus LC 500",
+    "modelPath": "https://rishabh81.sirv.com/models/lexus_lc-500.glb",
+    "brand": "Lexus",
+    "year": 2018,
+    "class": "A",
+    "pi": 750,
+    "transmission": { "gears": 10, "type": "Automatic", "adjustable": true },
+    "baseStats": {
+      "hp": 471,
+      "torque": 398,
+      "weight": 1968,
+      "topSpeed": 168,
+      "acceleration060": 4.4,
+      "handling": 7.8,
+      "braking": 8.0,
+      "driveType": "RWD",
+      "brakingDistance600": 105
+    },
+    "compatibleSwaps": ["v8_supercharged", "v10_performance"]
+  },
+  {
+    "id": "alpine-a110-gt4-2024",
+    "name": "Alpine A110 GT4",
+    "modelPath": "https://rishabh81.sirv.com/models/a110_gt4_alpine_team_2024__www.vecarz.com.glb",
+    "brand": "Alpine",
+    "year": 2024,
+    "class": "A",
+    "pi": 780,
+    "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+    "baseStats": {
+      "hp": 360,
+      "torque": 300,
+      "weight": 1080,
+      "topSpeed": 165,
+      "acceleration060": 3.9,
+      "handling": 9.5,
+      "braking": 9.2,
+      "driveType": "RWD",
+      "brakingDistance600": 98
+    },
+    "compatibleSwaps": ["turbo_rally_i4", "v6_dtm_spec"]
+  },
+  {
+    "id": "nissan-z-gt4-2023",
+    "name": "Nissan Z GT4",
+    "modelPath": "https://rishabh81.sirv.com/models/2023_nissan_z_gt4.glb",
+    "brand": "Nissan",
+    "year": 2023,
+    "class": "A",
+    "pi": 820,
+    "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+    "baseStats": {
+      "hp": 450,
+      "torque": 443,
+      "weight": 1410,
+      "topSpeed": 175,
+      "acceleration060": 3.8,
+      "handling": 9.0,
+      "braking": 8.8,
+      "driveType": "RWD",
+      "brakingDistance600": 100
+    },
+    "compatibleSwaps": ["racing_v6_tt", "racing_v8"]
+  },
+  {
+    "id": "chevrolet-camaro-zl1",
+    "name": "Chevrolet Camaro ZL1",
+    "modelPath": "https://rishabh81.sirv.com/models/chevrolet_camaro_zl1.glb",
+    "brand": "Chevrolet",
+    "year": 2024,
+    "class": "A",
+    "pi": 740,
+    "transmission": { "gears": 6, "type": "Manual", "adjustable": true },
+    "baseStats": {
+      "hp": 650,
+      "torque": 650,
+      "weight": 1786,
+      "topSpeed": 198,
+      "acceleration060": 3.5,
+      "handling": 7.8,
+      "braking": 7.7,
+      "driveType": "RWD",
+      "brakingDistance600": 110
+    },
+    "compatibleSwaps": ["v8_modern", "racing_v8"]
+  },
+  {
+    "id": "volvo-polestar-1-ks-2020",
+    "name": "Volvo Polestar 1 K.S. Edition",
+    "modelPath": "https://rishabh81.sirv.com/models/volvo_polestar_k.s_2020__www.vecarz.com.glb",
+    "brand": "Volvo",
+    "year": 2020,
+    "class": "A",
+    "pi": 780,
+    "transmission": { "gears": 8, "type": "Automatic", "adjustable": true },
+    "baseStats": {
+      "hp": 600,
+      "torque": 738,
+      "weight": 2350,
+      "topSpeed": 155,
+      "acceleration060": 4.1,
+      "handling": 7.8,
+      "braking": 8.0,
+      "driveType": "AWD",
+      "brakingDistance600": 115
+    },
+    "compatibleSwaps": ["ev_dual_motor", "v8_modern"]
+  },
+  {
+    "id": "bmw-m4-dtm-2017",
+    "name": "BMW M4 DTM Champion Edition",
+    "modelPath": "https://rishabh81.sirv.com/models/2017_bmw_m4_dtm.glb",
+    "brand": "BMW",
+    "year": 2017,
+    "class": "A",
+    "pi": 790,
+    "transmission": { "gears": 7, "type": "M-DCT", "adjustable": true },
+    "baseStats": {
+      "hp": 500,
+      "torque": 443,
+      "weight": 1510,
+      "topSpeed": 190,
+      "acceleration060": 3.8,
+      "handling": 8.7,
+      "braking": 8.5,
+      "driveType": "RWD",
+      "brakingDistance600": 108
+    },
+    "compatibleSwaps": ["i6_tt_performance", "v6_dtm_spec"]
+  },
+  {
+    "id": "mercedes-benz-g63-amg-2020",
+    "name": "Mercedes-Benz G 63 AMG",
+    "modelPath": "https://rishabh81.sirv.com/models/2020_mercedes-benz_g-class_amg_g63.glb",
+    "brand": "Mercedes-Benz",
+    "year": 2020,
+    "class": "A",
+    "pi": 760,
+    "transmission": {
+      "gears": 9,
+      "type": "Automatic",
+      "adjustable": true
+    },
+    "baseStats": {
+      "hp": 585,
+      "torque": 627,
+      "weight": 2640,
+      "topSpeed": 137,
+      "acceleration060": 4.5,
+      "handling": 6.2,
+      "braking": 6.8,
+      "driveType": "AWD",
+      "brakingDistance600": 135
+    },
+    "compatibleSwaps": [
+      "v8_modern",
+      "racing_v12",
+      "v10_performance",
+      "v8_supercharged"
+    ]
+  },
+  {
+    "id": "bmw-m4-gts-2016",
+    "name": "BMW M4 GTS",
+    "modelPath": "https://rishabh81.sirv.com/models/2016_bmw_m4_gts.glb",
+    "brand": "BMW",
+    "year": 2016,
+    "class": "A",
+    "pi": 795,
+    "transmission": { "gears": 7, "type": "M-DCT", "adjustable": true },
+    "baseStats": {
+      "hp": 493,
+      "torque": 443,
+      "weight": 1510,
+      "topSpeed": 190,
+      "acceleration060": 3.7,
+      "handling": 8.4,
+      "braking": 8.2,
+      "driveType": "RWD",
+      "brakingDistance600": 110
+    },
+    "compatibleSwaps": ["i6_tt_performance", "racing_v8"]
+  },
+  {
+    "id": "alfa-romeo-155-v6-ti",
+    "name": "Alfa Romeo 155 V6 TI DTM",
+    "modelPath": "https://rishabh81.sirv.com/models/ac_-_alfa_romeo_155_v6_ti_free.glb",
+    "brand": "Alfa Romeo",
+    "year": 1993,
+    "class": "A",
+    "pi": 785,
+    "transmission": { "gears": 6, "type": "Sequential", "adjustable": true },
+    "baseStats": {
+      "hp": 420,
+      "torque": 214,
+      "weight": 1010,
+      "topSpeed": 186,
+      "acceleration060": 3.5,
+      "handling": 9.5,
+      "braking": 9.2,
+      "driveType": "AWD",
+      "brakingDistance600": 98
+    },
+    "compatibleSwaps": ["v6_dtm_spec", "racing_v8"]
+  },
+  {
+    "id": "lexus-lfa",
+    "name": "Lexus LFA",
+    "modelPath": "https://rishabh81.sirv.com/models/2010_lexus_lfa.glb",
+    "brand": "Lexus",
+    "year": 2010,
+    "class": "A",
+    "pi": 735,
+    "transmission": { "gears": 6, "type": "ASG", "adjustable": true },
+    "baseStats": {
+      "hp": 552,
+      "torque": 354,
+      "weight": 1480,
+      "topSpeed": 202,
+      "acceleration060": 3.7,
+      "handling": 8.1,
+      "braking": 8.0,
+      "driveType": "RWD",
+      "brakingDistance600": 105
+    },
+    "compatibleSwaps": ["v10_n_a", "v10_performance"]
+  }
+]
