@@ -142,8 +142,8 @@ const Experience = () => {
         {cachedUrl ? (
           <Stage
             key={cachedUrl}
-            environment="sunset"
-            intensity={0.55}
+            environment="city"
+            intensity={0.85}
             contactShadow={false}
             // CRITICAL: Disable Stage auto-scaling/centering to prevent fluctuation
             adjustCamera={false}
